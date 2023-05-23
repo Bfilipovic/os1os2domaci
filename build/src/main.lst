@@ -1,0 +1,292 @@
+GAS LISTING /tmp/ccuObDCj.s 			page 1
+
+
+   1              		.file	"main.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.text
+   5              	.Ltext0:
+   6              		.section	.rodata.str1.8,"aMS",@progbits,1
+   7              		.align	3
+   8              	.LC0:
+   9 0000 6C616C61 		.string	"lalala"
+   9      6C6100
+  10              		.text
+  11              		.align	2
+  12              		.globl	main
+  14              	main:
+  15              	.LFB0:
+  16              		.file 1 "src/main.cpp"
+   1:src/main.cpp  **** //
+   2:src/main.cpp  **** // Created by os on 5/18/23.
+   3:src/main.cpp  **** //
+   4:src/main.cpp  **** #include "../lib/console.h"
+   5:src/main.cpp  **** #include "../h/strings.h"
+   6:src/main.cpp  **** #include "../lib/hw.h"
+   7:src/main.cpp  **** 
+   8:src/main.cpp  **** extern "C" {
+   9:src/main.cpp  **** #include "../h/kern_defs.h"
+  10:src/main.cpp  **** #include "../h/kern_threads.h"
+  11:src/main.cpp  **** }
+  12:src/main.cpp  **** 
+  13:src/main.cpp  **** int main()
+  14:src/main.cpp  **** {
+  17              		.loc 1 14 1
+  18              		.cfi_startproc
+  19 0000 130101FD 		addi	sp,sp,-48
+  20              		.cfi_def_cfa_offset 48
+  21 0004 23341102 		sd	ra,40(sp)
+  22 0008 23308102 		sd	s0,32(sp)
+  23 000c 233C9100 		sd	s1,24(sp)
+  24 0010 23382101 		sd	s2,16(sp)
+  25 0014 23343101 		sd	s3,8(sp)
+  26              		.cfi_offset 1, -8
+  27              		.cfi_offset 8, -16
+  28              		.cfi_offset 9, -24
+  29              		.cfi_offset 18, -32
+  30              		.cfi_offset 19, -40
+  31 0018 13040103 		addi	s0,sp,48
+  32              		.cfi_def_cfa 8, 0
+  15:src/main.cpp  ****     __putc('o');
+  33              		.loc 1 15 5
+  34              		.loc 1 15 11 is_stmt 0
+  35 001c 1305F006 		li	a0,111
+  36 0020 97000000 		call	__putc@plt
+  36      E7800000 
+  37              	.LVL0:
+  16:src/main.cpp  ****     __putc('s');
+  38              		.loc 1 16 5 is_stmt 1
+  39              		.loc 1 16 11 is_stmt 0
+  40 0028 13053007 		li	a0,115
+GAS LISTING /tmp/ccuObDCj.s 			page 2
+
+
+  41 002c 97000000 		call	__putc@plt
+  41      E7800000 
+  42              	.LVL1:
+  17:src/main.cpp  ****     __putc('1');
+  43              		.loc 1 17 5 is_stmt 1
+  44              		.loc 1 17 11 is_stmt 0
+  45 0034 13051003 		li	a0,49
+  46 0038 97000000 		call	__putc@plt
+  46      E7800000 
+  47              	.LVL2:
+  18:src/main.cpp  ****     printstring("lalala");
+  48              		.loc 1 18 5 is_stmt 1
+  49              		.loc 1 18 16 is_stmt 0
+  50 0040 17050000 		lla	a0,.LC0
+  50      13050500 
+  51 0048 97000000 		call	_Z11printstringPKc@plt
+  51      E7800000 
+  52              	.LVL3:
+  19:src/main.cpp  ****     void* a;
+  53              		.loc 1 19 5 is_stmt 1
+  20:src/main.cpp  ****     void* b;
+  54              		.loc 1 20 5
+  21:src/main.cpp  ****     void* c;
+  55              		.loc 1 21 5
+  22:src/main.cpp  **** 
+  23:src/main.cpp  ****     kern_mem_init((void*)HEAP_START_ADDR, (void*)HEAP_END_ADDR);
+  56              		.loc 1 23 5
+  57              		.loc 1 23 18 is_stmt 0
+  58 0050 97070000 		la	a5,HEAP_END_ADDR
+  58      83B70700 
+  59 0058 83B50700 		ld	a1,0(a5)
+  60 005c 97070000 		la	a5,HEAP_START_ADDR
+  60      83B70700 
+  61 0064 03B50700 		ld	a0,0(a5)
+  62 0068 97000000 		call	kern_mem_init@plt
+  62      E7800000 
+  63              	.LVL4:
+  24:src/main.cpp  ****     a = kern_mem_alloc(64);
+  64              		.loc 1 24 5 is_stmt 1
+  65              		.loc 1 24 23 is_stmt 0
+  66 0070 13050004 		li	a0,64
+  67 0074 97000000 		call	kern_mem_alloc@plt
+  67      E7800000 
+  68              	.LVL5:
+  69 007c 93090500 		mv	s3,a0
+  70              	.LVL6:
+  25:src/main.cpp  ****     b = kern_mem_alloc(64);
+  71              		.loc 1 25 5 is_stmt 1
+  72              		.loc 1 25 23 is_stmt 0
+  73 0080 13050004 		li	a0,64
+  74              	.LVL7:
+  75 0084 97000000 		call	kern_mem_alloc@plt
+  75      E7800000 
+  76              	.LVL8:
+  77 008c 93040500 		mv	s1,a0
+  78              	.LVL9:
+  26:src/main.cpp  ****     c = kern_mem_alloc(64);
+GAS LISTING /tmp/ccuObDCj.s 			page 3
+
+
+  79              		.loc 1 26 5 is_stmt 1
+  80              		.loc 1 26 23 is_stmt 0
+  81 0090 13050004 		li	a0,64
+  82 0094 97000000 		call	kern_mem_alloc@plt
+  82      E7800000 
+  83              	.LVL10:
+  84 009c 13090500 		mv	s2,a0
+  85              	.LVL11:
+  27:src/main.cpp  **** 
+  28:src/main.cpp  **** 
+  29:src/main.cpp  ****     kern_mem_free(a);
+  86              		.loc 1 29 5 is_stmt 1
+  87              		.loc 1 29 18 is_stmt 0
+  88 00a0 13850900 		mv	a0,s3
+  89              	.LVL12:
+  90 00a4 97000000 		call	kern_mem_free@plt
+  90      E7800000 
+  91              	.LVL13:
+  30:src/main.cpp  ****     kern_mem_free(c);
+  92              		.loc 1 30 5 is_stmt 1
+  93              		.loc 1 30 18 is_stmt 0
+  94 00ac 13050900 		mv	a0,s2
+  95 00b0 97000000 		call	kern_mem_free@plt
+  95      E7800000 
+  96              	.LVL14:
+  31:src/main.cpp  ****     kern_mem_free(b);
+  97              		.loc 1 31 5 is_stmt 1
+  98              		.loc 1 31 18 is_stmt 0
+  99 00b8 13850400 		mv	a0,s1
+ 100 00bc 97000000 		call	kern_mem_free@plt
+ 100      E7800000 
+ 101              	.LVL15:
+  32:src/main.cpp  **** 
+  33:src/main.cpp  ****     kern_interrupt_init();
+ 102              		.loc 1 33 5 is_stmt 1
+ 103              		.loc 1 33 24 is_stmt 0
+ 104 00c4 97000000 		call	kern_interrupt_init@plt
+ 104      E7800000 
+ 105              	.LVL16:
+ 106              	.L2:
+  34:src/main.cpp  **** 
+  35:src/main.cpp  ****     while (1){}
+ 107              		.loc 1 35 5 is_stmt 1 discriminator 1
+ 108              		.loc 1 35 5 discriminator 1
+ 109 00cc 6F000000 		j	.L2
+ 110              		.cfi_endproc
+ 111              	.LFE0:
+ 113              	.Letext0:
+ 114              		.file 2 "src/../lib/hw.h"
+ 115              		.file 3 "src/../lib/console.h"
+ 116              		.file 4 "src/../h/strings.h"
+ 117              		.file 5 "src/../h/kern_defs.h"
+GAS LISTING /tmp/ccuObDCj.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.cpp
+     /tmp/ccuObDCj.s:14     .text:0000000000000000 main
+     /tmp/ccuObDCj.s:18     .text:0000000000000000 .L0 
+     /tmp/ccuObDCj.s:19     .text:0000000000000000 .L0 
+     /tmp/ccuObDCj.s:20     .text:0000000000000004 .L0 
+     /tmp/ccuObDCj.s:26     .text:0000000000000018 .L0 
+     /tmp/ccuObDCj.s:27     .text:0000000000000018 .L0 
+     /tmp/ccuObDCj.s:28     .text:0000000000000018 .L0 
+     /tmp/ccuObDCj.s:29     .text:0000000000000018 .L0 
+     /tmp/ccuObDCj.s:30     .text:0000000000000018 .L0 
+     /tmp/ccuObDCj.s:32     .text:000000000000001c .L0 
+     /tmp/ccuObDCj.s:34     .text:000000000000001c .L0 
+     /tmp/ccuObDCj.s:35     .text:000000000000001c .L0 
+     /tmp/ccuObDCj.s:39     .text:0000000000000028 .L0 
+     /tmp/ccuObDCj.s:40     .text:0000000000000028 .L0 
+     /tmp/ccuObDCj.s:44     .text:0000000000000034 .L0 
+     /tmp/ccuObDCj.s:45     .text:0000000000000034 .L0 
+     /tmp/ccuObDCj.s:49     .text:0000000000000040 .L0 
+     /tmp/ccuObDCj.s:50     .text:0000000000000040 .L0 
+     /tmp/ccuObDCj.s:54     .text:0000000000000050 .L0 
+     /tmp/ccuObDCj.s:55     .text:0000000000000050 .L0 
+     /tmp/ccuObDCj.s:56     .text:0000000000000050 .L0 
+     /tmp/ccuObDCj.s:57     .text:0000000000000050 .L0 
+     /tmp/ccuObDCj.s:58     .text:0000000000000050 .L0 
+     /tmp/ccuObDCj.s:65     .text:0000000000000070 .L0 
+     /tmp/ccuObDCj.s:66     .text:0000000000000070 .L0 
+     /tmp/ccuObDCj.s:72     .text:0000000000000080 .L0 
+     /tmp/ccuObDCj.s:73     .text:0000000000000080 .L0 
+     /tmp/ccuObDCj.s:80     .text:0000000000000090 .L0 
+     /tmp/ccuObDCj.s:81     .text:0000000000000090 .L0 
+     /tmp/ccuObDCj.s:87     .text:00000000000000a0 .L0 
+     /tmp/ccuObDCj.s:88     .text:00000000000000a0 .L0 
+     /tmp/ccuObDCj.s:93     .text:00000000000000ac .L0 
+     /tmp/ccuObDCj.s:94     .text:00000000000000ac .L0 
+     /tmp/ccuObDCj.s:98     .text:00000000000000b8 .L0 
+     /tmp/ccuObDCj.s:99     .text:00000000000000b8 .L0 
+     /tmp/ccuObDCj.s:103    .text:00000000000000c4 .L0 
+     /tmp/ccuObDCj.s:104    .text:00000000000000c4 .L0 
+     /tmp/ccuObDCj.s:108    .text:00000000000000cc .L0 
+     /tmp/ccuObDCj.s:109    .text:00000000000000cc .L0 
+     /tmp/ccuObDCj.s:110    .text:00000000000000d0 .L0 
+     /tmp/ccuObDCj.s:118    .text:00000000000000d0 .L0 
+     /tmp/ccuObDCj.s:8      .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccuObDCj.s:50     .text:0000000000000040 .L0 
+     /tmp/ccuObDCj.s:58     .text:0000000000000050 .L0 
+     /tmp/ccuObDCj.s:60     .text:000000000000005c .L0 
+     /tmp/ccuObDCj.s:106    .text:00000000000000cc .L2
+     /tmp/ccuObDCj.s:434    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccuObDCj.s:765    .debug_str:0000000000000143 .LASF24
+     /tmp/ccuObDCj.s:767    .debug_str:0000000000000207 .LASF25
+     /tmp/ccuObDCj.s:775    .debug_str:0000000000000243 .LASF26
+     /tmp/ccuObDCj.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccuObDCj.s:113    .text:00000000000000d0 .Letext0
+     /tmp/ccuObDCj.s:719    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccuObDCj.s:723    .debug_str:0000000000000013 .LASF0
+     /tmp/ccuObDCj.s:763    .debug_str:0000000000000130 .LASF1
+GAS LISTING /tmp/ccuObDCj.s 			page 5
+
+
+     /tmp/ccuObDCj.s:749    .debug_str:00000000000000c9 .LASF2
+     /tmp/ccuObDCj.s:743    .debug_str:00000000000000a2 .LASF4
+     /tmp/ccuObDCj.s:739    .debug_str:000000000000007d .LASF3
+     /tmp/ccuObDCj.s:733    .debug_str:0000000000000058 .LASF5
+     /tmp/ccuObDCj.s:741    .debug_str:000000000000008f .LASF6
+     /tmp/ccuObDCj.s:761    .debug_str:000000000000011d .LASF7
+     /tmp/ccuObDCj.s:771    .debug_str:0000000000000223 .LASF8
+     /tmp/ccuObDCj.s:729    .debug_str:000000000000003b .LASF9
+     /tmp/ccuObDCj.s:731    .debug_str:0000000000000049 .LASF10
+     /tmp/ccuObDCj.s:769    .debug_str:0000000000000214 .LASF11
+     /tmp/ccuObDCj.s:735    .debug_str:000000000000005f .LASF12
+     /tmp/ccuObDCj.s:773    .debug_str:0000000000000233 .LASF13
+     /tmp/ccuObDCj.s:747    .debug_str:00000000000000bd .LASF14
+     /tmp/ccuObDCj.s:759    .debug_str:0000000000000107 .LASF15
+     /tmp/ccuObDCj.s:755    .debug_str:00000000000000e3 .LASF16
+     /tmp/ccuObDCj.s:751    .debug_str:00000000000000d7 .LASF27
+     /tmp/ccuObDCj.s:15     .text:0000000000000000 .LFB0
+     /tmp/ccuObDCj.s:111    .text:00000000000000d0 .LFE0
+     /tmp/ccuObDCj.s:684    .debug_loc:0000000000000000 .LLST0
+     /tmp/ccuObDCj.s:695    .debug_loc:0000000000000036 .LLST1
+     /tmp/ccuObDCj.s:37     .text:0000000000000028 .LVL0
+     /tmp/ccuObDCj.s:42     .text:0000000000000034 .LVL1
+     /tmp/ccuObDCj.s:47     .text:0000000000000040 .LVL2
+     /tmp/ccuObDCj.s:52     .text:0000000000000050 .LVL3
+     /tmp/ccuObDCj.s:63     .text:0000000000000070 .LVL4
+     /tmp/ccuObDCj.s:68     .text:000000000000007c .LVL5
+     /tmp/ccuObDCj.s:76     .text:000000000000008c .LVL8
+     /tmp/ccuObDCj.s:83     .text:000000000000009c .LVL10
+     /tmp/ccuObDCj.s:91     .text:00000000000000ac .LVL13
+     /tmp/ccuObDCj.s:96     .text:00000000000000b8 .LVL14
+     /tmp/ccuObDCj.s:101    .text:00000000000000c4 .LVL15
+     /tmp/ccuObDCj.s:105    .text:00000000000000cc .LVL16
+     /tmp/ccuObDCj.s:753    .debug_str:00000000000000dc .LASF17
+     /tmp/ccuObDCj.s:721    .debug_str:0000000000000000 .LASF18
+     /tmp/ccuObDCj.s:725    .debug_str:0000000000000020 .LASF19
+     /tmp/ccuObDCj.s:737    .debug_str:000000000000006f .LASF20
+     /tmp/ccuObDCj.s:727    .debug_str:000000000000002c .LASF21
+     /tmp/ccuObDCj.s:757    .debug_str:00000000000000f9 .LASF22
+     /tmp/ccuObDCj.s:745    .debug_str:00000000000000a9 .LASF23
+     /tmp/ccuObDCj.s:70     .text:0000000000000080 .LVL6
+     /tmp/ccuObDCj.s:74     .text:0000000000000084 .LVL7
+     /tmp/ccuObDCj.s:85     .text:00000000000000a0 .LVL11
+     /tmp/ccuObDCj.s:89     .text:00000000000000a4 .LVL12
+     /tmp/ccuObDCj.s:119    .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+__putc
+_Z11printstringPKc
+HEAP_END_ADDR
+HEAP_START_ADDR
+kern_mem_init
+kern_mem_alloc
+kern_mem_free
+kern_interrupt_init
