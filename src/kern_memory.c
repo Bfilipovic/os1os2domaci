@@ -2,7 +2,6 @@
 // Created by os on 5/17/23.
 //
 
-#include "../h/kern_defs.h"
 #include "../lib/hw.h"
 
 

@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccDMQSXV.s 			page 1
+GAS LISTING /tmp/cciikDjw.s 			page 1
 
 
    1              		.file	"kern_memory.c"
@@ -16,23 +16,22 @@ GAS LISTING /tmp/ccDMQSXV.s 			page 1
    2:src/kern_memory.c **** // Created by os on 5/17/23.
    3:src/kern_memory.c **** //
    4:src/kern_memory.c **** 
-   5:src/kern_memory.c **** #include "../h/kern_defs.h"
-   6:src/kern_memory.c **** #include "../lib/hw.h"
+   5:src/kern_memory.c **** #include "../lib/hw.h"
+   6:src/kern_memory.c **** 
    7:src/kern_memory.c **** 
-   8:src/kern_memory.c **** 
-   9:src/kern_memory.c **** typedef struct mem_block {
-  10:src/kern_memory.c ****     int sizeInBlocks;
-  11:src/kern_memory.c ****     int startingBlock;
-  12:src/kern_memory.c ****     struct mem_block* next;
-  13:src/kern_memory.c **** } mem_block_s;
+   8:src/kern_memory.c **** typedef struct mem_block {
+   9:src/kern_memory.c ****     int sizeInBlocks;
+  10:src/kern_memory.c ****     int startingBlock;
+  11:src/kern_memory.c ****     struct mem_block* next;
+  12:src/kern_memory.c **** } mem_block_s;
+  13:src/kern_memory.c **** 
   14:src/kern_memory.c **** 
-  15:src/kern_memory.c **** 
-  16:src/kern_memory.c **** mem_block_s * freeHead;
+  15:src/kern_memory.c **** mem_block_s * freeHead;
+  16:src/kern_memory.c **** 
   17:src/kern_memory.c **** 
-  18:src/kern_memory.c **** 
-  19:src/kern_memory.c **** void* kern_mem_alloc(int sizeInBlocks)
-  20:src/kern_memory.c **** {
-  13              		.loc 1 20 1
+  18:src/kern_memory.c **** void* kern_mem_alloc(int sizeInBlocks)
+  19:src/kern_memory.c **** {
+  13              		.loc 1 19 1
   14              		.cfi_startproc
   15              	.LVL0:
   16 0000 130101FF 		addi	sp,sp,-16
@@ -42,71 +41,71 @@ GAS LISTING /tmp/ccDMQSXV.s 			page 1
   20 0008 13040101 		addi	s0,sp,16
   21              		.cfi_def_cfa 8, 0
   22 000c 93060500 		mv	a3,a0
-  21:src/kern_memory.c ****     mem_block_s *curr = freeHead;
-  23              		.loc 1 21 5
-  24              		.loc 1 21 18 is_stmt 0
+  20:src/kern_memory.c ****     mem_block_s *curr = freeHead;
+  23              		.loc 1 20 5
+  24              		.loc 1 20 18 is_stmt 0
   25 0010 97050000 		ld	a1,freeHead
   25      83B50500 
   26              	.LVL1:
-  22:src/kern_memory.c ****     mem_block_s *prev = 0;
-  27              		.loc 1 22 5 is_stmt 1
-  23:src/kern_memory.c **** 
-  24:src/kern_memory.c ****     while (curr){
-  28              		.loc 1 24 5
   21:src/kern_memory.c ****     mem_block_s *prev = 0;
-  29              		.loc 1 21 18 is_stmt 0
+  27              		.loc 1 21 5 is_stmt 1
+  22:src/kern_memory.c **** 
+  23:src/kern_memory.c ****     while (curr){
+  28              		.loc 1 23 5
+  20:src/kern_memory.c ****     mem_block_s *prev = 0;
+  29              		.loc 1 20 18 is_stmt 0
   30 0018 13850500 		mv	a0,a1
   31              	.LVL2:
-  22:src/kern_memory.c ****     mem_block_s *prev = 0;
-GAS LISTING /tmp/ccDMQSXV.s 			page 2
+  21:src/kern_memory.c ****     mem_block_s *prev = 0;
+  32              		.loc 1 21 18
+GAS LISTING /tmp/cciikDjw.s 			page 2
 
 
-  32              		.loc 1 22 18
   33 001c 13060000 		li	a2,0
-  34              		.loc 1 24 11
+  34              		.loc 1 23 11
   35 0020 6F008004 		j	.L2
   36              	.LVL3:
   37              	.L13:
-  25:src/kern_memory.c ****         if(curr->sizeInBlocks==sizeInBlocks+1){
-  26:src/kern_memory.c ****             if(curr==freeHead) freeHead=curr->next;
-  38              		.loc 1 26 13 is_stmt 1
-  39              		.loc 1 26 15 is_stmt 0
+  24:src/kern_memory.c ****         if(curr->sizeInBlocks==sizeInBlocks+1){
+  25:src/kern_memory.c ****             if(curr==freeHead) freeHead=curr->next;
+  38              		.loc 1 25 13 is_stmt 1
+  39              		.loc 1 25 15 is_stmt 0
   40 0024 6300B502 		beq	a0,a1,.L12
-  27:src/kern_memory.c ****             else prev->next = curr->next;
-  41              		.loc 1 27 18 is_stmt 1
-  42              		.loc 1 27 35 is_stmt 0
+  26:src/kern_memory.c ****             else prev->next = curr->next;
+  41              		.loc 1 26 18 is_stmt 1
+  42              		.loc 1 26 35 is_stmt 0
   43 0028 83378500 		ld	a5,8(a0)
-  44              		.loc 1 27 29
+  44              		.loc 1 26 29
   45 002c 2334F600 		sd	a5,8(a2)
   46              	.L5:
-  28:src/kern_memory.c ****             curr->sizeInBlocks=sizeInBlocks+1;
-  47              		.loc 1 28 13 is_stmt 1
-  48              		.loc 1 28 31 is_stmt 0
+  27:src/kern_memory.c ****             curr->sizeInBlocks=sizeInBlocks+1;
+  47              		.loc 1 27 13 is_stmt 1
+  48              		.loc 1 27 31 is_stmt 0
   49 0030 2320E500 		sw	a4,0(a0)
-  29:src/kern_memory.c ****             return (curr+MEM_BLOCK_SIZE);
-  50              		.loc 1 29 13 is_stmt 1
-  51              		.loc 1 29 25 is_stmt 0
+  28:src/kern_memory.c ****             return (curr+MEM_BLOCK_SIZE);
+  50              		.loc 1 28 13 is_stmt 1
+  51              		.loc 1 28 25 is_stmt 0
   52 0034 13050540 		addi	a0,a0,1024
   53              	.LVL4:
   54              	.L1:
-  30:src/kern_memory.c ****         }
-  31:src/kern_memory.c ****         else if(curr->sizeInBlocks>sizeInBlocks+1){
-  32:src/kern_memory.c ****             mem_block_s* newFreeBlock = curr+(sizeInBlocks+1)*MEM_BLOCK_SIZE;
-  33:src/kern_memory.c ****             newFreeBlock->sizeInBlocks = curr->sizeInBlocks-sizeInBlocks-1;
-  34:src/kern_memory.c ****             newFreeBlock->startingBlock=curr->startingBlock+sizeInBlocks+1;
-  35:src/kern_memory.c ****             newFreeBlock->next = curr->next;
-  36:src/kern_memory.c ****             if(curr==freeHead) freeHead=newFreeBlock;
-  37:src/kern_memory.c ****             else prev->next=newFreeBlock;
-  38:src/kern_memory.c ****             curr->sizeInBlocks=sizeInBlocks+1;
-  39:src/kern_memory.c ****             return (curr+MEM_BLOCK_SIZE);
-  40:src/kern_memory.c ****         }
-  41:src/kern_memory.c ****         prev=curr;
-  42:src/kern_memory.c ****         curr=curr->next;
-  43:src/kern_memory.c ****     }
-  44:src/kern_memory.c **** 
-  45:src/kern_memory.c ****     return 0;
-  46:src/kern_memory.c **** }
-  55              		.loc 1 46 1
+  29:src/kern_memory.c ****         }
+  30:src/kern_memory.c ****         else if(curr->sizeInBlocks>sizeInBlocks+1){
+  31:src/kern_memory.c ****             mem_block_s* newFreeBlock = curr+(sizeInBlocks+1)*MEM_BLOCK_SIZE;
+  32:src/kern_memory.c ****             newFreeBlock->sizeInBlocks = curr->sizeInBlocks-sizeInBlocks-1;
+  33:src/kern_memory.c ****             newFreeBlock->startingBlock=curr->startingBlock+sizeInBlocks+1;
+  34:src/kern_memory.c ****             newFreeBlock->next = curr->next;
+  35:src/kern_memory.c ****             if(curr==freeHead) freeHead=newFreeBlock;
+  36:src/kern_memory.c ****             else prev->next=newFreeBlock;
+  37:src/kern_memory.c ****             curr->sizeInBlocks=sizeInBlocks+1;
+  38:src/kern_memory.c ****             return (curr+MEM_BLOCK_SIZE);
+  39:src/kern_memory.c ****         }
+  40:src/kern_memory.c ****         prev=curr;
+  41:src/kern_memory.c ****         curr=curr->next;
+  42:src/kern_memory.c ****     }
+  43:src/kern_memory.c **** 
+  44:src/kern_memory.c ****     return 0;
+  45:src/kern_memory.c **** }
+  55              		.loc 1 45 1
   56 0038 03348100 		ld	s0,8(sp)
   57              		.cfi_remember_state
   58              		.cfi_restore 8
@@ -117,136 +116,136 @@ GAS LISTING /tmp/ccDMQSXV.s 			page 1
   63              	.LVL5:
   64              	.L12:
   65              		.cfi_restore_state
-  26:src/kern_memory.c ****             else prev->next = curr->next;
-GAS LISTING /tmp/ccDMQSXV.s 			page 3
+  25:src/kern_memory.c ****             else prev->next = curr->next;
+  66              		.loc 1 25 32 is_stmt 1 discriminator 1
+GAS LISTING /tmp/cciikDjw.s 			page 3
 
 
-  66              		.loc 1 26 32 is_stmt 1 discriminator 1
-  26:src/kern_memory.c ****             else prev->next = curr->next;
-  67              		.loc 1 26 45 is_stmt 0 discriminator 1
+  25:src/kern_memory.c ****             else prev->next = curr->next;
+  67              		.loc 1 25 45 is_stmt 0 discriminator 1
   68 0044 83378500 		ld	a5,8(a0)
-  26:src/kern_memory.c ****             else prev->next = curr->next;
-  69              		.loc 1 26 40 discriminator 1
+  25:src/kern_memory.c ****             else prev->next = curr->next;
+  69              		.loc 1 25 40 discriminator 1
   70 0048 97060000 		sd	a5,freeHead,a3
   70      23B0F600 
   71 0050 6FF01FFE 		j	.L5
   72              	.LVL6:
   73              	.L14:
   74              	.LBB2:
-  36:src/kern_memory.c ****             else prev->next=newFreeBlock;
-  75              		.loc 1 36 32 is_stmt 1 discriminator 1
-  36:src/kern_memory.c ****             else prev->next=newFreeBlock;
-  76              		.loc 1 36 40 is_stmt 0 discriminator 1
+  35:src/kern_memory.c ****             else prev->next=newFreeBlock;
+  75              		.loc 1 35 32 is_stmt 1 discriminator 1
+  35:src/kern_memory.c ****             else prev->next=newFreeBlock;
+  76              		.loc 1 35 40 is_stmt 0 discriminator 1
   77 0054 97070000 		sd	a1,freeHead,a5
   77      23B0B700 
   78 005c 6F00C005 		j	.L9
   79              	.LVL7:
   80              	.L7:
   81              	.LBE2:
-  41:src/kern_memory.c ****         curr=curr->next;
-  82              		.loc 1 41 9 is_stmt 1
-  42:src/kern_memory.c ****     }
-  83              		.loc 1 42 9
-  41:src/kern_memory.c ****         curr=curr->next;
-  84              		.loc 1 41 13 is_stmt 0
+  40:src/kern_memory.c ****         curr=curr->next;
+  82              		.loc 1 40 9 is_stmt 1
+  41:src/kern_memory.c ****     }
+  83              		.loc 1 41 9
+  40:src/kern_memory.c ****         curr=curr->next;
+  84              		.loc 1 40 13 is_stmt 0
   85 0060 13060500 		mv	a2,a0
-  42:src/kern_memory.c ****     }
-  86              		.loc 1 42 13
+  41:src/kern_memory.c ****     }
+  86              		.loc 1 41 13
   87 0064 03358500 		ld	a0,8(a0)
   88              	.LVL8:
   89              	.L2:
-  24:src/kern_memory.c ****         if(curr->sizeInBlocks==sizeInBlocks+1){
-  90              		.loc 1 24 11 is_stmt 1
+  23:src/kern_memory.c ****         if(curr->sizeInBlocks==sizeInBlocks+1){
+  90              		.loc 1 23 11 is_stmt 1
   91 0068 E30805FC 		beqz	a0,.L1
-  25:src/kern_memory.c ****             if(curr==freeHead) freeHead=curr->next;
-  92              		.loc 1 25 9
-  25:src/kern_memory.c ****             if(curr==freeHead) freeHead=curr->next;
-  93              		.loc 1 25 16 is_stmt 0
+  24:src/kern_memory.c ****             if(curr==freeHead) freeHead=curr->next;
+  92              		.loc 1 24 9
+  24:src/kern_memory.c ****             if(curr==freeHead) freeHead=curr->next;
+  93              		.loc 1 24 16 is_stmt 0
   94 006c 83270500 		lw	a5,0(a0)
-  25:src/kern_memory.c ****             if(curr==freeHead) freeHead=curr->next;
-  95              		.loc 1 25 44
+  24:src/kern_memory.c ****             if(curr==freeHead) freeHead=curr->next;
+  95              		.loc 1 24 44
   96 0070 1B871600 		addiw	a4,a3,1
-  25:src/kern_memory.c ****             if(curr==freeHead) freeHead=curr->next;
-  97              		.loc 1 25 11
+  24:src/kern_memory.c ****             if(curr==freeHead) freeHead=curr->next;
+  97              		.loc 1 24 11
   98 0074 E388E7FA 		beq	a5,a4,.L13
-  31:src/kern_memory.c ****             mem_block_s* newFreeBlock = curr+(sizeInBlocks+1)*MEM_BLOCK_SIZE;
-  99              		.loc 1 31 14 is_stmt 1
-  31:src/kern_memory.c ****             mem_block_s* newFreeBlock = curr+(sizeInBlocks+1)*MEM_BLOCK_SIZE;
- 100              		.loc 1 31 16 is_stmt 0
+  30:src/kern_memory.c ****             mem_block_s* newFreeBlock = curr+(sizeInBlocks+1)*MEM_BLOCK_SIZE;
+  99              		.loc 1 30 14 is_stmt 1
+  30:src/kern_memory.c ****             mem_block_s* newFreeBlock = curr+(sizeInBlocks+1)*MEM_BLOCK_SIZE;
+ 100              		.loc 1 30 16 is_stmt 0
  101 0078 E354F7FE 		ble	a5,a4,.L7
  102              	.LBB3:
-  32:src/kern_memory.c ****             newFreeBlock->sizeInBlocks = curr->sizeInBlocks-sizeInBlocks-1;
- 103              		.loc 1 32 13 is_stmt 1
-  32:src/kern_memory.c ****             newFreeBlock->sizeInBlocks = curr->sizeInBlocks-sizeInBlocks-1;
-GAS LISTING /tmp/ccDMQSXV.s 			page 4
+  31:src/kern_memory.c ****             newFreeBlock->sizeInBlocks = curr->sizeInBlocks-sizeInBlocks-1;
+ 103              		.loc 1 31 13 is_stmt 1
+  31:src/kern_memory.c ****             newFreeBlock->sizeInBlocks = curr->sizeInBlocks-sizeInBlocks-1;
+ 104              		.loc 1 31 45 is_stmt 0
+GAS LISTING /tmp/cciikDjw.s 			page 4
 
 
- 104              		.loc 1 32 45 is_stmt 0
  105 007c 9315A700 		slli	a1,a4,10
-  32:src/kern_memory.c ****             newFreeBlock->sizeInBlocks = curr->sizeInBlocks-sizeInBlocks-1;
- 106              		.loc 1 32 26
+  31:src/kern_memory.c ****             newFreeBlock->sizeInBlocks = curr->sizeInBlocks-sizeInBlocks-1;
+ 106              		.loc 1 31 26
  107 0080 B305B500 		add	a1,a0,a1
  108              	.LVL9:
-  33:src/kern_memory.c ****             newFreeBlock->startingBlock=curr->startingBlock+sizeInBlocks+1;
- 109              		.loc 1 33 13 is_stmt 1
-  33:src/kern_memory.c ****             newFreeBlock->startingBlock=curr->startingBlock+sizeInBlocks+1;
- 110              		.loc 1 33 60 is_stmt 0
+  32:src/kern_memory.c ****             newFreeBlock->startingBlock=curr->startingBlock+sizeInBlocks+1;
+ 109              		.loc 1 32 13 is_stmt 1
+  32:src/kern_memory.c ****             newFreeBlock->startingBlock=curr->startingBlock+sizeInBlocks+1;
+ 110              		.loc 1 32 60 is_stmt 0
  111 0084 BB87D740 		subw	a5,a5,a3
-  33:src/kern_memory.c ****             newFreeBlock->startingBlock=curr->startingBlock+sizeInBlocks+1;
- 112              		.loc 1 33 73
+  32:src/kern_memory.c ****             newFreeBlock->startingBlock=curr->startingBlock+sizeInBlocks+1;
+ 112              		.loc 1 32 73
  113 0088 9B87F7FF 		addiw	a5,a5,-1
-  33:src/kern_memory.c ****             newFreeBlock->startingBlock=curr->startingBlock+sizeInBlocks+1;
- 114              		.loc 1 33 40
+  32:src/kern_memory.c ****             newFreeBlock->startingBlock=curr->startingBlock+sizeInBlocks+1;
+ 114              		.loc 1 32 40
  115 008c 23A0F500 		sw	a5,0(a1)
-  34:src/kern_memory.c ****             newFreeBlock->next = curr->next;
- 116              		.loc 1 34 13 is_stmt 1
-  34:src/kern_memory.c ****             newFreeBlock->next = curr->next;
- 117              		.loc 1 34 45 is_stmt 0
+  33:src/kern_memory.c ****             newFreeBlock->next = curr->next;
+ 116              		.loc 1 33 13 is_stmt 1
+  33:src/kern_memory.c ****             newFreeBlock->next = curr->next;
+ 117              		.loc 1 33 45 is_stmt 0
  118 0090 83274500 		lw	a5,4(a0)
-  34:src/kern_memory.c ****             newFreeBlock->next = curr->next;
- 119              		.loc 1 34 60
+  33:src/kern_memory.c ****             newFreeBlock->next = curr->next;
+ 119              		.loc 1 33 60
  120 0094 BB86D700 		addw	a3,a5,a3
-  34:src/kern_memory.c ****             newFreeBlock->next = curr->next;
- 121              		.loc 1 34 73
+  33:src/kern_memory.c ****             newFreeBlock->next = curr->next;
+ 121              		.loc 1 33 73
  122 0098 9B861600 		addiw	a3,a3,1
-  34:src/kern_memory.c ****             newFreeBlock->next = curr->next;
- 123              		.loc 1 34 40
+  33:src/kern_memory.c ****             newFreeBlock->next = curr->next;
+ 123              		.loc 1 33 40
  124 009c 23A2D500 		sw	a3,4(a1)
-  35:src/kern_memory.c ****             if(curr==freeHead) freeHead=newFreeBlock;
- 125              		.loc 1 35 13 is_stmt 1
-  35:src/kern_memory.c ****             if(curr==freeHead) freeHead=newFreeBlock;
- 126              		.loc 1 35 38 is_stmt 0
+  34:src/kern_memory.c ****             if(curr==freeHead) freeHead=newFreeBlock;
+ 125              		.loc 1 34 13 is_stmt 1
+  34:src/kern_memory.c ****             if(curr==freeHead) freeHead=newFreeBlock;
+ 126              		.loc 1 34 38 is_stmt 0
  127 00a0 83378500 		ld	a5,8(a0)
-  35:src/kern_memory.c ****             if(curr==freeHead) freeHead=newFreeBlock;
- 128              		.loc 1 35 32
+  34:src/kern_memory.c ****             if(curr==freeHead) freeHead=newFreeBlock;
+ 128              		.loc 1 34 32
  129 00a4 23B4F500 		sd	a5,8(a1)
-  36:src/kern_memory.c ****             else prev->next=newFreeBlock;
- 130              		.loc 1 36 13 is_stmt 1
-  36:src/kern_memory.c ****             else prev->next=newFreeBlock;
- 131              		.loc 1 36 20 is_stmt 0
+  35:src/kern_memory.c ****             else prev->next=newFreeBlock;
+ 130              		.loc 1 35 13 is_stmt 1
+  35:src/kern_memory.c ****             else prev->next=newFreeBlock;
+ 131              		.loc 1 35 20 is_stmt 0
  132 00a8 97070000 		ld	a5,freeHead
  132      83B70700 
-  36:src/kern_memory.c ****             else prev->next=newFreeBlock;
- 133              		.loc 1 36 15
+  35:src/kern_memory.c ****             else prev->next=newFreeBlock;
+ 133              		.loc 1 35 15
  134 00b0 E382A7FA 		beq	a5,a0,.L14
-  37:src/kern_memory.c ****             curr->sizeInBlocks=sizeInBlocks+1;
- 135              		.loc 1 37 18 is_stmt 1
-  37:src/kern_memory.c ****             curr->sizeInBlocks=sizeInBlocks+1;
- 136              		.loc 1 37 28 is_stmt 0
+  36:src/kern_memory.c ****             curr->sizeInBlocks=sizeInBlocks+1;
+ 135              		.loc 1 36 18 is_stmt 1
+  36:src/kern_memory.c ****             curr->sizeInBlocks=sizeInBlocks+1;
+ 136              		.loc 1 36 28 is_stmt 0
  137 00b4 2334B600 		sd	a1,8(a2)
  138              	.L9:
-  38:src/kern_memory.c ****             return (curr+MEM_BLOCK_SIZE);
- 139              		.loc 1 38 13 is_stmt 1
-  38:src/kern_memory.c ****             return (curr+MEM_BLOCK_SIZE);
-GAS LISTING /tmp/ccDMQSXV.s 			page 5
+  37:src/kern_memory.c ****             return (curr+MEM_BLOCK_SIZE);
+ 139              		.loc 1 37 13 is_stmt 1
+  37:src/kern_memory.c ****             return (curr+MEM_BLOCK_SIZE);
+ 140              		.loc 1 37 31 is_stmt 0
+GAS LISTING /tmp/cciikDjw.s 			page 5
 
 
- 140              		.loc 1 38 31 is_stmt 0
  141 00b8 2320E500 		sw	a4,0(a0)
-  39:src/kern_memory.c ****         }
- 142              		.loc 1 39 13 is_stmt 1
-  39:src/kern_memory.c ****         }
- 143              		.loc 1 39 25 is_stmt 0
+  38:src/kern_memory.c ****         }
+ 142              		.loc 1 38 13 is_stmt 1
+  38:src/kern_memory.c ****         }
+ 143              		.loc 1 38 25 is_stmt 0
  144 00bc 13050540 		addi	a0,a0,1024
  145              	.LVL10:
  146 00c0 6FF09FF7 		j	.L1
@@ -257,10 +256,10 @@ GAS LISTING /tmp/ccDMQSXV.s 			page 1
  152              		.globl	kern_mem_free
  154              	kern_mem_free:
  155              	.LFB1:
-  47:src/kern_memory.c **** 
-  48:src/kern_memory.c **** int kern_mem_free(void* addr)
-  49:src/kern_memory.c **** {
- 156              		.loc 1 49 1 is_stmt 1
+  46:src/kern_memory.c **** 
+  47:src/kern_memory.c **** int kern_mem_free(void* addr)
+  48:src/kern_memory.c **** {
+ 156              		.loc 1 48 1 is_stmt 1
  157              		.cfi_startproc
  158              	.LVL11:
  159 00c4 130101FF 		addi	sp,sp,-16
@@ -269,121 +268,121 @@ GAS LISTING /tmp/ccDMQSXV.s 			page 1
  162              		.cfi_offset 8, -8
  163 00cc 13040101 		addi	s0,sp,16
  164              		.cfi_def_cfa 8, 0
-  50:src/kern_memory.c ****     mem_block_s* freedBlock = (mem_block_s*) addr-MEM_BLOCK_SIZE;
- 165              		.loc 1 50 5
- 166              		.loc 1 50 18 is_stmt 0
+  49:src/kern_memory.c ****     mem_block_s* freedBlock = (mem_block_s*) addr-MEM_BLOCK_SIZE;
+ 165              		.loc 1 49 5
+ 166              		.loc 1 49 18 is_stmt 0
  167 00d0 130705C0 		addi	a4,a0,-1024
  168              	.LVL12:
-  51:src/kern_memory.c ****     mem_block_s* curr=freeHead;
- 169              		.loc 1 51 5 is_stmt 1
- 170              		.loc 1 51 18 is_stmt 0
+  50:src/kern_memory.c ****     mem_block_s* curr=freeHead;
+ 169              		.loc 1 50 5 is_stmt 1
+ 170              		.loc 1 50 18 is_stmt 0
  171 00d4 97070000 		ld	a5,freeHead
  171      83B70700 
  172              	.LVL13:
-  52:src/kern_memory.c ****     mem_block_s * prev =0;
- 173              		.loc 1 52 5 is_stmt 1
-  53:src/kern_memory.c **** 
-  54:src/kern_memory.c ****     while (curr<freedBlock && curr!=0){
- 174              		.loc 1 54 5
-  52:src/kern_memory.c ****     mem_block_s * prev =0;
- 175              		.loc 1 52 19 is_stmt 0
+  51:src/kern_memory.c ****     mem_block_s * prev =0;
+ 173              		.loc 1 51 5 is_stmt 1
+  52:src/kern_memory.c **** 
+  53:src/kern_memory.c ****     while (curr<freedBlock && curr!=0){
+ 174              		.loc 1 53 5
+  51:src/kern_memory.c ****     mem_block_s * prev =0;
+ 175              		.loc 1 51 19 is_stmt 0
  176 00dc 93060000 		li	a3,0
  177              	.LVL14:
  178              	.L16:
- 179              		.loc 1 54 11 is_stmt 1
+ 179              		.loc 1 53 11 is_stmt 1
  180 00e0 63FAE700 		bgeu	a5,a4,.L17
- 181              		.loc 1 54 28 is_stmt 0 discriminator 1
+ 181              		.loc 1 53 28 is_stmt 0 discriminator 1
  182 00e4 63880700 		beqz	a5,.L17
-  55:src/kern_memory.c ****         prev=curr;
- 183              		.loc 1 55 9 is_stmt 1
+  54:src/kern_memory.c ****         prev=curr;
+ 183              		.loc 1 54 9 is_stmt 1
  184              	.LVL15:
-  56:src/kern_memory.c ****         curr=curr->next;
-GAS LISTING /tmp/ccDMQSXV.s 			page 6
+  55:src/kern_memory.c ****         curr=curr->next;
+ 185              		.loc 1 55 9
+GAS LISTING /tmp/cciikDjw.s 			page 6
 
 
- 185              		.loc 1 56 9
-  55:src/kern_memory.c ****         prev=curr;
- 186              		.loc 1 55 13 is_stmt 0
+  54:src/kern_memory.c ****         prev=curr;
+ 186              		.loc 1 54 13 is_stmt 0
  187 00e8 93860700 		mv	a3,a5
- 188              		.loc 1 56 13
+ 188              		.loc 1 55 13
  189 00ec 83B78700 		ld	a5,8(a5)
  190              	.LVL16:
  191 00f0 6FF01FFF 		j	.L16
  192              	.L17:
-  57:src/kern_memory.c ****     }
-  58:src/kern_memory.c **** 
-  59:src/kern_memory.c ****     /*
-  60:src/kern_memory.c ****     //kast radi lakse aritmetike
-  61:src/kern_memory.c ****     char* cfreedBlock = (char *)freedBlock;
-  62:src/kern_memory.c ****     char* cprev = (char *)prev;
-  63:src/kern_memory.c ****     char* ccurr = (char *)curr;
-  64:src/kern_memory.c ****     */
-  65:src/kern_memory.c **** 
-  66:src/kern_memory.c ****     if(prev){
- 193              		.loc 1 66 5 is_stmt 1
- 194              		.loc 1 66 7 is_stmt 0
+  56:src/kern_memory.c ****     }
+  57:src/kern_memory.c **** 
+  58:src/kern_memory.c ****     /*
+  59:src/kern_memory.c ****     //kast radi lakse aritmetike
+  60:src/kern_memory.c ****     char* cfreedBlock = (char *)freedBlock;
+  61:src/kern_memory.c ****     char* cprev = (char *)prev;
+  62:src/kern_memory.c ****     char* ccurr = (char *)curr;
+  63:src/kern_memory.c ****     */
+  64:src/kern_memory.c **** 
+  65:src/kern_memory.c ****     if(prev){
+ 193              		.loc 1 65 5 is_stmt 1
+ 194              		.loc 1 65 7 is_stmt 0
  195 00f4 638E0604 		beqz	a3,.L19
-  67:src/kern_memory.c ****         if(prev->startingBlock+prev->sizeInBlocks==freedBlock->startingBlock){
- 196              		.loc 1 67 9 is_stmt 1
- 197              		.loc 1 67 16 is_stmt 0
+  66:src/kern_memory.c ****         if(prev->startingBlock+prev->sizeInBlocks==freedBlock->startingBlock){
+ 196              		.loc 1 66 9 is_stmt 1
+ 197              		.loc 1 66 16 is_stmt 0
  198 00f8 03A64600 		lw	a2,4(a3)
- 199              		.loc 1 67 36
+ 199              		.loc 1 66 36
  200 00fc 83A50600 		lw	a1,0(a3)
- 201              		.loc 1 67 31
+ 201              		.loc 1 66 31
  202 0100 3B06B600 		addw	a2,a2,a1
- 203              		.loc 1 67 62
+ 203              		.loc 1 66 62
  204 0104 032845C0 		lw	a6,-1020(a0)
- 205              		.loc 1 67 11
+ 205              		.loc 1 66 11
  206 0108 630A0603 		beq	a2,a6,.L25
-  68:src/kern_memory.c ****             prev->sizeInBlocks+=freedBlock->sizeInBlocks;
-  69:src/kern_memory.c ****             freedBlock=prev;
-  70:src/kern_memory.c ****         } else {
-  71:src/kern_memory.c ****             prev->next=freedBlock;
- 207              		.loc 1 71 13 is_stmt 1
- 208              		.loc 1 71 23 is_stmt 0
+  67:src/kern_memory.c ****             prev->sizeInBlocks+=freedBlock->sizeInBlocks;
+  68:src/kern_memory.c ****             freedBlock=prev;
+  69:src/kern_memory.c ****         } else {
+  70:src/kern_memory.c ****             prev->next=freedBlock;
+ 207              		.loc 1 70 13 is_stmt 1
+ 208              		.loc 1 70 23 is_stmt 0
  209 010c 23B4E600 		sd	a4,8(a3)
  210              	.LVL17:
  211              	.L21:
-  72:src/kern_memory.c ****         }
-  73:src/kern_memory.c ****     }
-  74:src/kern_memory.c ****     else freeHead=freedBlock;
-  75:src/kern_memory.c **** 
-  76:src/kern_memory.c ****     if(curr){
- 212              		.loc 1 76 5 is_stmt 1
- 213              		.loc 1 76 7 is_stmt 0
+  71:src/kern_memory.c ****         }
+  72:src/kern_memory.c ****     }
+  73:src/kern_memory.c ****     else freeHead=freedBlock;
+  74:src/kern_memory.c **** 
+  75:src/kern_memory.c ****     if(curr){
+ 212              		.loc 1 75 5 is_stmt 1
+ 213              		.loc 1 75 7 is_stmt 0
  214 0110 638E0700 		beqz	a5,.L22
-  77:src/kern_memory.c ****         if(freedBlock->startingBlock+freedBlock->sizeInBlocks==curr->startingBlock){
- 215              		.loc 1 77 9 is_stmt 1
- 216              		.loc 1 77 22 is_stmt 0
+  76:src/kern_memory.c ****         if(freedBlock->startingBlock+freedBlock->sizeInBlocks==curr->startingBlock){
+ 215              		.loc 1 76 9 is_stmt 1
+ 216              		.loc 1 76 22 is_stmt 0
  217 0114 83264700 		lw	a3,4(a4)
- 218              		.loc 1 77 48
+ 218              		.loc 1 76 48
  219 0118 03260700 		lw	a2,0(a4)
-GAS LISTING /tmp/ccDMQSXV.s 			page 7
+ 220              		.loc 1 76 37
+GAS LISTING /tmp/cciikDjw.s 			page 7
 
 
- 220              		.loc 1 77 37
  221 011c BB86C600 		addw	a3,a3,a2
- 222              		.loc 1 77 68
+ 222              		.loc 1 76 68
  223 0120 83A54700 		lw	a1,4(a5)
- 224              		.loc 1 77 11
+ 224              		.loc 1 76 11
  225 0124 638CB602 		beq	a3,a1,.L26
-  78:src/kern_memory.c ****             freedBlock->sizeInBlocks+=curr->sizeInBlocks;
-  79:src/kern_memory.c ****             freedBlock->next=curr->next;
-  80:src/kern_memory.c ****         } else{
-  81:src/kern_memory.c ****           freedBlock->next=curr;
- 226              		.loc 1 81 11 is_stmt 1
- 227              		.loc 1 81 27 is_stmt 0
+  77:src/kern_memory.c ****             freedBlock->sizeInBlocks+=curr->sizeInBlocks;
+  78:src/kern_memory.c ****             freedBlock->next=curr->next;
+  79:src/kern_memory.c ****         } else{
+  80:src/kern_memory.c ****           freedBlock->next=curr;
+ 226              		.loc 1 80 11 is_stmt 1
+ 227              		.loc 1 80 27 is_stmt 0
  228 0128 2334F700 		sd	a5,8(a4)
  229              	.LVL18:
  230              	.L22:
-  82:src/kern_memory.c ****         }
-  83:src/kern_memory.c ****     }
+  81:src/kern_memory.c ****         }
+  82:src/kern_memory.c ****     }
+  83:src/kern_memory.c **** 
   84:src/kern_memory.c **** 
-  85:src/kern_memory.c **** 
-  86:src/kern_memory.c ****     return 0;
- 231              		.loc 1 86 5 is_stmt 1
-  87:src/kern_memory.c **** }
- 232              		.loc 1 87 1 is_stmt 0
+  85:src/kern_memory.c ****     return 0;
+ 231              		.loc 1 85 5 is_stmt 1
+  86:src/kern_memory.c **** }
+ 232              		.loc 1 86 1 is_stmt 0
  233 012c 13050000 		li	a0,0
  234              	.LVL19:
  235 0130 03348100 		ld	s0,8(sp)
@@ -396,54 +395,54 @@ GAS LISTING /tmp/ccDMQSXV.s 			page 1
  242              	.LVL20:
  243              	.L25:
  244              		.cfi_restore_state
-  68:src/kern_memory.c ****             freedBlock=prev;
- 245              		.loc 1 68 13 is_stmt 1
-  68:src/kern_memory.c ****             freedBlock=prev;
- 246              		.loc 1 68 43 is_stmt 0
+  67:src/kern_memory.c ****             freedBlock=prev;
+ 245              		.loc 1 67 13 is_stmt 1
+  67:src/kern_memory.c ****             freedBlock=prev;
+ 246              		.loc 1 67 43 is_stmt 0
  247 013c 032705C0 		lw	a4,-1024(a0)
  248              	.LVL21:
-  68:src/kern_memory.c ****             freedBlock=prev;
- 249              		.loc 1 68 31
+  67:src/kern_memory.c ****             freedBlock=prev;
+ 249              		.loc 1 67 31
  250 0140 BB85E500 		addw	a1,a1,a4
  251 0144 23A0B600 		sw	a1,0(a3)
-  69:src/kern_memory.c ****         } else {
- 252              		.loc 1 69 13 is_stmt 1
+  68:src/kern_memory.c ****         } else {
+ 252              		.loc 1 68 13 is_stmt 1
  253              	.LVL22:
-  69:src/kern_memory.c ****         } else {
- 254              		.loc 1 69 23 is_stmt 0
+  68:src/kern_memory.c ****         } else {
+ 254              		.loc 1 68 23 is_stmt 0
  255 0148 13870600 		mv	a4,a3
  256 014c 6FF05FFC 		j	.L21
  257              	.LVL23:
  258              	.L19:
-  74:src/kern_memory.c **** 
- 259              		.loc 1 74 10 is_stmt 1
-  74:src/kern_memory.c **** 
-GAS LISTING /tmp/ccDMQSXV.s 			page 8
+  73:src/kern_memory.c **** 
+ 259              		.loc 1 73 10 is_stmt 1
+  73:src/kern_memory.c **** 
+ 260              		.loc 1 73 18 is_stmt 0
+GAS LISTING /tmp/cciikDjw.s 			page 8
 
 
- 260              		.loc 1 74 18 is_stmt 0
  261 0150 97060000 		sd	a4,freeHead,a3
  261      23B0E600 
  262              	.LVL24:
  263 0158 6FF09FFB 		j	.L21
  264              	.L26:
-  78:src/kern_memory.c ****             freedBlock->next=curr->next;
- 265              		.loc 1 78 13 is_stmt 1
-  78:src/kern_memory.c ****             freedBlock->next=curr->next;
- 266              		.loc 1 78 43 is_stmt 0
+  77:src/kern_memory.c ****             freedBlock->next=curr->next;
+ 265              		.loc 1 77 13 is_stmt 1
+  77:src/kern_memory.c ****             freedBlock->next=curr->next;
+ 266              		.loc 1 77 43 is_stmt 0
  267 015c 83A60700 		lw	a3,0(a5)
-  78:src/kern_memory.c ****             freedBlock->next=curr->next;
- 268              		.loc 1 78 37
+  77:src/kern_memory.c ****             freedBlock->next=curr->next;
+ 268              		.loc 1 77 37
  269 0160 3B06D600 		addw	a2,a2,a3
  270 0164 2320C700 		sw	a2,0(a4)
-  79:src/kern_memory.c ****         } else{
- 271              		.loc 1 79 13 is_stmt 1
-  79:src/kern_memory.c ****         } else{
- 272              		.loc 1 79 34 is_stmt 0
+  78:src/kern_memory.c ****         } else{
+ 271              		.loc 1 78 13 is_stmt 1
+  78:src/kern_memory.c ****         } else{
+ 272              		.loc 1 78 34 is_stmt 0
  273 0168 83B78700 		ld	a5,8(a5)
  274              	.LVL25:
-  79:src/kern_memory.c ****         } else{
- 275              		.loc 1 79 29
+  78:src/kern_memory.c ****         } else{
+ 275              		.loc 1 78 29
  276 016c 2334F700 		sd	a5,8(a4)
  277 0170 6FF0DFFB 		j	.L22
  278              		.cfi_endproc
@@ -452,10 +451,10 @@ GAS LISTING /tmp/ccDMQSXV.s 			page 1
  282              		.globl	kern_mem_init
  284              	kern_mem_init:
  285              	.LFB2:
-  88:src/kern_memory.c **** 
-  89:src/kern_memory.c **** void kern_mem_init(void* start, void* end)
-  90:src/kern_memory.c **** {
- 286              		.loc 1 90 1 is_stmt 1
+  87:src/kern_memory.c **** 
+  88:src/kern_memory.c **** void kern_mem_init(void* start, void* end)
+  89:src/kern_memory.c **** {
+ 286              		.loc 1 89 1 is_stmt 1
  287              		.cfi_startproc
  288              	.LVL26:
  289 0174 130101FF 		addi	sp,sp,-16
@@ -464,84 +463,84 @@ GAS LISTING /tmp/ccDMQSXV.s 			page 1
  292              		.cfi_offset 8, -8
  293 017c 13040101 		addi	s0,sp,16
  294              		.cfi_def_cfa 8, 0
-  91:src/kern_memory.c ****     unsigned long lstart = (unsigned long) start;
- 295              		.loc 1 91 5
+  90:src/kern_memory.c ****     unsigned long lstart = (unsigned long) start;
+ 295              		.loc 1 90 5
  296              	.LVL27:
-  92:src/kern_memory.c ****     unsigned long lend = (unsigned long) end;
- 297              		.loc 1 92 5
- 298              		.loc 1 92 19 is_stmt 0
+  91:src/kern_memory.c ****     unsigned long lend = (unsigned long) end;
+ 297              		.loc 1 91 5
+ 298              		.loc 1 91 19 is_stmt 0
  299 0180 93870500 		mv	a5,a1
  300              	.LVL28:
-  93:src/kern_memory.c **** 
-  94:src/kern_memory.c ****     if(lstart%MEM_BLOCK_SIZE>0) start =(void*) ((lstart/MEM_BLOCK_SIZE+1)*MEM_BLOCK_SIZE);
- 301              		.loc 1 94 5 is_stmt 1
- 302              		.loc 1 94 14 is_stmt 0
+  92:src/kern_memory.c **** 
+  93:src/kern_memory.c ****     if(lstart%MEM_BLOCK_SIZE>0) start =(void*) ((lstart/MEM_BLOCK_SIZE+1)*MEM_BLOCK_SIZE);
+ 301              		.loc 1 93 5 is_stmt 1
+ 302              		.loc 1 93 14 is_stmt 0
  303 0184 1377F503 		andi	a4,a0,63
- 304              		.loc 1 94 7
-GAS LISTING /tmp/ccDMQSXV.s 			page 9
-
-
+ 304              		.loc 1 93 7
  305 0188 63080700 		beqz	a4,.L28
- 306              		.loc 1 94 33 is_stmt 1 discriminator 1
- 307              		.loc 1 94 56 is_stmt 0 discriminator 1
+GAS LISTING /tmp/cciikDjw.s 			page 9
+
+
+ 306              		.loc 1 93 33 is_stmt 1 discriminator 1
+ 307              		.loc 1 93 56 is_stmt 0 discriminator 1
  308 018c 13556500 		srli	a0,a0,6
  309              	.LVL29:
- 310              		.loc 1 94 71 discriminator 1
+ 310              		.loc 1 93 71 discriminator 1
  311 0190 13051500 		addi	a0,a0,1
- 312              		.loc 1 94 74 discriminator 1
+ 312              		.loc 1 93 74 discriminator 1
  313 0194 13156500 		slli	a0,a0,6
  314              	.LVL30:
  315              	.L28:
-  95:src/kern_memory.c ****     if(lend%MEM_BLOCK_SIZE>0) end =(void*) ((lend/MEM_BLOCK_SIZE)*MEM_BLOCK_SIZE);
- 316              		.loc 1 95 5 is_stmt 1
- 317              		.loc 1 95 12 is_stmt 0
+  94:src/kern_memory.c ****     if(lend%MEM_BLOCK_SIZE>0) end =(void*) ((lend/MEM_BLOCK_SIZE)*MEM_BLOCK_SIZE);
+ 316              		.loc 1 94 5 is_stmt 1
+ 317              		.loc 1 94 12 is_stmt 0
  318 0198 13F7F703 		andi	a4,a5,63
- 319              		.loc 1 95 7
+ 319              		.loc 1 94 7
  320 019c 63040700 		beqz	a4,.L29
- 321              		.loc 1 95 31 is_stmt 1 discriminator 1
- 322              		.loc 1 95 66 is_stmt 0 discriminator 1
+ 321              		.loc 1 94 31 is_stmt 1 discriminator 1
+ 322              		.loc 1 94 66 is_stmt 0 discriminator 1
  323 01a0 93F507FC 		andi	a1,a5,-64
  324              	.LVL31:
  325              	.L29:
-  96:src/kern_memory.c **** 
-  97:src/kern_memory.c ****     freeHead = (mem_block_s*)start;
- 326              		.loc 1 97 5 is_stmt 1
- 327              		.loc 1 97 14 is_stmt 0
+  95:src/kern_memory.c **** 
+  96:src/kern_memory.c ****     freeHead = (mem_block_s*)start;
+ 326              		.loc 1 96 5 is_stmt 1
+ 327              		.loc 1 96 14 is_stmt 0
  328 01a4 97070000 		lla	a5,freeHead
  328      93870700 
  329              	.LVL32:
  330 01ac 23B0A700 		sd	a0,0(a5)
-  98:src/kern_memory.c ****     freeHead->next=0;
- 331              		.loc 1 98 5 is_stmt 1
- 332              		.loc 1 98 19 is_stmt 0
+  97:src/kern_memory.c ****     freeHead->next=0;
+ 331              		.loc 1 97 5 is_stmt 1
+ 332              		.loc 1 97 19 is_stmt 0
  333 01b0 23340500 		sd	zero,8(a0)
-  99:src/kern_memory.c ****     freeHead->startingBlock=0;
- 334              		.loc 1 99 5 is_stmt 1
- 335              		.loc 1 99 28 is_stmt 0
+  98:src/kern_memory.c ****     freeHead->startingBlock=0;
+ 334              		.loc 1 98 5 is_stmt 1
+ 335              		.loc 1 98 28 is_stmt 0
  336 01b4 23220500 		sw	zero,4(a0)
- 100:src/kern_memory.c ****     freeHead->sizeInBlocks = (end-start)/MEM_BLOCK_SIZE;
- 337              		.loc 1 100 5 is_stmt 1
- 338              		.loc 1 100 34 is_stmt 0
+  99:src/kern_memory.c ****     freeHead->sizeInBlocks = (end-start)/MEM_BLOCK_SIZE;
+ 337              		.loc 1 99 5 is_stmt 1
+ 338              		.loc 1 99 34 is_stmt 0
  339 01b8 3385A540 		sub	a0,a1,a0
  340              	.LVL33:
- 341              		.loc 1 100 41
+ 341              		.loc 1 99 41
  342 01bc 13556500 		srli	a0,a0,6
- 343              		.loc 1 100 13
+ 343              		.loc 1 99 13
  344 01c0 83B70700 		ld	a5,0(a5)
- 345              		.loc 1 100 28
+ 345              		.loc 1 99 28
  346 01c4 23A0A700 		sw	a0,0(a5)
- 101:src/kern_memory.c **** }
- 347              		.loc 1 101 1
+ 100:src/kern_memory.c **** }
+ 347              		.loc 1 100 1
  348 01c8 03348100 		ld	s0,8(sp)
  349              		.cfi_restore 8
  350              		.cfi_def_cfa 2, 16
  351 01cc 13010101 		addi	sp,sp,16
  352              		.cfi_def_cfa_offset 0
  353 01d0 67800000 		jr	ra
-GAS LISTING /tmp/ccDMQSXV.s 			page 10
-
-
  354              		.cfi_endproc
+GAS LISTING /tmp/cciikDjw.s 			page 10
+
+
  355              	.LFE2:
  357              		.globl	freeHead
  358              		.section	.sbss,"aw",@nobits
@@ -552,317 +551,317 @@ GAS LISTING /tmp/ccDMQSXV.s 			page 1
  364              		.text
  365              	.Letext0:
  366              		.file 2 "src/../lib/hw.h"
-GAS LISTING /tmp/ccDMQSXV.s 			page 11
+GAS LISTING /tmp/cciikDjw.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 kern_memory.c
-     /tmp/ccDMQSXV.s:10     .text:0000000000000000 kern_mem_alloc
-     /tmp/ccDMQSXV.s:14     .text:0000000000000000 .L0 
-     /tmp/ccDMQSXV.s:16     .text:0000000000000000 .L0 
-     /tmp/ccDMQSXV.s:17     .text:0000000000000004 .L0 
-     /tmp/ccDMQSXV.s:19     .text:0000000000000008 .L0 
-     /tmp/ccDMQSXV.s:21     .text:000000000000000c .L0 
-     /tmp/ccDMQSXV.s:24     .text:0000000000000010 .L0 
-     /tmp/ccDMQSXV.s:362    .sbss:0000000000000000 freeHead
-     /tmp/ccDMQSXV.s:25     .text:0000000000000010 .L0 
-     /tmp/ccDMQSXV.s:28     .text:0000000000000018 .L0 
-     /tmp/ccDMQSXV.s:29     .text:0000000000000018 .L0 
-     /tmp/ccDMQSXV.s:30     .text:0000000000000018 .L0 
-     /tmp/ccDMQSXV.s:33     .text:000000000000001c .L0 
-     /tmp/ccDMQSXV.s:35     .text:0000000000000020 .L0 
-     /tmp/ccDMQSXV.s:39     .text:0000000000000024 .L0 
-     /tmp/ccDMQSXV.s:40     .text:0000000000000024 .L0 
-     /tmp/ccDMQSXV.s:42     .text:0000000000000028 .L0 
-     /tmp/ccDMQSXV.s:43     .text:0000000000000028 .L0 
-     /tmp/ccDMQSXV.s:45     .text:000000000000002c .L0 
-     /tmp/ccDMQSXV.s:48     .text:0000000000000030 .L0 
-     /tmp/ccDMQSXV.s:49     .text:0000000000000030 .L0 
-     /tmp/ccDMQSXV.s:51     .text:0000000000000034 .L0 
-     /tmp/ccDMQSXV.s:52     .text:0000000000000034 .L0 
-     /tmp/ccDMQSXV.s:56     .text:0000000000000038 .L0 
-     /tmp/ccDMQSXV.s:57     .text:000000000000003c .L0 
-     /tmp/ccDMQSXV.s:58     .text:000000000000003c .L0 
-     /tmp/ccDMQSXV.s:59     .text:000000000000003c .L0 
-     /tmp/ccDMQSXV.s:61     .text:0000000000000040 .L0 
-     /tmp/ccDMQSXV.s:65     .text:0000000000000044 .L0 
-     /tmp/ccDMQSXV.s:67     .text:0000000000000044 .L0 
-     /tmp/ccDMQSXV.s:68     .text:0000000000000044 .L0 
-     /tmp/ccDMQSXV.s:70     .text:0000000000000048 .L0 
-     /tmp/ccDMQSXV.s:76     .text:0000000000000054 .L0 
-     /tmp/ccDMQSXV.s:77     .text:0000000000000054 .L0 
-     /tmp/ccDMQSXV.s:83     .text:0000000000000060 .L0 
-     /tmp/ccDMQSXV.s:84     .text:0000000000000060 .L0 
-     /tmp/ccDMQSXV.s:85     .text:0000000000000060 .L0 
-     /tmp/ccDMQSXV.s:87     .text:0000000000000064 .L0 
-     /tmp/ccDMQSXV.s:91     .text:0000000000000068 .L0 
-     /tmp/ccDMQSXV.s:93     .text:000000000000006c .L0 
-     /tmp/ccDMQSXV.s:94     .text:000000000000006c .L0 
-     /tmp/ccDMQSXV.s:96     .text:0000000000000070 .L0 
-     /tmp/ccDMQSXV.s:98     .text:0000000000000074 .L0 
-     /tmp/ccDMQSXV.s:100    .text:0000000000000078 .L0 
-     /tmp/ccDMQSXV.s:101    .text:0000000000000078 .L0 
-     /tmp/ccDMQSXV.s:104    .text:000000000000007c .L0 
-     /tmp/ccDMQSXV.s:105    .text:000000000000007c .L0 
-     /tmp/ccDMQSXV.s:107    .text:0000000000000080 .L0 
-     /tmp/ccDMQSXV.s:110    .text:0000000000000084 .L0 
-     /tmp/ccDMQSXV.s:111    .text:0000000000000084 .L0 
-     /tmp/ccDMQSXV.s:113    .text:0000000000000088 .L0 
-     /tmp/ccDMQSXV.s:115    .text:000000000000008c .L0 
-     /tmp/ccDMQSXV.s:117    .text:0000000000000090 .L0 
-     /tmp/ccDMQSXV.s:118    .text:0000000000000090 .L0 
-     /tmp/ccDMQSXV.s:120    .text:0000000000000094 .L0 
-GAS LISTING /tmp/ccDMQSXV.s 			page 12
+     /tmp/cciikDjw.s:10     .text:0000000000000000 kern_mem_alloc
+     /tmp/cciikDjw.s:14     .text:0000000000000000 .L0 
+     /tmp/cciikDjw.s:16     .text:0000000000000000 .L0 
+     /tmp/cciikDjw.s:17     .text:0000000000000004 .L0 
+     /tmp/cciikDjw.s:19     .text:0000000000000008 .L0 
+     /tmp/cciikDjw.s:21     .text:000000000000000c .L0 
+     /tmp/cciikDjw.s:24     .text:0000000000000010 .L0 
+     /tmp/cciikDjw.s:362    .sbss:0000000000000000 freeHead
+     /tmp/cciikDjw.s:25     .text:0000000000000010 .L0 
+     /tmp/cciikDjw.s:28     .text:0000000000000018 .L0 
+     /tmp/cciikDjw.s:29     .text:0000000000000018 .L0 
+     /tmp/cciikDjw.s:30     .text:0000000000000018 .L0 
+     /tmp/cciikDjw.s:33     .text:000000000000001c .L0 
+     /tmp/cciikDjw.s:35     .text:0000000000000020 .L0 
+     /tmp/cciikDjw.s:39     .text:0000000000000024 .L0 
+     /tmp/cciikDjw.s:40     .text:0000000000000024 .L0 
+     /tmp/cciikDjw.s:42     .text:0000000000000028 .L0 
+     /tmp/cciikDjw.s:43     .text:0000000000000028 .L0 
+     /tmp/cciikDjw.s:45     .text:000000000000002c .L0 
+     /tmp/cciikDjw.s:48     .text:0000000000000030 .L0 
+     /tmp/cciikDjw.s:49     .text:0000000000000030 .L0 
+     /tmp/cciikDjw.s:51     .text:0000000000000034 .L0 
+     /tmp/cciikDjw.s:52     .text:0000000000000034 .L0 
+     /tmp/cciikDjw.s:56     .text:0000000000000038 .L0 
+     /tmp/cciikDjw.s:57     .text:000000000000003c .L0 
+     /tmp/cciikDjw.s:58     .text:000000000000003c .L0 
+     /tmp/cciikDjw.s:59     .text:000000000000003c .L0 
+     /tmp/cciikDjw.s:61     .text:0000000000000040 .L0 
+     /tmp/cciikDjw.s:65     .text:0000000000000044 .L0 
+     /tmp/cciikDjw.s:67     .text:0000000000000044 .L0 
+     /tmp/cciikDjw.s:68     .text:0000000000000044 .L0 
+     /tmp/cciikDjw.s:70     .text:0000000000000048 .L0 
+     /tmp/cciikDjw.s:76     .text:0000000000000054 .L0 
+     /tmp/cciikDjw.s:77     .text:0000000000000054 .L0 
+     /tmp/cciikDjw.s:83     .text:0000000000000060 .L0 
+     /tmp/cciikDjw.s:84     .text:0000000000000060 .L0 
+     /tmp/cciikDjw.s:85     .text:0000000000000060 .L0 
+     /tmp/cciikDjw.s:87     .text:0000000000000064 .L0 
+     /tmp/cciikDjw.s:91     .text:0000000000000068 .L0 
+     /tmp/cciikDjw.s:93     .text:000000000000006c .L0 
+     /tmp/cciikDjw.s:94     .text:000000000000006c .L0 
+     /tmp/cciikDjw.s:96     .text:0000000000000070 .L0 
+     /tmp/cciikDjw.s:98     .text:0000000000000074 .L0 
+     /tmp/cciikDjw.s:100    .text:0000000000000078 .L0 
+     /tmp/cciikDjw.s:101    .text:0000000000000078 .L0 
+     /tmp/cciikDjw.s:104    .text:000000000000007c .L0 
+     /tmp/cciikDjw.s:105    .text:000000000000007c .L0 
+     /tmp/cciikDjw.s:107    .text:0000000000000080 .L0 
+     /tmp/cciikDjw.s:110    .text:0000000000000084 .L0 
+     /tmp/cciikDjw.s:111    .text:0000000000000084 .L0 
+     /tmp/cciikDjw.s:113    .text:0000000000000088 .L0 
+     /tmp/cciikDjw.s:115    .text:000000000000008c .L0 
+     /tmp/cciikDjw.s:117    .text:0000000000000090 .L0 
+     /tmp/cciikDjw.s:118    .text:0000000000000090 .L0 
+     /tmp/cciikDjw.s:120    .text:0000000000000094 .L0 
+GAS LISTING /tmp/cciikDjw.s 			page 12
 
 
-     /tmp/ccDMQSXV.s:122    .text:0000000000000098 .L0 
-     /tmp/ccDMQSXV.s:124    .text:000000000000009c .L0 
-     /tmp/ccDMQSXV.s:126    .text:00000000000000a0 .L0 
-     /tmp/ccDMQSXV.s:127    .text:00000000000000a0 .L0 
-     /tmp/ccDMQSXV.s:129    .text:00000000000000a4 .L0 
-     /tmp/ccDMQSXV.s:131    .text:00000000000000a8 .L0 
-     /tmp/ccDMQSXV.s:132    .text:00000000000000a8 .L0 
-     /tmp/ccDMQSXV.s:134    .text:00000000000000b0 .L0 
-     /tmp/ccDMQSXV.s:136    .text:00000000000000b4 .L0 
-     /tmp/ccDMQSXV.s:137    .text:00000000000000b4 .L0 
-     /tmp/ccDMQSXV.s:140    .text:00000000000000b8 .L0 
-     /tmp/ccDMQSXV.s:141    .text:00000000000000b8 .L0 
-     /tmp/ccDMQSXV.s:143    .text:00000000000000bc .L0 
-     /tmp/ccDMQSXV.s:144    .text:00000000000000bc .L0 
-     /tmp/ccDMQSXV.s:148    .text:00000000000000c4 .L0 
-     /tmp/ccDMQSXV.s:154    .text:00000000000000c4 kern_mem_free
-     /tmp/ccDMQSXV.s:157    .text:00000000000000c4 .L0 
-     /tmp/ccDMQSXV.s:159    .text:00000000000000c4 .L0 
-     /tmp/ccDMQSXV.s:160    .text:00000000000000c8 .L0 
-     /tmp/ccDMQSXV.s:162    .text:00000000000000cc .L0 
-     /tmp/ccDMQSXV.s:164    .text:00000000000000d0 .L0 
-     /tmp/ccDMQSXV.s:166    .text:00000000000000d0 .L0 
-     /tmp/ccDMQSXV.s:167    .text:00000000000000d0 .L0 
-     /tmp/ccDMQSXV.s:170    .text:00000000000000d4 .L0 
-     /tmp/ccDMQSXV.s:171    .text:00000000000000d4 .L0 
-     /tmp/ccDMQSXV.s:174    .text:00000000000000dc .L0 
-     /tmp/ccDMQSXV.s:175    .text:00000000000000dc .L0 
-     /tmp/ccDMQSXV.s:176    .text:00000000000000dc .L0 
-     /tmp/ccDMQSXV.s:180    .text:00000000000000e0 .L0 
-     /tmp/ccDMQSXV.s:182    .text:00000000000000e4 .L0 
-     /tmp/ccDMQSXV.s:185    .text:00000000000000e8 .L0 
-     /tmp/ccDMQSXV.s:186    .text:00000000000000e8 .L0 
-     /tmp/ccDMQSXV.s:187    .text:00000000000000e8 .L0 
-     /tmp/ccDMQSXV.s:189    .text:00000000000000ec .L0 
-     /tmp/ccDMQSXV.s:194    .text:00000000000000f4 .L0 
-     /tmp/ccDMQSXV.s:195    .text:00000000000000f4 .L0 
-     /tmp/ccDMQSXV.s:197    .text:00000000000000f8 .L0 
-     /tmp/ccDMQSXV.s:198    .text:00000000000000f8 .L0 
-     /tmp/ccDMQSXV.s:200    .text:00000000000000fc .L0 
-     /tmp/ccDMQSXV.s:202    .text:0000000000000100 .L0 
-     /tmp/ccDMQSXV.s:204    .text:0000000000000104 .L0 
-     /tmp/ccDMQSXV.s:206    .text:0000000000000108 .L0 
-     /tmp/ccDMQSXV.s:208    .text:000000000000010c .L0 
-     /tmp/ccDMQSXV.s:209    .text:000000000000010c .L0 
-     /tmp/ccDMQSXV.s:213    .text:0000000000000110 .L0 
-     /tmp/ccDMQSXV.s:214    .text:0000000000000110 .L0 
-     /tmp/ccDMQSXV.s:216    .text:0000000000000114 .L0 
-     /tmp/ccDMQSXV.s:217    .text:0000000000000114 .L0 
-     /tmp/ccDMQSXV.s:219    .text:0000000000000118 .L0 
-     /tmp/ccDMQSXV.s:221    .text:000000000000011c .L0 
-     /tmp/ccDMQSXV.s:223    .text:0000000000000120 .L0 
-     /tmp/ccDMQSXV.s:225    .text:0000000000000124 .L0 
-     /tmp/ccDMQSXV.s:227    .text:0000000000000128 .L0 
-     /tmp/ccDMQSXV.s:228    .text:0000000000000128 .L0 
-     /tmp/ccDMQSXV.s:232    .text:000000000000012c .L0 
-     /tmp/ccDMQSXV.s:233    .text:000000000000012c .L0 
-     /tmp/ccDMQSXV.s:236    .text:0000000000000134 .L0 
-GAS LISTING /tmp/ccDMQSXV.s 			page 13
+     /tmp/cciikDjw.s:122    .text:0000000000000098 .L0 
+     /tmp/cciikDjw.s:124    .text:000000000000009c .L0 
+     /tmp/cciikDjw.s:126    .text:00000000000000a0 .L0 
+     /tmp/cciikDjw.s:127    .text:00000000000000a0 .L0 
+     /tmp/cciikDjw.s:129    .text:00000000000000a4 .L0 
+     /tmp/cciikDjw.s:131    .text:00000000000000a8 .L0 
+     /tmp/cciikDjw.s:132    .text:00000000000000a8 .L0 
+     /tmp/cciikDjw.s:134    .text:00000000000000b0 .L0 
+     /tmp/cciikDjw.s:136    .text:00000000000000b4 .L0 
+     /tmp/cciikDjw.s:137    .text:00000000000000b4 .L0 
+     /tmp/cciikDjw.s:140    .text:00000000000000b8 .L0 
+     /tmp/cciikDjw.s:141    .text:00000000000000b8 .L0 
+     /tmp/cciikDjw.s:143    .text:00000000000000bc .L0 
+     /tmp/cciikDjw.s:144    .text:00000000000000bc .L0 
+     /tmp/cciikDjw.s:148    .text:00000000000000c4 .L0 
+     /tmp/cciikDjw.s:154    .text:00000000000000c4 kern_mem_free
+     /tmp/cciikDjw.s:157    .text:00000000000000c4 .L0 
+     /tmp/cciikDjw.s:159    .text:00000000000000c4 .L0 
+     /tmp/cciikDjw.s:160    .text:00000000000000c8 .L0 
+     /tmp/cciikDjw.s:162    .text:00000000000000cc .L0 
+     /tmp/cciikDjw.s:164    .text:00000000000000d0 .L0 
+     /tmp/cciikDjw.s:166    .text:00000000000000d0 .L0 
+     /tmp/cciikDjw.s:167    .text:00000000000000d0 .L0 
+     /tmp/cciikDjw.s:170    .text:00000000000000d4 .L0 
+     /tmp/cciikDjw.s:171    .text:00000000000000d4 .L0 
+     /tmp/cciikDjw.s:174    .text:00000000000000dc .L0 
+     /tmp/cciikDjw.s:175    .text:00000000000000dc .L0 
+     /tmp/cciikDjw.s:176    .text:00000000000000dc .L0 
+     /tmp/cciikDjw.s:180    .text:00000000000000e0 .L0 
+     /tmp/cciikDjw.s:182    .text:00000000000000e4 .L0 
+     /tmp/cciikDjw.s:185    .text:00000000000000e8 .L0 
+     /tmp/cciikDjw.s:186    .text:00000000000000e8 .L0 
+     /tmp/cciikDjw.s:187    .text:00000000000000e8 .L0 
+     /tmp/cciikDjw.s:189    .text:00000000000000ec .L0 
+     /tmp/cciikDjw.s:194    .text:00000000000000f4 .L0 
+     /tmp/cciikDjw.s:195    .text:00000000000000f4 .L0 
+     /tmp/cciikDjw.s:197    .text:00000000000000f8 .L0 
+     /tmp/cciikDjw.s:198    .text:00000000000000f8 .L0 
+     /tmp/cciikDjw.s:200    .text:00000000000000fc .L0 
+     /tmp/cciikDjw.s:202    .text:0000000000000100 .L0 
+     /tmp/cciikDjw.s:204    .text:0000000000000104 .L0 
+     /tmp/cciikDjw.s:206    .text:0000000000000108 .L0 
+     /tmp/cciikDjw.s:208    .text:000000000000010c .L0 
+     /tmp/cciikDjw.s:209    .text:000000000000010c .L0 
+     /tmp/cciikDjw.s:213    .text:0000000000000110 .L0 
+     /tmp/cciikDjw.s:214    .text:0000000000000110 .L0 
+     /tmp/cciikDjw.s:216    .text:0000000000000114 .L0 
+     /tmp/cciikDjw.s:217    .text:0000000000000114 .L0 
+     /tmp/cciikDjw.s:219    .text:0000000000000118 .L0 
+     /tmp/cciikDjw.s:221    .text:000000000000011c .L0 
+     /tmp/cciikDjw.s:223    .text:0000000000000120 .L0 
+     /tmp/cciikDjw.s:225    .text:0000000000000124 .L0 
+     /tmp/cciikDjw.s:227    .text:0000000000000128 .L0 
+     /tmp/cciikDjw.s:228    .text:0000000000000128 .L0 
+     /tmp/cciikDjw.s:232    .text:000000000000012c .L0 
+     /tmp/cciikDjw.s:233    .text:000000000000012c .L0 
+     /tmp/cciikDjw.s:236    .text:0000000000000134 .L0 
+GAS LISTING /tmp/cciikDjw.s 			page 13
 
 
-     /tmp/ccDMQSXV.s:237    .text:0000000000000134 .L0 
-     /tmp/ccDMQSXV.s:238    .text:0000000000000134 .L0 
-     /tmp/ccDMQSXV.s:240    .text:0000000000000138 .L0 
-     /tmp/ccDMQSXV.s:244    .text:000000000000013c .L0 
-     /tmp/ccDMQSXV.s:246    .text:000000000000013c .L0 
-     /tmp/ccDMQSXV.s:247    .text:000000000000013c .L0 
-     /tmp/ccDMQSXV.s:250    .text:0000000000000140 .L0 
-     /tmp/ccDMQSXV.s:254    .text:0000000000000148 .L0 
-     /tmp/ccDMQSXV.s:255    .text:0000000000000148 .L0 
-     /tmp/ccDMQSXV.s:260    .text:0000000000000150 .L0 
-     /tmp/ccDMQSXV.s:261    .text:0000000000000150 .L0 
-     /tmp/ccDMQSXV.s:266    .text:000000000000015c .L0 
-     /tmp/ccDMQSXV.s:267    .text:000000000000015c .L0 
-     /tmp/ccDMQSXV.s:269    .text:0000000000000160 .L0 
-     /tmp/ccDMQSXV.s:272    .text:0000000000000168 .L0 
-     /tmp/ccDMQSXV.s:273    .text:0000000000000168 .L0 
-     /tmp/ccDMQSXV.s:276    .text:000000000000016c .L0 
-     /tmp/ccDMQSXV.s:278    .text:0000000000000174 .L0 
-     /tmp/ccDMQSXV.s:284    .text:0000000000000174 kern_mem_init
-     /tmp/ccDMQSXV.s:287    .text:0000000000000174 .L0 
-     /tmp/ccDMQSXV.s:289    .text:0000000000000174 .L0 
-     /tmp/ccDMQSXV.s:290    .text:0000000000000178 .L0 
-     /tmp/ccDMQSXV.s:292    .text:000000000000017c .L0 
-     /tmp/ccDMQSXV.s:294    .text:0000000000000180 .L0 
-     /tmp/ccDMQSXV.s:297    .text:0000000000000180 .L0 
-     /tmp/ccDMQSXV.s:298    .text:0000000000000180 .L0 
-     /tmp/ccDMQSXV.s:299    .text:0000000000000180 .L0 
-     /tmp/ccDMQSXV.s:302    .text:0000000000000184 .L0 
-     /tmp/ccDMQSXV.s:303    .text:0000000000000184 .L0 
-     /tmp/ccDMQSXV.s:305    .text:0000000000000188 .L0 
-     /tmp/ccDMQSXV.s:307    .text:000000000000018c .L0 
-     /tmp/ccDMQSXV.s:308    .text:000000000000018c .L0 
-     /tmp/ccDMQSXV.s:311    .text:0000000000000190 .L0 
-     /tmp/ccDMQSXV.s:313    .text:0000000000000194 .L0 
-     /tmp/ccDMQSXV.s:317    .text:0000000000000198 .L0 
-     /tmp/ccDMQSXV.s:318    .text:0000000000000198 .L0 
-     /tmp/ccDMQSXV.s:320    .text:000000000000019c .L0 
-     /tmp/ccDMQSXV.s:322    .text:00000000000001a0 .L0 
-     /tmp/ccDMQSXV.s:323    .text:00000000000001a0 .L0 
-     /tmp/ccDMQSXV.s:327    .text:00000000000001a4 .L0 
-     /tmp/ccDMQSXV.s:328    .text:00000000000001a4 .L0 
-     /tmp/ccDMQSXV.s:332    .text:00000000000001b0 .L0 
-     /tmp/ccDMQSXV.s:333    .text:00000000000001b0 .L0 
-     /tmp/ccDMQSXV.s:335    .text:00000000000001b4 .L0 
-     /tmp/ccDMQSXV.s:336    .text:00000000000001b4 .L0 
-     /tmp/ccDMQSXV.s:338    .text:00000000000001b8 .L0 
-     /tmp/ccDMQSXV.s:339    .text:00000000000001b8 .L0 
-     /tmp/ccDMQSXV.s:342    .text:00000000000001bc .L0 
-     /tmp/ccDMQSXV.s:344    .text:00000000000001c0 .L0 
-     /tmp/ccDMQSXV.s:346    .text:00000000000001c4 .L0 
-     /tmp/ccDMQSXV.s:348    .text:00000000000001c8 .L0 
-     /tmp/ccDMQSXV.s:349    .text:00000000000001cc .L0 
-     /tmp/ccDMQSXV.s:350    .text:00000000000001cc .L0 
-     /tmp/ccDMQSXV.s:352    .text:00000000000001d0 .L0 
-     /tmp/ccDMQSXV.s:354    .text:00000000000001d4 .L0 
-     /tmp/ccDMQSXV.s:367    .text:00000000000001d4 .L0 
+     /tmp/cciikDjw.s:237    .text:0000000000000134 .L0 
+     /tmp/cciikDjw.s:238    .text:0000000000000134 .L0 
+     /tmp/cciikDjw.s:240    .text:0000000000000138 .L0 
+     /tmp/cciikDjw.s:244    .text:000000000000013c .L0 
+     /tmp/cciikDjw.s:246    .text:000000000000013c .L0 
+     /tmp/cciikDjw.s:247    .text:000000000000013c .L0 
+     /tmp/cciikDjw.s:250    .text:0000000000000140 .L0 
+     /tmp/cciikDjw.s:254    .text:0000000000000148 .L0 
+     /tmp/cciikDjw.s:255    .text:0000000000000148 .L0 
+     /tmp/cciikDjw.s:260    .text:0000000000000150 .L0 
+     /tmp/cciikDjw.s:261    .text:0000000000000150 .L0 
+     /tmp/cciikDjw.s:266    .text:000000000000015c .L0 
+     /tmp/cciikDjw.s:267    .text:000000000000015c .L0 
+     /tmp/cciikDjw.s:269    .text:0000000000000160 .L0 
+     /tmp/cciikDjw.s:272    .text:0000000000000168 .L0 
+     /tmp/cciikDjw.s:273    .text:0000000000000168 .L0 
+     /tmp/cciikDjw.s:276    .text:000000000000016c .L0 
+     /tmp/cciikDjw.s:278    .text:0000000000000174 .L0 
+     /tmp/cciikDjw.s:284    .text:0000000000000174 kern_mem_init
+     /tmp/cciikDjw.s:287    .text:0000000000000174 .L0 
+     /tmp/cciikDjw.s:289    .text:0000000000000174 .L0 
+     /tmp/cciikDjw.s:290    .text:0000000000000178 .L0 
+     /tmp/cciikDjw.s:292    .text:000000000000017c .L0 
+     /tmp/cciikDjw.s:294    .text:0000000000000180 .L0 
+     /tmp/cciikDjw.s:297    .text:0000000000000180 .L0 
+     /tmp/cciikDjw.s:298    .text:0000000000000180 .L0 
+     /tmp/cciikDjw.s:299    .text:0000000000000180 .L0 
+     /tmp/cciikDjw.s:302    .text:0000000000000184 .L0 
+     /tmp/cciikDjw.s:303    .text:0000000000000184 .L0 
+     /tmp/cciikDjw.s:305    .text:0000000000000188 .L0 
+     /tmp/cciikDjw.s:307    .text:000000000000018c .L0 
+     /tmp/cciikDjw.s:308    .text:000000000000018c .L0 
+     /tmp/cciikDjw.s:311    .text:0000000000000190 .L0 
+     /tmp/cciikDjw.s:313    .text:0000000000000194 .L0 
+     /tmp/cciikDjw.s:317    .text:0000000000000198 .L0 
+     /tmp/cciikDjw.s:318    .text:0000000000000198 .L0 
+     /tmp/cciikDjw.s:320    .text:000000000000019c .L0 
+     /tmp/cciikDjw.s:322    .text:00000000000001a0 .L0 
+     /tmp/cciikDjw.s:323    .text:00000000000001a0 .L0 
+     /tmp/cciikDjw.s:327    .text:00000000000001a4 .L0 
+     /tmp/cciikDjw.s:328    .text:00000000000001a4 .L0 
+     /tmp/cciikDjw.s:332    .text:00000000000001b0 .L0 
+     /tmp/cciikDjw.s:333    .text:00000000000001b0 .L0 
+     /tmp/cciikDjw.s:335    .text:00000000000001b4 .L0 
+     /tmp/cciikDjw.s:336    .text:00000000000001b4 .L0 
+     /tmp/cciikDjw.s:338    .text:00000000000001b8 .L0 
+     /tmp/cciikDjw.s:339    .text:00000000000001b8 .L0 
+     /tmp/cciikDjw.s:342    .text:00000000000001bc .L0 
+     /tmp/cciikDjw.s:344    .text:00000000000001c0 .L0 
+     /tmp/cciikDjw.s:346    .text:00000000000001c4 .L0 
+     /tmp/cciikDjw.s:348    .text:00000000000001c8 .L0 
+     /tmp/cciikDjw.s:349    .text:00000000000001cc .L0 
+     /tmp/cciikDjw.s:350    .text:00000000000001cc .L0 
+     /tmp/cciikDjw.s:352    .text:00000000000001d0 .L0 
+     /tmp/cciikDjw.s:354    .text:00000000000001d4 .L0 
+     /tmp/cciikDjw.s:367    .text:00000000000001d4 .L0 
                      .debug_frame:0000000000000000 .L0 
-GAS LISTING /tmp/ccDMQSXV.s 			page 14
+GAS LISTING /tmp/cciikDjw.s 			page 14
 
 
-     /tmp/ccDMQSXV.s:25     .text:0000000000000010 .L0 
-     /tmp/ccDMQSXV.s:70     .text:0000000000000048 .L0 
-     /tmp/ccDMQSXV.s:77     .text:0000000000000054 .L0 
-     /tmp/ccDMQSXV.s:132    .text:00000000000000a8 .L0 
-     /tmp/ccDMQSXV.s:171    .text:00000000000000d4 .L0 
-     /tmp/ccDMQSXV.s:261    .text:0000000000000150 .L0 
-     /tmp/ccDMQSXV.s:328    .text:00000000000001a4 .L0 
-     /tmp/ccDMQSXV.s:89     .text:0000000000000068 .L2
-     /tmp/ccDMQSXV.s:64     .text:0000000000000044 .L12
-     /tmp/ccDMQSXV.s:46     .text:0000000000000030 .L5
-     /tmp/ccDMQSXV.s:138    .text:00000000000000b8 .L9
-     /tmp/ccDMQSXV.s:54     .text:0000000000000038 .L1
-     /tmp/ccDMQSXV.s:37     .text:0000000000000024 .L13
-     /tmp/ccDMQSXV.s:80     .text:0000000000000060 .L7
-     /tmp/ccDMQSXV.s:73     .text:0000000000000054 .L14
-     /tmp/ccDMQSXV.s:192    .text:00000000000000f4 .L17
-     /tmp/ccDMQSXV.s:178    .text:00000000000000e0 .L16
-     /tmp/ccDMQSXV.s:258    .text:0000000000000150 .L19
-     /tmp/ccDMQSXV.s:243    .text:000000000000013c .L25
-     /tmp/ccDMQSXV.s:230    .text:000000000000012c .L22
-     /tmp/ccDMQSXV.s:264    .text:000000000000015c .L26
-     /tmp/ccDMQSXV.s:211    .text:0000000000000110 .L21
-     /tmp/ccDMQSXV.s:315    .text:0000000000000198 .L28
-     /tmp/ccDMQSXV.s:325    .text:00000000000001a4 .L29
-     /tmp/ccDMQSXV.s:668    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccDMQSXV.s:1287   .debug_str:000000000000010d .LASF32
-     /tmp/ccDMQSXV.s:1281   .debug_str:00000000000000de .LASF33
-     /tmp/ccDMQSXV.s:1303   .debug_str:0000000000000206 .LASF34
-     /tmp/ccDMQSXV.s:5      .text:0000000000000000 .Ltext0
-     /tmp/ccDMQSXV.s:365    .text:00000000000001d4 .Letext0
-     /tmp/ccDMQSXV.s:1243   .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/ccDMQSXV.s:1289   .debug_str:00000000000001ab .LASF0
-     /tmp/ccDMQSXV.s:1275   .debug_str:00000000000000b2 .LASF1
-     /tmp/ccDMQSXV.s:1271   .debug_str:0000000000000092 .LASF2
-     /tmp/ccDMQSXV.s:1255   .debug_str:0000000000000032 .LASF4
-     /tmp/ccDMQSXV.s:1273   .debug_str:00000000000000a0 .LASF3
-     /tmp/ccDMQSXV.s:1247   .debug_str:0000000000000013 .LASF5
-     /tmp/ccDMQSXV.s:1245   .debug_str:0000000000000000 .LASF6
-     /tmp/ccDMQSXV.s:1267   .debug_str:0000000000000070 .LASF7
-     /tmp/ccDMQSXV.s:1297   .debug_str:00000000000001d0 .LASF8
-     /tmp/ccDMQSXV.s:1253   .debug_str:0000000000000024 .LASF9
-     /tmp/ccDMQSXV.s:1317   .debug_str:0000000000000263 .LASF10
-     /tmp/ccDMQSXV.s:1269   .debug_str:0000000000000083 .LASF11
-     /tmp/ccDMQSXV.s:1309   .debug_str:0000000000000236 .LASF12
-     /tmp/ccDMQSXV.s:1301   .debug_str:00000000000001f6 .LASF13
-     /tmp/ccDMQSXV.s:1279   .debug_str:00000000000000d2 .LASF14
-     /tmp/ccDMQSXV.s:1261   .debug_str:0000000000000050 .LASF15
-     /tmp/ccDMQSXV.s:1299   .debug_str:00000000000001e0 .LASF16
-     /tmp/ccDMQSXV.s:1311   .debug_str:0000000000000246 .LASF35
-     /tmp/ccDMQSXV.s:1305   .debug_str:000000000000021d .LASF17
-     /tmp/ccDMQSXV.s:1257   .debug_str:0000000000000039 .LASF18
-     /tmp/ccDMQSXV.s:1249   .debug_str:000000000000001a .LASF19
-     /tmp/ccDMQSXV.s:1307   .debug_str:000000000000022a .LASF20
-     /tmp/ccDMQSXV.s:1259   .debug_str:0000000000000047 .LASF21
-     /tmp/ccDMQSXV.s:1313   .debug_str:0000000000000250 .LASF29
-     /tmp/ccDMQSXV.s:285    .text:0000000000000174 .LFB2
-     /tmp/ccDMQSXV.s:355    .text:00000000000001d4 .LFE2
-GAS LISTING /tmp/ccDMQSXV.s 			page 15
+     /tmp/cciikDjw.s:25     .text:0000000000000010 .L0 
+     /tmp/cciikDjw.s:70     .text:0000000000000048 .L0 
+     /tmp/cciikDjw.s:77     .text:0000000000000054 .L0 
+     /tmp/cciikDjw.s:132    .text:00000000000000a8 .L0 
+     /tmp/cciikDjw.s:171    .text:00000000000000d4 .L0 
+     /tmp/cciikDjw.s:261    .text:0000000000000150 .L0 
+     /tmp/cciikDjw.s:328    .text:00000000000001a4 .L0 
+     /tmp/cciikDjw.s:89     .text:0000000000000068 .L2
+     /tmp/cciikDjw.s:64     .text:0000000000000044 .L12
+     /tmp/cciikDjw.s:46     .text:0000000000000030 .L5
+     /tmp/cciikDjw.s:138    .text:00000000000000b8 .L9
+     /tmp/cciikDjw.s:54     .text:0000000000000038 .L1
+     /tmp/cciikDjw.s:37     .text:0000000000000024 .L13
+     /tmp/cciikDjw.s:80     .text:0000000000000060 .L7
+     /tmp/cciikDjw.s:73     .text:0000000000000054 .L14
+     /tmp/cciikDjw.s:192    .text:00000000000000f4 .L17
+     /tmp/cciikDjw.s:178    .text:00000000000000e0 .L16
+     /tmp/cciikDjw.s:258    .text:0000000000000150 .L19
+     /tmp/cciikDjw.s:243    .text:000000000000013c .L25
+     /tmp/cciikDjw.s:230    .text:000000000000012c .L22
+     /tmp/cciikDjw.s:264    .text:000000000000015c .L26
+     /tmp/cciikDjw.s:211    .text:0000000000000110 .L21
+     /tmp/cciikDjw.s:315    .text:0000000000000198 .L28
+     /tmp/cciikDjw.s:325    .text:00000000000001a4 .L29
+     /tmp/cciikDjw.s:668    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/cciikDjw.s:1287   .debug_str:000000000000010d .LASF32
+     /tmp/cciikDjw.s:1281   .debug_str:00000000000000de .LASF33
+     /tmp/cciikDjw.s:1303   .debug_str:0000000000000206 .LASF34
+     /tmp/cciikDjw.s:5      .text:0000000000000000 .Ltext0
+     /tmp/cciikDjw.s:365    .text:00000000000001d4 .Letext0
+     /tmp/cciikDjw.s:1243   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/cciikDjw.s:1289   .debug_str:00000000000001ab .LASF0
+     /tmp/cciikDjw.s:1275   .debug_str:00000000000000b2 .LASF1
+     /tmp/cciikDjw.s:1271   .debug_str:0000000000000092 .LASF2
+     /tmp/cciikDjw.s:1255   .debug_str:0000000000000032 .LASF4
+     /tmp/cciikDjw.s:1273   .debug_str:00000000000000a0 .LASF3
+     /tmp/cciikDjw.s:1247   .debug_str:0000000000000013 .LASF5
+     /tmp/cciikDjw.s:1245   .debug_str:0000000000000000 .LASF6
+     /tmp/cciikDjw.s:1267   .debug_str:0000000000000070 .LASF7
+     /tmp/cciikDjw.s:1297   .debug_str:00000000000001d0 .LASF8
+     /tmp/cciikDjw.s:1253   .debug_str:0000000000000024 .LASF9
+     /tmp/cciikDjw.s:1317   .debug_str:0000000000000263 .LASF10
+     /tmp/cciikDjw.s:1269   .debug_str:0000000000000083 .LASF11
+     /tmp/cciikDjw.s:1309   .debug_str:0000000000000236 .LASF12
+     /tmp/cciikDjw.s:1301   .debug_str:00000000000001f6 .LASF13
+     /tmp/cciikDjw.s:1279   .debug_str:00000000000000d2 .LASF14
+     /tmp/cciikDjw.s:1261   .debug_str:0000000000000050 .LASF15
+     /tmp/cciikDjw.s:1299   .debug_str:00000000000001e0 .LASF16
+     /tmp/cciikDjw.s:1311   .debug_str:0000000000000246 .LASF35
+     /tmp/cciikDjw.s:1305   .debug_str:000000000000021d .LASF17
+     /tmp/cciikDjw.s:1257   .debug_str:0000000000000039 .LASF18
+     /tmp/cciikDjw.s:1249   .debug_str:000000000000001a .LASF19
+     /tmp/cciikDjw.s:1307   .debug_str:000000000000022a .LASF20
+     /tmp/cciikDjw.s:1259   .debug_str:0000000000000047 .LASF21
+     /tmp/cciikDjw.s:1313   .debug_str:0000000000000250 .LASF29
+     /tmp/cciikDjw.s:285    .text:0000000000000174 .LFB2
+     /tmp/cciikDjw.s:355    .text:00000000000001d4 .LFE2
+GAS LISTING /tmp/cciikDjw.s 			page 15
 
 
-     /tmp/ccDMQSXV.s:1291   .debug_str:00000000000001b8 .LASF22
-     /tmp/ccDMQSXV.s:1003   .debug_loc:0000000000000000 .LLST8
-     /tmp/ccDMQSXV.s:1021   .debug_loc:000000000000004c .LLST9
-     /tmp/ccDMQSXV.s:1295   .debug_str:00000000000001c9 .LASF23
-     /tmp/ccDMQSXV.s:1032   .debug_loc:0000000000000082 .LLST10
-     /tmp/ccDMQSXV.s:1263   .debug_str:0000000000000066 .LASF24
-     /tmp/ccDMQSXV.s:1046   .debug_loc:00000000000000bb .LLST11
-     /tmp/ccDMQSXV.s:1285   .debug_str:00000000000000ff .LASF36
-     /tmp/ccDMQSXV.s:155    .text:00000000000000c4 .LFB1
-     /tmp/ccDMQSXV.s:279    .text:0000000000000174 .LFE1
-     /tmp/ccDMQSXV.s:1265   .debug_str:000000000000006b .LASF25
-     /tmp/ccDMQSXV.s:1064   .debug_loc:0000000000000107 .LLST4
-     /tmp/ccDMQSXV.s:1293   .debug_str:00000000000001be .LASF26
-     /tmp/ccDMQSXV.s:1082   .debug_loc:0000000000000153 .LLST5
-     /tmp/ccDMQSXV.s:1251   .debug_str:000000000000001f .LASF27
-     /tmp/ccDMQSXV.s:1103   .debug_loc:00000000000001b2 .LLST6
-     /tmp/ccDMQSXV.s:1315   .debug_str:000000000000025e .LASF28
-     /tmp/ccDMQSXV.s:1123   .debug_loc:000000000000020f .LLST7
-     /tmp/ccDMQSXV.s:1283   .debug_str:00000000000000f0 .LASF30
-     /tmp/ccDMQSXV.s:11     .text:0000000000000000 .LFB0
-     /tmp/ccDMQSXV.s:149    .text:00000000000000c4 .LFE0
-     /tmp/ccDMQSXV.s:1147   .debug_loc:000000000000027f .LLST0
-     /tmp/ccDMQSXV.s:1161   .debug_loc:00000000000002b8 .LLST1
-     /tmp/ccDMQSXV.s:1191   .debug_loc:000000000000033e .LLST2
-     /tmp/ccDMQSXV.s:1235   .debug_ranges:0000000000000000 .Ldebug_ranges0
-     /tmp/ccDMQSXV.s:1277   .debug_str:00000000000000c5 .LASF31
-     /tmp/ccDMQSXV.s:1211   .debug_loc:000000000000039b .LLST3
-     /tmp/ccDMQSXV.s:288    .text:0000000000000174 .LVL26
-     /tmp/ccDMQSXV.s:309    .text:0000000000000190 .LVL29
-     /tmp/ccDMQSXV.s:314    .text:0000000000000198 .LVL30
-     /tmp/ccDMQSXV.s:340    .text:00000000000001bc .LVL33
-     /tmp/ccDMQSXV.s:324    .text:00000000000001a4 .LVL31
-     /tmp/ccDMQSXV.s:296    .text:0000000000000180 .LVL27
-     /tmp/ccDMQSXV.s:300    .text:0000000000000184 .LVL28
-     /tmp/ccDMQSXV.s:329    .text:00000000000001ac .LVL32
-     /tmp/ccDMQSXV.s:158    .text:00000000000000c4 .LVL11
-     /tmp/ccDMQSXV.s:234    .text:0000000000000130 .LVL19
-     /tmp/ccDMQSXV.s:242    .text:000000000000013c .LVL20
-     /tmp/ccDMQSXV.s:168    .text:00000000000000d4 .LVL12
-     /tmp/ccDMQSXV.s:248    .text:0000000000000140 .LVL21
-     /tmp/ccDMQSXV.s:253    .text:0000000000000148 .LVL22
-     /tmp/ccDMQSXV.s:257    .text:0000000000000150 .LVL23
-     /tmp/ccDMQSXV.s:172    .text:00000000000000dc .LVL13
-     /tmp/ccDMQSXV.s:184    .text:00000000000000e8 .LVL15
-     /tmp/ccDMQSXV.s:190    .text:00000000000000f0 .LVL16
-     /tmp/ccDMQSXV.s:229    .text:000000000000012c .LVL18
-     /tmp/ccDMQSXV.s:274    .text:000000000000016c .LVL25
-     /tmp/ccDMQSXV.s:177    .text:00000000000000e0 .LVL14
-     /tmp/ccDMQSXV.s:210    .text:0000000000000110 .LVL17
-     /tmp/ccDMQSXV.s:262    .text:0000000000000158 .LVL24
-     /tmp/ccDMQSXV.s:15     .text:0000000000000000 .LVL0
-     /tmp/ccDMQSXV.s:31     .text:000000000000001c .LVL2
-     /tmp/ccDMQSXV.s:26     .text:0000000000000018 .LVL1
-     /tmp/ccDMQSXV.s:36     .text:0000000000000024 .LVL3
-     /tmp/ccDMQSXV.s:53     .text:0000000000000038 .LVL4
-     /tmp/ccDMQSXV.s:63     .text:0000000000000044 .LVL5
-     /tmp/ccDMQSXV.s:79     .text:0000000000000060 .LVL7
-GAS LISTING /tmp/ccDMQSXV.s 			page 16
+     /tmp/cciikDjw.s:1291   .debug_str:00000000000001b8 .LASF22
+     /tmp/cciikDjw.s:1003   .debug_loc:0000000000000000 .LLST8
+     /tmp/cciikDjw.s:1021   .debug_loc:000000000000004c .LLST9
+     /tmp/cciikDjw.s:1295   .debug_str:00000000000001c9 .LASF23
+     /tmp/cciikDjw.s:1032   .debug_loc:0000000000000082 .LLST10
+     /tmp/cciikDjw.s:1263   .debug_str:0000000000000066 .LASF24
+     /tmp/cciikDjw.s:1046   .debug_loc:00000000000000bb .LLST11
+     /tmp/cciikDjw.s:1285   .debug_str:00000000000000ff .LASF36
+     /tmp/cciikDjw.s:155    .text:00000000000000c4 .LFB1
+     /tmp/cciikDjw.s:279    .text:0000000000000174 .LFE1
+     /tmp/cciikDjw.s:1265   .debug_str:000000000000006b .LASF25
+     /tmp/cciikDjw.s:1064   .debug_loc:0000000000000107 .LLST4
+     /tmp/cciikDjw.s:1293   .debug_str:00000000000001be .LASF26
+     /tmp/cciikDjw.s:1082   .debug_loc:0000000000000153 .LLST5
+     /tmp/cciikDjw.s:1251   .debug_str:000000000000001f .LASF27
+     /tmp/cciikDjw.s:1103   .debug_loc:00000000000001b2 .LLST6
+     /tmp/cciikDjw.s:1315   .debug_str:000000000000025e .LASF28
+     /tmp/cciikDjw.s:1123   .debug_loc:000000000000020f .LLST7
+     /tmp/cciikDjw.s:1283   .debug_str:00000000000000f0 .LASF30
+     /tmp/cciikDjw.s:11     .text:0000000000000000 .LFB0
+     /tmp/cciikDjw.s:149    .text:00000000000000c4 .LFE0
+     /tmp/cciikDjw.s:1147   .debug_loc:000000000000027f .LLST0
+     /tmp/cciikDjw.s:1161   .debug_loc:00000000000002b8 .LLST1
+     /tmp/cciikDjw.s:1191   .debug_loc:000000000000033e .LLST2
+     /tmp/cciikDjw.s:1235   .debug_ranges:0000000000000000 .Ldebug_ranges0
+     /tmp/cciikDjw.s:1277   .debug_str:00000000000000c5 .LASF31
+     /tmp/cciikDjw.s:1211   .debug_loc:000000000000039b .LLST3
+     /tmp/cciikDjw.s:288    .text:0000000000000174 .LVL26
+     /tmp/cciikDjw.s:309    .text:0000000000000190 .LVL29
+     /tmp/cciikDjw.s:314    .text:0000000000000198 .LVL30
+     /tmp/cciikDjw.s:340    .text:00000000000001bc .LVL33
+     /tmp/cciikDjw.s:324    .text:00000000000001a4 .LVL31
+     /tmp/cciikDjw.s:296    .text:0000000000000180 .LVL27
+     /tmp/cciikDjw.s:300    .text:0000000000000184 .LVL28
+     /tmp/cciikDjw.s:329    .text:00000000000001ac .LVL32
+     /tmp/cciikDjw.s:158    .text:00000000000000c4 .LVL11
+     /tmp/cciikDjw.s:234    .text:0000000000000130 .LVL19
+     /tmp/cciikDjw.s:242    .text:000000000000013c .LVL20
+     /tmp/cciikDjw.s:168    .text:00000000000000d4 .LVL12
+     /tmp/cciikDjw.s:248    .text:0000000000000140 .LVL21
+     /tmp/cciikDjw.s:253    .text:0000000000000148 .LVL22
+     /tmp/cciikDjw.s:257    .text:0000000000000150 .LVL23
+     /tmp/cciikDjw.s:172    .text:00000000000000dc .LVL13
+     /tmp/cciikDjw.s:184    .text:00000000000000e8 .LVL15
+     /tmp/cciikDjw.s:190    .text:00000000000000f0 .LVL16
+     /tmp/cciikDjw.s:229    .text:000000000000012c .LVL18
+     /tmp/cciikDjw.s:274    .text:000000000000016c .LVL25
+     /tmp/cciikDjw.s:177    .text:00000000000000e0 .LVL14
+     /tmp/cciikDjw.s:210    .text:0000000000000110 .LVL17
+     /tmp/cciikDjw.s:262    .text:0000000000000158 .LVL24
+     /tmp/cciikDjw.s:15     .text:0000000000000000 .LVL0
+     /tmp/cciikDjw.s:31     .text:000000000000001c .LVL2
+     /tmp/cciikDjw.s:26     .text:0000000000000018 .LVL1
+     /tmp/cciikDjw.s:36     .text:0000000000000024 .LVL3
+     /tmp/cciikDjw.s:53     .text:0000000000000038 .LVL4
+     /tmp/cciikDjw.s:63     .text:0000000000000044 .LVL5
+     /tmp/cciikDjw.s:79     .text:0000000000000060 .LVL7
+GAS LISTING /tmp/cciikDjw.s 			page 16
 
 
-     /tmp/ccDMQSXV.s:88     .text:0000000000000068 .LVL8
-     /tmp/ccDMQSXV.s:145    .text:00000000000000c0 .LVL10
-     /tmp/ccDMQSXV.s:72     .text:0000000000000054 .LVL6
-     /tmp/ccDMQSXV.s:108    .text:0000000000000084 .LVL9
-     /tmp/ccDMQSXV.s:368    .debug_info:0000000000000000 .Ldebug_info0
-     /tmp/ccDMQSXV.s:74     .text:0000000000000054 .LBB2
-     /tmp/ccDMQSXV.s:81     .text:0000000000000060 .LBE2
-     /tmp/ccDMQSXV.s:102    .text:000000000000007c .LBB3
-     /tmp/ccDMQSXV.s:147    .text:00000000000000c4 .LBE3
+     /tmp/cciikDjw.s:88     .text:0000000000000068 .LVL8
+     /tmp/cciikDjw.s:145    .text:00000000000000c0 .LVL10
+     /tmp/cciikDjw.s:72     .text:0000000000000054 .LVL6
+     /tmp/cciikDjw.s:108    .text:0000000000000084 .LVL9
+     /tmp/cciikDjw.s:368    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/cciikDjw.s:74     .text:0000000000000054 .LBB2
+     /tmp/cciikDjw.s:81     .text:0000000000000060 .LBE2
+     /tmp/cciikDjw.s:102    .text:000000000000007c .LBB3
+     /tmp/cciikDjw.s:147    .text:00000000000000c4 .LBE3
 
 NO UNDEFINED SYMBOLS

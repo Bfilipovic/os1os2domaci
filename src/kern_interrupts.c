@@ -4,6 +4,11 @@
 
 #include "../lib/hw.h"
 #include "../lib/console.h"
+#include "../h/kern_interrupts.h"
+#include "../h/kern_reg_util.h"
+#include "../h/kern_memory.h"
+#include "../h/kern_threads.h"
+#include "../h/syscall_c.h"
 
 #define INTR_ILLEGAL_INSTRUCTION 0x0000000000000002UL
 #define INTR_ILLEGAL_ADDR_RD 0x0000000000000005UL
@@ -13,42 +18,22 @@
 #define INTR_TIMER 0x8000000000000001UL
 #define INTR_CONSOLE 0x8000000000000009UL
 
-inline uint64 r_scause();
-inline void w_scause(uint64 scause);
-inline uint64 r_sepc();
-inline void w_sepc(uint64 sepc);
-inline uint64 r_stvec();
-inline void w_stvec(uint64 stvec);
-inline uint64 r_stval();
-inline void w_stval(uint64 stval);
-inline void ms_sip(uint64 mask);
-inline void mc_sip(uint64 mask);
-inline uint64 r_sip();
-inline void w_sip(uint64 sip);
-inline void ms_sstatus(uint64 mask);
-inline void mc_sstatus(uint64 mask);
-inline uint64 r_sstatus();
-inline void w_sstatus(uint64 sstatus);
+
 extern void supervisorTrap();
 
-enum BitMaskSstatus
+
+uint64 SYSTEM_TIME;
+
+
+uint64 kern_syscall(enum SyscallNumber num, ...)
 {
-    SSTATUS_SIE = (1 << 1),
-    SSTATUS_SPIE = (1 << 5),
-    SSTATUS_SPP = (1 << 8),
-};
-
-enum BitMaskSip
-{
-    SIP_SSIP = (1 << 1),
-    SIP_STIP = (1 << 5),
-    SIP_SEIP = (1 << 9),
-};
-
-
+    __asm__ volatile ("ecall");
+    return  running->syscall_retval;
+}
 
 void kern_interrupt_init()
 {
+    SYSTEM_TIME=0;
     w_stvec((uint64) &supervisorTrap);
     ms_sstatus(SSTATUS_SIE);
 }
@@ -58,119 +43,87 @@ int time=0;
 
 void handleSupervisorTrap()
 {
-    uint64 scause = r_scause();
+    uint64  a0,a1,a2,a3,a4;
+    __asm__ volatile ("mv %[a0], a0" : [a0] "=r"(a0));
+    __asm__ volatile ("mv %[a1], a1" : [a1] "=r"(a1));
+    __asm__ volatile ("mv %[a2], a2" : [a2] "=r"(a2));
+    __asm__ volatile ("mv %[a3], a3" : [a3] "=r"(a3));
+    __asm__ volatile ("mv %[a4], a4" : [a4] "=r"(a4));
+    uint64  scause = r_scause();
     if (scause == INTR_USER_ECALL || scause == INTR_KERNEL_ECALL)
     {
-        // interrupt: no; cause code: environment call from U-mode(8) or S-mode(9)
+        uint64   syscall_num = a0;
+        uint64   sepc = r_sepc() + 4;
+        w_sepc(sepc);
+        switch (syscall_num) {
+            case MEM_ALLOC:{
+                uint64 size = a1;
+                running->syscall_retval=(uint64)kern_mem_alloc(size);
+                break;
+            }
+
+            case MEM_FREE:{
+                uint64 addr = a1;
+                running->syscall_retval=(uint64) kern_mem_free((void*)addr);
+                break;
+            }
+
+            case THREAD_CREATE:{
+                uint64 handle = a1;
+                uint64 start_routine = a2;
+                uint64 arg = a3;
+                uint64 stack = a4;
+                running->syscall_retval=(uint64) kern_thread_create((thread_t*)handle,
+                                                          (void(*)(void*))start_routine,
+                                                          (void*)arg,
+                                                          (void*)stack);
+                break;
+            }
+
+            case THREAD_DISPATCH:{
+                uint64 volatile sstatus = r_sstatus();
+                uint64 volatile v_sepc = r_sepc();
+                kern_thread_dispatch();
+
+                w_sstatus(sstatus);
+                w_sepc(v_sepc);
+                running->endTime=time+running->timeslice;
+                break;
+            }
+        }
+
     }
     else if (scause == INTR_TIMER)
     {
-       mc_sip(SIP_SSIP);
-       if(++time>=30){
-           __putc('!');
-       }
-       time=time%30;
+        SYSTEM_TIME++;
+        mc_sip(SIP_SSIP);
+
+
+        if(++time>=30){
+            __putc('0'+running->id);
+        }
+        time=time%30;
+
+        if(SYSTEM_TIME>=running->endTime){
+            __putc('!');
+            uint64 volatile sstatus = r_sstatus();
+            uint64 volatile v_sepc = r_sepc();
+            kern_thread_dispatch();
+
+            w_sstatus(sstatus);
+            w_sepc(v_sepc);
+            running->endTime=SYSTEM_TIME+running->timeslice;
+        }
+
     }
     else if (scause == INTR_CONSOLE)
     {
         // interrupt: yes; cause code: supervisor external interrupt (PLIC; could be keyboard)
-        plic_claim();
-       // console_handler();
+        //plic_claim();
+        console_handler();
     }
     else
     {
         // unexpected trap cause
     }
-}
-
-inline uint64 r_scause()
-{
-    uint64 volatile scause;
-    __asm__ volatile ("csrr %[scause], scause" : [scause] "=r"(scause));
-    return scause;
-}
-
-inline void w_scause(uint64 scause)
-{
-    __asm__ volatile ("csrw scause, %[scause]" : : [scause] "r"(scause));
-}
-
-inline uint64 r_sepc()
-{
-    uint64 volatile sepc;
-    __asm__ volatile ("csrr %[sepc], sepc" : [sepc] "=r"(sepc));
-    return sepc;
-}
-
-inline void w_sepc(uint64 sepc)
-{
-    __asm__ volatile ("csrw sepc, %[sepc]" : : [sepc] "r"(sepc));
-}
-
-inline uint64 r_stvec()
-{
-    uint64 volatile stvec;
-    __asm__ volatile ("csrr %[stvec], stvec" : [stvec] "=r"(stvec));
-    return stvec;
-}
-
-inline void w_stvec(uint64 stvec)
-{
-    __asm__ volatile ("csrw stvec, %[stvec]" : : [stvec] "r"(stvec));
-}
-
-inline uint64 r_stval()
-{
-    uint64 volatile stval;
-    __asm__ volatile ("csrr %[stval], stval" : [stval] "=r"(stval));
-    return stval;
-}
-
-inline void w_stval(uint64 stval)
-{
-    __asm__ volatile ("csrw stval, %[stval]" : : [stval] "r"(stval));
-}
-
-inline void ms_sip(uint64 mask)
-{
-    __asm__ volatile ("csrs sip, %[mask]" : : [mask] "r"(mask));
-}
-
-inline void mc_sip(uint64 mask)
-{
-    __asm__ volatile ("csrc sip, %[mask]" : : [mask] "r"(mask));
-}
-
-inline uint64 r_sip()
-{
-    uint64 volatile sip;
-    __asm__ volatile ("csrr %[sip], sip" : [sip] "=r"(sip));
-    return sip;
-}
-
-inline void w_sip(uint64 sip)
-{
-    __asm__ volatile ("csrw sip, %[sip]" : : [sip] "r"(sip));
-}
-
-inline void ms_sstatus(uint64 mask)
-{
-    __asm__ volatile ("csrs sstatus, %[mask]" : : [mask] "r"(mask));
-}
-
-inline void mc_sstatus(uint64 mask)
-{
-    __asm__ volatile ("csrc sstatus, %[mask]" : : [mask] "r"(mask));
-}
-
-inline uint64 r_sstatus()
-{
-    uint64 volatile sstatus;
-    __asm__ volatile ("csrr %[sstatus], sstatus" : [sstatus] "=r"(sstatus));
-    return sstatus;
-}
-
-inline void w_sstatus(uint64 sstatus)
-{
-    __asm__ volatile ("csrw sstatus, %[sstatus]" : : [sstatus] "r"(sstatus));
 }

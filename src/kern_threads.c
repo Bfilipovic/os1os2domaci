@@ -3,42 +3,16 @@
 //
 
 #include "../h/kern_threads.h"
-#include "../h/kern_defs.h"
+#include "../h/kern_interrupts.h"
 #include "../lib/hw.h"
 
 #define MAX_THREADS 64
 
-enum ThreadStatus {
-    UNUSED,
-    CREATED,
-    READY,
-    SUSPENDED,
-};
-
-enum ThreadType {
-    REGULAR,
-    PERIODIC
-};
-
-
-struct thread_s{
-    uint64 ra;
-    uint64 sp;
-    uint64 id;
-    void(*body)(void*);
-    void* arg;
-    uint64 joined_tid;
-    uint64 timeslice;
-    enum ThreadType type;
-    enum ThreadStatus status;
-};
 typedef struct thread_s* thread_t;
 
 struct thread_s threads[MAX_THREADS];
-thread_t running;
 static int id;
-
-struct thread_s* kern_thread_create(thread_t* handle, void(*start_routine)(void*), void* arg);
+struct thread_s* running;
 
 void kern_thread_init()
 {
@@ -46,6 +20,13 @@ void kern_thread_init()
     for (int i=0;i<MAX_THREADS;i++){
         threads[i].status=UNUSED;
     }
+
+    //set threads[0] as main thread
+    threads[0].status=RUNNING;
+    threads[0].id=0;
+    threads[0].timeslice=DEFAULT_TIME_SLICE+2;
+    threads[0].endTime=9999;
+    running=&threads[0];
 }
 
 thread_t kern_scheduler_get()
@@ -55,14 +36,16 @@ thread_t kern_scheduler_get()
         num = (num+i)%MAX_THREADS;
         if(threads[num].status==READY) return &threads[num];
     }
+    if(running->status==READY) return running;
     return 0;
 }
 
 void kern_thread_yield()
 {
-    __asm__ volatile ("ecall");
+    kern_syscall(THREAD_DISPATCH);
 }
 
+//samo izlazi iz kernela i vraca se odakle je pozvana
 void popSppSpie()
 {
     __asm__ volatile("csrw sepc, ra"); //ovde dodaj izlazak iz privilegovanog moda
@@ -76,6 +59,7 @@ void kern_thread_dispatch()
     thread_t old = running;
     running=kern_scheduler_get();
     if(old!=running){
+        if(old->status==RUNNING) old->status=READY;
         contextSwitch(old,running);
     }
 }
@@ -86,4 +70,30 @@ void kern_thread_wrapper()
     running->body(running->arg);
     running->status=UNUSED;
     kern_thread_yield();
+}
+
+int kern_thread_create(thread_t* handle, void(*start_routine)(void*), void* arg, void* stack_space)
+{
+    *handle=0;
+    thread_t t=&threads[0]; //dodela da bismo sklonili upozorenje
+    for(int i=0;i<MAX_THREADS;i++){
+        if(threads[i].status==UNUSED){
+            *handle=&threads[i];
+            t=&threads[i];
+            break;
+        }
+    }
+    if(*handle==0) return -1;
+
+    t->id=++id;
+    t->status=READY;
+    t->type=REGULAR;
+    t->arg=arg;
+    t->joined_tid=-1;
+    t->timeslice=DEFAULT_TIME_SLICE;
+    t->body=start_routine;
+    t->sp = ((uint64)stack_space);
+    t->ra=(uint64) &kern_thread_wrapper;
+
+    return 0;
 }

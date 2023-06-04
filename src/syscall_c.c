@@ -3,17 +3,34 @@
 //
 
 #include "../h/syscall_c.h"
+#include "../h/kern_threads.h"
+#include "../h/kern_reg_util.h"
+#include "../h/kern_interrupts.h"
 
+#include <stdarg.h>
 
-void* mem_alloc (size_t size);
-int mem_free (void*);
+void* mem_alloc (size_t size){
+    uint64 blocks = (size+MEM_BLOCK_SIZE-1)/MEM_BLOCK_SIZE;
+    return (void*)kern_syscall(MEM_ALLOC, blocks);
+}
+
+int mem_free (void* addr){
+    return (int) kern_syscall(MEM_FREE,addr);
+}
 
 struct thread_s;
 typedef struct thread_s* thread_t;
-int thread_create (
-        thread_t* handle,
-        void(*start_routine)(void*),
-        void* arg
-);
+
+int thread_create (thread_t* handle, void(*start_routine)(void*), void* arg)
+{
+    void * stack = mem_alloc(DEFAULT_STACK_SIZE);
+    if(stack==0) return -1;
+    return (int) kern_syscall(THREAD_CREATE,handle,start_routine,arg,stack);
+}
+
+void thread_dispatch(){
+    kern_syscall(THREAD_DISPATCH);
+}
 
 int thread_exit ();
+
