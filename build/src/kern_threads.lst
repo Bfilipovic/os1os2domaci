@@ -1,4 +1,4 @@
-GAS LISTING /tmp/ccvXE2EI.s 			page 1
+GAS LISTING /tmp/ccAQswmS.s 			page 1
 
 
    1              		.file	"kern_threads.c"
@@ -51,281 +51,278 @@ GAS LISTING /tmp/ccvXE2EI.s 			page 1
   28              		.loc 1 20 14 is_stmt 0
   29 0014 93070000 		li	a5,0
   30              		.loc 1 20 5
-  31 0018 6F004002 		j	.L2
+  31 0018 6F000002 		j	.L2
   32              	.LVL1:
   33              	.L3:
   21:src/kern_threads.c ****         threads[i].status=UNUSED;
   34              		.loc 1 21 9 is_stmt 1 discriminator 3
   35              		.loc 1 21 26 is_stmt 0 discriminator 3
-  36 001c 13972700 		slli	a4,a5,2
-GAS LISTING /tmp/ccvXE2EI.s 			page 2
+  36 001c 13078005 		li	a4,88
+GAS LISTING /tmp/ccAQswmS.s 			page 2
 
 
-  37 0020 3307F700 		add	a4,a4,a5
-  38 0024 93164700 		slli	a3,a4,4
-  39 0028 17070000 		lla	a4,threads
-  39      13070700 
-  40 0030 3307D700 		add	a4,a4,a3
-  41 0034 23220704 		sw	zero,68(a4)
+  37 0020 B386E702 		mul	a3,a5,a4
+  38 0024 17070000 		lla	a4,threads
+  38      13070700 
+  39 002c 3307D700 		add	a4,a4,a3
+  40 0030 23240704 		sw	zero,72(a4)
   20:src/kern_threads.c ****     for (int i=0;i<MAX_THREADS;i++){
-  42              		.loc 1 20 32 is_stmt 1 discriminator 3
+  41              		.loc 1 20 32 is_stmt 1 discriminator 3
   20:src/kern_threads.c ****     for (int i=0;i<MAX_THREADS;i++){
-  43              		.loc 1 20 33 is_stmt 0 discriminator 3
-  44 0038 9B871700 		addiw	a5,a5,1
-  45              	.LVL2:
-  46              	.L2:
+  42              		.loc 1 20 33 is_stmt 0 discriminator 3
+  43 0034 9B871700 		addiw	a5,a5,1
+  44              	.LVL2:
+  45              	.L2:
   20:src/kern_threads.c ****     for (int i=0;i<MAX_THREADS;i++){
-  47              		.loc 1 20 18 is_stmt 1 discriminator 1
+  46              		.loc 1 20 18 is_stmt 1 discriminator 1
   20:src/kern_threads.c ****     for (int i=0;i<MAX_THREADS;i++){
-  48              		.loc 1 20 5 is_stmt 0 discriminator 1
-  49 003c 1307F003 		li	a4,63
-  50 0040 E35EF7FC 		ble	a5,a4,.L3
-  51              	.LBE2:
+  47              		.loc 1 20 5 is_stmt 0 discriminator 1
+  48 0038 1307F003 		li	a4,63
+  49 003c E350F7FE 		ble	a5,a4,.L3
+  50              	.LBE2:
   22:src/kern_threads.c ****     }
   23:src/kern_threads.c **** 
   24:src/kern_threads.c ****     //set threads[0] as main thread
   25:src/kern_threads.c ****     threads[0].status=RUNNING;
-  52              		.loc 1 25 5 is_stmt 1
-  53              		.loc 1 25 22 is_stmt 0
-  54 0044 97070000 		lla	a5,threads
-  54      93870700 
-  55              	.LVL3:
-  56 004c 13071000 		li	a4,1
-  57 0050 23A2E704 		sw	a4,68(a5)
+  51              		.loc 1 25 5 is_stmt 1
+  52              		.loc 1 25 22 is_stmt 0
+  53 0040 97070000 		lla	a5,threads
+  53      93870700 
+  54              	.LVL3:
+  55 0048 13071000 		li	a4,1
+  56 004c 23A4E704 		sw	a4,72(a5)
   26:src/kern_threads.c ****     threads[0].id=0;
-  58              		.loc 1 26 5 is_stmt 1
-  59              		.loc 1 26 18 is_stmt 0
-  60 0054 23B80700 		sd	zero,16(a5)
+  57              		.loc 1 26 5 is_stmt 1
+  58              		.loc 1 26 18 is_stmt 0
+  59 0050 23B80700 		sd	zero,16(a5)
   27:src/kern_threads.c ****     threads[0].timeslice=DEFAULT_TIME_SLICE+2;
-  61              		.loc 1 27 5 is_stmt 1
-  62              		.loc 1 27 25 is_stmt 0
-  63 0058 13074000 		li	a4,4
-  64 005c 23B8E702 		sd	a4,48(a5)
+  60              		.loc 1 27 5 is_stmt 1
+  61              		.loc 1 27 25 is_stmt 0
+  62 0054 13074000 		li	a4,4
+  63 0058 23B8E702 		sd	a4,48(a5)
   28:src/kern_threads.c ****     threads[0].endTime=9999;
-  65              		.loc 1 28 5 is_stmt 1
-  66              		.loc 1 28 23 is_stmt 0
-  67 0060 37270000 		li	a4,8192
-  68 0064 1307F770 		addi	a4,a4,1807
-  69 0068 23BCE702 		sd	a4,56(a5)
+  64              		.loc 1 28 5 is_stmt 1
+  65              		.loc 1 28 23 is_stmt 0
+  66 005c 37270000 		li	a4,8192
+  67 0060 1307F770 		addi	a4,a4,1807
+  68 0064 23BCE702 		sd	a4,56(a5)
   29:src/kern_threads.c ****     running=&threads[0];
-  70              		.loc 1 29 5 is_stmt 1
-  71              		.loc 1 29 12 is_stmt 0
-  72 006c 17070000 		sd	a5,running,a4
-  72      2330F700 
+  69              		.loc 1 29 5 is_stmt 1
+  70              		.loc 1 29 12 is_stmt 0
+  71 0068 17070000 		sd	a5,running,a4
+  71      2330F700 
   30:src/kern_threads.c **** }
-  73              		.loc 1 30 1
-  74 0074 03348100 		ld	s0,8(sp)
-  75              		.cfi_restore 8
-  76              		.cfi_def_cfa 2, 16
-  77 0078 13010101 		addi	sp,sp,16
-GAS LISTING /tmp/ccvXE2EI.s 			page 3
+  72              		.loc 1 30 1
+  73 0070 03348100 		ld	s0,8(sp)
+  74              		.cfi_restore 8
+  75              		.cfi_def_cfa 2, 16
+  76 0074 13010101 		addi	sp,sp,16
+  77              		.cfi_def_cfa_offset 0
+GAS LISTING /tmp/ccAQswmS.s 			page 3
 
 
-  78              		.cfi_def_cfa_offset 0
-  79 007c 67800000 		jr	ra
-  80              		.cfi_endproc
-  81              	.LFE0:
-  83              		.align	2
-  84              		.globl	kern_scheduler_get
-  86              	kern_scheduler_get:
-  87              	.LFB1:
+  78 0078 67800000 		jr	ra
+  79              		.cfi_endproc
+  80              	.LFE0:
+  82              		.align	2
+  83              		.globl	kern_scheduler_get
+  85              	kern_scheduler_get:
+  86              	.LFB1:
   31:src/kern_threads.c **** 
   32:src/kern_threads.c **** thread_t kern_scheduler_get()
   33:src/kern_threads.c **** {
-  88              		.loc 1 33 1 is_stmt 1
-  89              		.cfi_startproc
-  90 0080 130101FF 		addi	sp,sp,-16
-  91              		.cfi_def_cfa_offset 16
-  92 0084 23348100 		sd	s0,8(sp)
-  93              		.cfi_offset 8, -8
-  94 0088 13040101 		addi	s0,sp,16
-  95              		.cfi_def_cfa 8, 0
+  87              		.loc 1 33 1 is_stmt 1
+  88              		.cfi_startproc
+  89 007c 130101FF 		addi	sp,sp,-16
+  90              		.cfi_def_cfa_offset 16
+  91 0080 23348100 		sd	s0,8(sp)
+  92              		.cfi_offset 8, -8
+  93 0084 13040101 		addi	s0,sp,16
+  94              		.cfi_def_cfa 8, 0
   34:src/kern_threads.c ****     int num = running-threads;
-  96              		.loc 1 34 5
-  97              		.loc 1 34 22 is_stmt 0
-  98 008c 17050000 		ld	a0,running
-  98      03350500 
-  99 0094 97070000 		lla	a5,threads
-  99      93870700 
- 100 009c B307F540 		sub	a5,a0,a5
- 101 00a0 93D74740 		srai	a5,a5,4
- 102              		.loc 1 34 9
- 103 00a4 17070000 		ld	a4,.LC0
- 103      03370700 
- 104 00ac BB87E702 		mulw	a5,a5,a4
- 105              	.LVL4:
+  95              		.loc 1 34 5
+  96              		.loc 1 34 22 is_stmt 0
+  97 0088 17050000 		ld	a0,running
+  97      03350500 
+  98 0090 97070000 		lla	a5,threads
+  98      93870700 
+  99 0098 B307F540 		sub	a5,a0,a5
+ 100 009c 93D73740 		srai	a5,a5,3
+ 101              		.loc 1 34 9
+ 102 00a0 17070000 		ld	a4,.LC0
+ 102      03370700 
+ 103 00a8 BB87E702 		mulw	a5,a5,a4
+ 104              	.LVL4:
   35:src/kern_threads.c ****     for(int i=1;i<=MAX_THREADS;i++){
- 106              		.loc 1 35 5 is_stmt 1
- 107              	.LBB3:
- 108              		.loc 1 35 9
- 109              		.loc 1 35 13 is_stmt 0
- 110 00b0 93061000 		li	a3,1
- 111              	.LVL5:
- 112              	.L6:
- 113              		.loc 1 35 17 is_stmt 1 discriminator 1
- 114              		.loc 1 35 5 is_stmt 0 discriminator 1
- 115 00b4 13070004 		li	a4,64
- 116 00b8 6346D706 		bgt	a3,a4,.L11
+ 105              		.loc 1 35 5 is_stmt 1
+ 106              	.LBB3:
+ 107              		.loc 1 35 9
+ 108              		.loc 1 35 13 is_stmt 0
+ 109 00ac 13061000 		li	a2,1
+ 110              	.LVL5:
+ 111              	.L6:
+ 112              		.loc 1 35 17 is_stmt 1 discriminator 1
+ 113              		.loc 1 35 5 is_stmt 0 discriminator 1
+ 114 00b0 13070004 		li	a4,64
+ 115 00b4 6342C706 		bgt	a2,a4,.L11
   36:src/kern_threads.c ****         num = (num+i)%MAX_THREADS;
- 117              		.loc 1 36 9 is_stmt 1
- 118              		.loc 1 36 19 is_stmt 0
- 119 00bc BB87D700 		addw	a5,a5,a3
- 120              	.LVL6:
- 121              		.loc 1 36 13
- 122 00c0 1BD7F741 		sraiw	a4,a5,31
- 123 00c4 1B57A701 		srliw	a4,a4,26
- 124 00c8 BB87E700 		addw	a5,a5,a4
- 125 00cc 93F7F703 		andi	a5,a5,63
- 126 00d0 BB87E740 		subw	a5,a5,a4
+ 116              		.loc 1 36 9 is_stmt 1
+ 117              		.loc 1 36 19 is_stmt 0
+ 118 00b8 BB87C700 		addw	a5,a5,a2
+ 119              	.LVL6:
+ 120              		.loc 1 36 13
+ 121 00bc 1BD7F741 		sraiw	a4,a5,31
+ 122 00c0 1B57A701 		srliw	a4,a4,26
+ 123 00c4 BB87E700 		addw	a5,a5,a4
+ 124 00c8 93F7F703 		andi	a5,a5,63
+ 125 00cc BB87E740 		subw	a5,a5,a4
   37:src/kern_threads.c ****         if(threads[num].status==READY) return &threads[num];
-GAS LISTING /tmp/ccvXE2EI.s 			page 4
+ 126              		.loc 1 37 9 is_stmt 1
+GAS LISTING /tmp/ccAQswmS.s 			page 4
 
 
- 127              		.loc 1 37 9 is_stmt 1
- 128              		.loc 1 37 24 is_stmt 0
- 129 00d4 13972700 		slli	a4,a5,2
- 130 00d8 3307F700 		add	a4,a4,a5
- 131 00dc 13164700 		slli	a2,a4,4
- 132 00e0 17070000 		lla	a4,threads
- 132      13070700 
- 133 00e8 3307C700 		add	a4,a4,a2
- 134 00ec 03264704 		lw	a2,68(a4)
- 135              		.loc 1 37 11
- 136 00f0 13072000 		li	a4,2
- 137 00f4 6306E600 		beq	a2,a4,.L12
+ 127              		.loc 1 37 24 is_stmt 0
+ 128 00d0 13078005 		li	a4,88
+ 129 00d4 B386E702 		mul	a3,a5,a4
+ 130 00d8 17070000 		lla	a4,threads
+ 130      13070700 
+ 131 00e0 3307D700 		add	a4,a4,a3
+ 132 00e4 83268704 		lw	a3,72(a4)
+ 133              		.loc 1 37 11
+ 134 00e8 13072000 		li	a4,2
+ 135 00ec 6386E600 		beq	a3,a4,.L12
   35:src/kern_threads.c ****     for(int i=1;i<=MAX_THREADS;i++){
- 138              		.loc 1 35 32 is_stmt 1 discriminator 2
+ 136              		.loc 1 35 32 is_stmt 1 discriminator 2
   35:src/kern_threads.c ****     for(int i=1;i<=MAX_THREADS;i++){
- 139              		.loc 1 35 33 is_stmt 0 discriminator 2
- 140 00f8 9B861600 		addiw	a3,a3,1
- 141              	.LVL7:
- 142 00fc 6FF09FFB 		j	.L6
- 143              	.LVL8:
- 144              	.L12:
- 145              		.loc 1 37 40 is_stmt 1 discriminator 1
- 146              		.loc 1 37 47 is_stmt 0 discriminator 1
- 147 0100 13972700 		slli	a4,a5,2
- 148 0104 B307F700 		add	a5,a4,a5
- 149 0108 13954700 		slli	a0,a5,4
- 150 010c 97070000 		lla	a5,threads
- 150      93870700 
- 151 0114 3305F500 		add	a0,a0,a5
- 152              	.L5:
- 153              	.LBE3:
+ 137              		.loc 1 35 33 is_stmt 0 discriminator 2
+ 138 00f0 1B061600 		addiw	a2,a2,1
+ 139              	.LVL7:
+ 140 00f4 6FF0DFFB 		j	.L6
+ 141              	.LVL8:
+ 142              	.L12:
+ 143              		.loc 1 37 40 is_stmt 1 discriminator 1
+ 144              		.loc 1 37 47 is_stmt 0 discriminator 1
+ 145 00f8 13058005 		li	a0,88
+ 146 00fc B387A702 		mul	a5,a5,a0
+ 147 0100 17050000 		lla	a0,threads
+ 147      13050500 
+ 148 0108 3385A700 		add	a0,a5,a0
+ 149              	.L5:
+ 150              	.LBE3:
   38:src/kern_threads.c ****     }
   39:src/kern_threads.c ****     if(running->status==READY) return running;
   40:src/kern_threads.c ****     return 0;
   41:src/kern_threads.c **** }
- 154              		.loc 1 41 1
- 155 0118 03348100 		ld	s0,8(sp)
- 156              		.cfi_remember_state
- 157              		.cfi_restore 8
- 158              		.cfi_def_cfa 2, 16
- 159 011c 13010101 		addi	sp,sp,16
- 160              		.cfi_def_cfa_offset 0
- 161 0120 67800000 		jr	ra
- 162              	.LVL9:
- 163              	.L11:
- 164              		.cfi_restore_state
+ 151              		.loc 1 41 1
+ 152 010c 03348100 		ld	s0,8(sp)
+ 153              		.cfi_remember_state
+ 154              		.cfi_restore 8
+ 155              		.cfi_def_cfa 2, 16
+ 156 0110 13010101 		addi	sp,sp,16
+ 157              		.cfi_def_cfa_offset 0
+ 158 0114 67800000 		jr	ra
+ 159              	.LVL9:
+ 160              	.L11:
+ 161              		.cfi_restore_state
   39:src/kern_threads.c ****     return 0;
- 165              		.loc 1 39 5 is_stmt 1
+ 162              		.loc 1 39 5 is_stmt 1
   39:src/kern_threads.c ****     return 0;
- 166              		.loc 1 39 15 is_stmt 0
- 167 0124 03274504 		lw	a4,68(a0)
+ 163              		.loc 1 39 15 is_stmt 0
+ 164 0118 03278504 		lw	a4,72(a0)
   39:src/kern_threads.c ****     return 0;
- 168              		.loc 1 39 7
- 169 0128 93072000 		li	a5,2
- 170              	.LVL10:
- 171 012c E306F7FE 		beq	a4,a5,.L5
+ 165              		.loc 1 39 7
+ 166 011c 93072000 		li	a5,2
+ 167              	.LVL10:
+ 168 0120 E306F7FE 		beq	a4,a5,.L5
   40:src/kern_threads.c **** }
-GAS LISTING /tmp/ccvXE2EI.s 			page 5
+ 169              		.loc 1 40 12
+ 170 0124 13050000 		li	a0,0
+ 171 0128 6FF05FFE 		j	.L5
+GAS LISTING /tmp/ccAQswmS.s 			page 5
 
 
- 172              		.loc 1 40 12
- 173 0130 13050000 		li	a0,0
- 174 0134 6FF05FFE 		j	.L5
- 175              		.cfi_endproc
- 176              	.LFE1:
- 178              		.align	2
- 179              		.globl	kern_thread_yield
- 181              	kern_thread_yield:
- 182              	.LFB2:
+ 172              		.cfi_endproc
+ 173              	.LFE1:
+ 175              		.align	2
+ 176              		.globl	kern_thread_yield
+ 178              	kern_thread_yield:
+ 179              	.LFB2:
   42:src/kern_threads.c **** 
   43:src/kern_threads.c **** void kern_thread_yield()
   44:src/kern_threads.c **** {
- 183              		.loc 1 44 1 is_stmt 1
- 184              		.cfi_startproc
- 185 0138 130101FF 		addi	sp,sp,-16
- 186              		.cfi_def_cfa_offset 16
- 187 013c 23341100 		sd	ra,8(sp)
- 188 0140 23308100 		sd	s0,0(sp)
- 189              		.cfi_offset 1, -8
- 190              		.cfi_offset 8, -16
- 191 0144 13040101 		addi	s0,sp,16
- 192              		.cfi_def_cfa 8, 0
+ 180              		.loc 1 44 1 is_stmt 1
+ 181              		.cfi_startproc
+ 182 012c 130101FF 		addi	sp,sp,-16
+ 183              		.cfi_def_cfa_offset 16
+ 184 0130 23341100 		sd	ra,8(sp)
+ 185 0134 23308100 		sd	s0,0(sp)
+ 186              		.cfi_offset 1, -8
+ 187              		.cfi_offset 8, -16
+ 188 0138 13040101 		addi	s0,sp,16
+ 189              		.cfi_def_cfa 8, 0
   45:src/kern_threads.c ****     kern_syscall(THREAD_DISPATCH);
- 193              		.loc 1 45 5
- 194 0148 13053001 		li	a0,19
- 195 014c 97000000 		call	kern_syscall
- 195      E7800000 
- 196              	.LVL11:
+ 190              		.loc 1 45 5
+ 191 013c 13053001 		li	a0,19
+ 192 0140 97000000 		call	kern_syscall
+ 192      E7800000 
+ 193              	.LVL11:
   46:src/kern_threads.c **** }
- 197              		.loc 1 46 1 is_stmt 0
- 198 0154 83308100 		ld	ra,8(sp)
- 199              		.cfi_restore 1
- 200 0158 03340100 		ld	s0,0(sp)
- 201              		.cfi_restore 8
- 202              		.cfi_def_cfa 2, 16
- 203 015c 13010101 		addi	sp,sp,16
- 204              		.cfi_def_cfa_offset 0
- 205 0160 67800000 		jr	ra
- 206              		.cfi_endproc
- 207              	.LFE2:
- 209              		.align	2
- 210              		.globl	popSppSpie
- 212              	popSppSpie:
- 213              	.LFB3:
+ 194              		.loc 1 46 1 is_stmt 0
+ 195 0148 83308100 		ld	ra,8(sp)
+ 196              		.cfi_restore 1
+ 197 014c 03340100 		ld	s0,0(sp)
+ 198              		.cfi_restore 8
+ 199              		.cfi_def_cfa 2, 16
+ 200 0150 13010101 		addi	sp,sp,16
+ 201              		.cfi_def_cfa_offset 0
+ 202 0154 67800000 		jr	ra
+ 203              		.cfi_endproc
+ 204              	.LFE2:
+ 206              		.align	2
+ 207              		.globl	popSppSpie
+ 209              	popSppSpie:
+ 210              	.LFB3:
   47:src/kern_threads.c **** 
   48:src/kern_threads.c **** //samo izlazi iz kernela i vraca se odakle je pozvana
   49:src/kern_threads.c **** void popSppSpie()
   50:src/kern_threads.c **** {
- 214              		.loc 1 50 1 is_stmt 1
- 215              		.cfi_startproc
- 216 0164 130101FF 		addi	sp,sp,-16
- 217              		.cfi_def_cfa_offset 16
- 218 0168 23348100 		sd	s0,8(sp)
- 219              		.cfi_offset 8, -8
- 220 016c 13040101 		addi	s0,sp,16
- 221              		.cfi_def_cfa 8, 0
+ 211              		.loc 1 50 1 is_stmt 1
+ 212              		.cfi_startproc
+ 213 0158 130101FF 		addi	sp,sp,-16
+ 214              		.cfi_def_cfa_offset 16
+ 215 015c 23348100 		sd	s0,8(sp)
+ 216              		.cfi_offset 8, -8
+ 217 0160 13040101 		addi	s0,sp,16
+ 218              		.cfi_def_cfa 8, 0
   51:src/kern_threads.c ****     __asm__ volatile("csrw sepc, ra"); //ovde dodaj izlazak iz privilegovanog moda
-GAS LISTING /tmp/ccvXE2EI.s 			page 6
+ 219              		.loc 1 51 5
+ 220              	#APP
+ 221              	# 51 "src/kern_threads.c" 1
+GAS LISTING /tmp/ccAQswmS.s 			page 6
 
 
- 222              		.loc 1 51 5
- 223              	#APP
- 224              	# 51 "src/kern_threads.c" 1
   52              	    __asm__ volatile("sret");
- 225              		csrw sepc, ra
- 226              	# 0 "" 2
- 227              		.loc 1 52 5
- 228              	# 52 "src/kern_threads.c" 1
+ 222              		csrw sepc, ra
+ 223              	# 0 "" 2
+ 224              		.loc 1 52 5
+ 225              	# 52 "src/kern_threads.c" 1
   53              	}
- 229              		sret
- 230              	# 0 "" 2
- 231              		.loc 1 53 1 is_stmt 0
- 232              	#NO_APP
- 233 0178 03348100 		ld	s0,8(sp)
- 234              		.cfi_restore 8
- 235              		.cfi_def_cfa 2, 16
- 236 017c 13010101 		addi	sp,sp,16
- 237              		.cfi_def_cfa_offset 0
- 238 0180 67800000 		jr	ra
- 239              		.cfi_endproc
- 240              	.LFE3:
- 242              		.align	2
- 243              		.globl	kern_thread_wrapper
- 245              	kern_thread_wrapper:
- 246              	.LFB5:
+ 226              		sret
+ 227              	# 0 "" 2
+ 228              		.loc 1 53 1 is_stmt 0
+ 229              	#NO_APP
+ 230 016c 03348100 		ld	s0,8(sp)
+ 231              		.cfi_restore 8
+ 232              		.cfi_def_cfa 2, 16
+ 233 0170 13010101 		addi	sp,sp,16
+ 234              		.cfi_def_cfa_offset 0
+ 235 0174 67800000 		jr	ra
+ 236              		.cfi_endproc
+ 237              	.LFE3:
+ 239              		.align	2
+ 240              		.globl	kern_thread_wrapper
+ 242              	kern_thread_wrapper:
+ 243              	.LFB6:
   54:src/kern_threads.c **** 
   55:src/kern_threads.c **** extern void contextSwitch(thread_t old, thread_t new);
   56:src/kern_threads.c **** 
@@ -339,751 +336,1188 @@ GAS LISTING /tmp/ccvXE2EI.s 			page 1
   64:src/kern_threads.c ****     }
   65:src/kern_threads.c **** }
   66:src/kern_threads.c **** 
-  67:src/kern_threads.c **** void kern_thread_wrapper()
+  67:src/kern_threads.c **** void kern_thread_end_running()
   68:src/kern_threads.c **** {
- 247              		.loc 1 68 1 is_stmt 1
- 248              		.cfi_startproc
- 249 0184 130101FE 		addi	sp,sp,-32
- 250              		.cfi_def_cfa_offset 32
- 251 0188 233C1100 		sd	ra,24(sp)
- 252 018c 23388100 		sd	s0,16(sp)
- 253 0190 23349100 		sd	s1,8(sp)
- 254              		.cfi_offset 1, -8
- 255              		.cfi_offset 8, -16
- 256              		.cfi_offset 9, -24
- 257 0194 13040102 		addi	s0,sp,32
- 258              		.cfi_def_cfa 8, 0
-  69:src/kern_threads.c ****     popSppSpie();
- 259              		.loc 1 69 5
- 260 0198 97000000 		call	popSppSpie
- 260      E7800000 
- 261              	.LVL12:
-GAS LISTING /tmp/ccvXE2EI.s 			page 7
+  69:src/kern_threads.c ****     thread_t old = running;
+  70:src/kern_threads.c ****     old->status=UNUSED;
+  71:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
+  72:src/kern_threads.c ****         if(threads[i].status==JOINED && threads[i].joined_tid==old->id) threads[i].status=READY;
+  73:src/kern_threads.c ****     }
+  74:src/kern_threads.c ****     running=kern_scheduler_get();
+  75:src/kern_threads.c ****     if(old!=running){
+  76:src/kern_threads.c ****         if(old->status==RUNNING) old->status=READY;
+  77:src/kern_threads.c ****         contextSwitch(old,running);
+  78:src/kern_threads.c ****     }
+  79:src/kern_threads.c **** }
+  80:src/kern_threads.c **** 
+  81:src/kern_threads.c **** void kern_thread_wrapper()
+  82:src/kern_threads.c **** {
+ 244              		.loc 1 82 1 is_stmt 1
+ 245              		.cfi_startproc
+ 246 0178 130101FE 		addi	sp,sp,-32
+ 247              		.cfi_def_cfa_offset 32
+ 248 017c 233C1100 		sd	ra,24(sp)
+ 249 0180 23388100 		sd	s0,16(sp)
+GAS LISTING /tmp/ccAQswmS.s 			page 7
 
 
-  70:src/kern_threads.c ****     running->body(running->arg);
- 262              		.loc 1 70 5
- 263              		.loc 1 70 12 is_stmt 0
- 264 01a0 97040000 		lla	s1,running
- 264      93840400 
- 265 01a8 83B70400 		ld	a5,0(s1)
- 266 01ac 03B78701 		ld	a4,24(a5)
- 267              		.loc 1 70 5
- 268 01b0 03B50702 		ld	a0,32(a5)
- 269 01b4 E7000700 		jalr	a4
- 270              	.LVL13:
-  71:src/kern_threads.c ****     running->status=UNUSED;
- 271              		.loc 1 71 5 is_stmt 1
- 272              		.loc 1 71 12 is_stmt 0
- 273 01b8 83B70400 		ld	a5,0(s1)
- 274              		.loc 1 71 20
- 275 01bc 23A20704 		sw	zero,68(a5)
-  72:src/kern_threads.c ****     kern_thread_yield();
- 276              		.loc 1 72 5 is_stmt 1
- 277 01c0 97000000 		call	kern_thread_yield
- 277      E7800000 
- 278              	.LVL14:
-  73:src/kern_threads.c **** }
- 279              		.loc 1 73 1 is_stmt 0
- 280 01c8 83308101 		ld	ra,24(sp)
- 281              		.cfi_restore 1
- 282 01cc 03340101 		ld	s0,16(sp)
- 283              		.cfi_restore 8
- 284              		.cfi_def_cfa 2, 32
- 285 01d0 83348100 		ld	s1,8(sp)
- 286              		.cfi_restore 9
- 287 01d4 13010102 		addi	sp,sp,32
- 288              		.cfi_def_cfa_offset 0
- 289 01d8 67800000 		jr	ra
- 290              		.cfi_endproc
- 291              	.LFE5:
- 293              		.align	2
- 294              		.globl	kern_thread_dispatch
- 296              	kern_thread_dispatch:
- 297              	.LFB4:
+ 250 0184 23349100 		sd	s1,8(sp)
+ 251              		.cfi_offset 1, -8
+ 252              		.cfi_offset 8, -16
+ 253              		.cfi_offset 9, -24
+ 254 0188 13040102 		addi	s0,sp,32
+ 255              		.cfi_def_cfa 8, 0
+  83:src/kern_threads.c ****     popSppSpie();
+ 256              		.loc 1 83 5
+ 257 018c 97000000 		call	popSppSpie
+ 257      E7800000 
+ 258              	.LVL12:
+  84:src/kern_threads.c ****     running->body(running->arg);
+ 259              		.loc 1 84 5
+ 260              		.loc 1 84 12 is_stmt 0
+ 261 0194 97040000 		lla	s1,running
+ 261      93840400 
+ 262 019c 83B70400 		ld	a5,0(s1)
+ 263 01a0 03B78701 		ld	a4,24(a5)
+ 264              		.loc 1 84 5
+ 265 01a4 03B50702 		ld	a0,32(a5)
+ 266 01a8 E7000700 		jalr	a4
+ 267              	.LVL13:
+  85:src/kern_threads.c ****     running->status=UNUSED;
+ 268              		.loc 1 85 5 is_stmt 1
+ 269              		.loc 1 85 12 is_stmt 0
+ 270 01ac 03B60400 		ld	a2,0(s1)
+ 271              		.loc 1 85 20
+ 272 01b0 23240604 		sw	zero,72(a2)
+  86:src/kern_threads.c ****     running->sem_next=0;
+ 273              		.loc 1 86 5 is_stmt 1
+ 274              		.loc 1 86 22 is_stmt 0
+ 275 01b4 23380604 		sd	zero,80(a2)
+  87:src/kern_threads.c ****     running->joined_tid=-1;
+ 276              		.loc 1 87 5 is_stmt 1
+ 277              		.loc 1 87 24 is_stmt 0
+ 278 01b8 9307F0FF 		li	a5,-1
+ 279 01bc 2334F602 		sd	a5,40(a2)
+  88:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
+ 280              		.loc 1 88 5 is_stmt 1
+ 281              	.LBB4:
+ 282              		.loc 1 88 9
+ 283              	.LVL14:
+ 284              		.loc 1 88 13 is_stmt 0
+ 285 01c0 93070000 		li	a5,0
+ 286              		.loc 1 88 5
+ 287 01c4 6F008000 		j	.L18
+ 288              	.LVL15:
+ 289              	.L19:
+ 290              		.loc 1 88 31 is_stmt 1 discriminator 2
+ 291              		.loc 1 88 32 is_stmt 0 discriminator 2
+ 292 01c8 9B871700 		addiw	a5,a5,1
+ 293              	.LVL16:
+ 294              	.L18:
+ 295              		.loc 1 88 17 is_stmt 1 discriminator 1
+ 296              		.loc 1 88 5 is_stmt 0 discriminator 1
+ 297 01cc 1307F003 		li	a4,63
+ 298 01d0 6342F706 		bgt	a5,a4,.L22
+GAS LISTING /tmp/ccAQswmS.s 			page 8
+
+
+  89:src/kern_threads.c ****         if(threads[i].status==JOINED && threads[i].joined_tid==running->id) threads[i].status=READY
+ 299              		.loc 1 89 9 is_stmt 1
+ 300              		.loc 1 89 22 is_stmt 0
+ 301 01d4 13078005 		li	a4,88
+ 302 01d8 B386E702 		mul	a3,a5,a4
+ 303 01dc 17070000 		lla	a4,threads
+ 303      13070700 
+ 304 01e4 3307D700 		add	a4,a4,a3
+ 305 01e8 83268704 		lw	a3,72(a4)
+ 306              		.loc 1 89 11
+ 307 01ec 13074000 		li	a4,4
+ 308 01f0 E39CE6FC 		bne	a3,a4,.L19
+ 309              		.loc 1 89 51 discriminator 1
+ 310 01f4 13078005 		li	a4,88
+ 311 01f8 B386E702 		mul	a3,a5,a4
+ 312 01fc 17070000 		lla	a4,threads
+ 312      13070700 
+ 313 0204 3307D700 		add	a4,a4,a3
+ 314 0208 83368702 		ld	a3,40(a4)
+ 315              		.loc 1 89 71 discriminator 1
+ 316 020c 03370601 		ld	a4,16(a2)
+ 317              		.loc 1 89 38 discriminator 1
+ 318 0210 E39CE6FA 		bne	a3,a4,.L19
+ 319              		.loc 1 89 77 is_stmt 1 discriminator 2
+ 320              		.loc 1 89 94 is_stmt 0 discriminator 2
+ 321 0214 13078005 		li	a4,88
+ 322 0218 B386E702 		mul	a3,a5,a4
+ 323 021c 17070000 		lla	a4,threads
+ 323      13070700 
+ 324 0224 3307D700 		add	a4,a4,a3
+ 325 0228 93062000 		li	a3,2
+ 326 022c 2324D704 		sw	a3,72(a4)
+ 327 0230 6FF09FF9 		j	.L19
+ 328              	.L22:
+ 329              	.LBE4:
+  90:src/kern_threads.c ****     }
+  91:src/kern_threads.c ****     kern_thread_yield();
+ 330              		.loc 1 91 5 is_stmt 1
+ 331 0234 97000000 		call	kern_thread_yield
+ 331      E7800000 
+ 332              	.LVL17:
+  92:src/kern_threads.c **** }
+ 333              		.loc 1 92 1 is_stmt 0
+ 334 023c 83308101 		ld	ra,24(sp)
+ 335              		.cfi_restore 1
+ 336 0240 03340101 		ld	s0,16(sp)
+ 337              		.cfi_restore 8
+ 338              		.cfi_def_cfa 2, 32
+ 339 0244 83348100 		ld	s1,8(sp)
+ 340              		.cfi_restore 9
+ 341 0248 13010102 		addi	sp,sp,32
+ 342              		.cfi_def_cfa_offset 0
+ 343 024c 67800000 		jr	ra
+ 344              		.cfi_endproc
+ 345              	.LFE6:
+ 347              		.align	2
+ 348              		.globl	kern_thread_dispatch
+GAS LISTING /tmp/ccAQswmS.s 			page 9
+
+
+ 350              	kern_thread_dispatch:
+ 351              	.LFB4:
   58:src/kern_threads.c ****     thread_t old = running;
- 298              		.loc 1 58 1 is_stmt 1
- 299              		.cfi_startproc
- 300 01dc 130101FE 		addi	sp,sp,-32
- 301              		.cfi_def_cfa_offset 32
- 302 01e0 233C1100 		sd	ra,24(sp)
- 303 01e4 23388100 		sd	s0,16(sp)
- 304 01e8 23349100 		sd	s1,8(sp)
- 305 01ec 23302101 		sd	s2,0(sp)
- 306              		.cfi_offset 1, -8
- 307              		.cfi_offset 8, -16
- 308              		.cfi_offset 9, -24
- 309              		.cfi_offset 18, -32
- 310 01f0 13040102 		addi	s0,sp,32
- 311              		.cfi_def_cfa 8, 0
+ 352              		.loc 1 58 1 is_stmt 1
+ 353              		.cfi_startproc
+ 354 0250 130101FE 		addi	sp,sp,-32
+ 355              		.cfi_def_cfa_offset 32
+ 356 0254 233C1100 		sd	ra,24(sp)
+ 357 0258 23388100 		sd	s0,16(sp)
+ 358 025c 23349100 		sd	s1,8(sp)
+ 359 0260 23302101 		sd	s2,0(sp)
+ 360              		.cfi_offset 1, -8
+ 361              		.cfi_offset 8, -16
+ 362              		.cfi_offset 9, -24
+ 363              		.cfi_offset 18, -32
+ 364 0264 13040102 		addi	s0,sp,32
+ 365              		.cfi_def_cfa 8, 0
   59:src/kern_threads.c ****     running=kern_scheduler_get();
- 312              		.loc 1 59 5
-GAS LISTING /tmp/ccvXE2EI.s 			page 8
-
-
+ 366              		.loc 1 59 5
   59:src/kern_threads.c ****     running=kern_scheduler_get();
- 313              		.loc 1 59 14 is_stmt 0
- 314 01f4 17090000 		lla	s2,running
- 314      13090900 
- 315 01fc 83340900 		ld	s1,0(s2)
- 316              	.LVL15:
+ 367              		.loc 1 59 14 is_stmt 0
+ 368 0268 17090000 		lla	s2,running
+ 368      13090900 
+ 369 0270 83340900 		ld	s1,0(s2)
+ 370              	.LVL18:
   60:src/kern_threads.c ****     if(old!=running){
- 317              		.loc 1 60 5 is_stmt 1
+ 371              		.loc 1 60 5 is_stmt 1
   60:src/kern_threads.c ****     if(old!=running){
- 318              		.loc 1 60 13 is_stmt 0
- 319 0200 97000000 		call	kern_scheduler_get
- 319      E7800000 
- 320              	.LVL16:
+ 372              		.loc 1 60 13 is_stmt 0
+ 373 0274 97000000 		call	kern_scheduler_get
+ 373      E7800000 
+ 374              	.LVL19:
   60:src/kern_threads.c ****     if(old!=running){
- 321              		.loc 1 60 12
- 322 0208 2330A900 		sd	a0,0(s2)
+ 375              		.loc 1 60 12
+ 376 027c 2330A900 		sd	a0,0(s2)
   61:src/kern_threads.c ****         if(old->status==RUNNING) old->status=READY;
- 323              		.loc 1 61 5 is_stmt 1
+ 377              		.loc 1 61 5 is_stmt 1
   61:src/kern_threads.c ****         if(old->status==RUNNING) old->status=READY;
- 324              		.loc 1 61 7 is_stmt 0
- 325 020c 63009502 		beq	a0,s1,.L19
- 326 0210 93050500 		mv	a1,a0
+ 378              		.loc 1 61 7 is_stmt 0
+ 379 0280 63009502 		beq	a0,s1,.L23
+ 380 0284 93050500 		mv	a1,a0
   62:src/kern_threads.c ****         contextSwitch(old,running);
- 327              		.loc 1 62 9 is_stmt 1
+ 381              		.loc 1 62 9 is_stmt 1
   62:src/kern_threads.c ****         contextSwitch(old,running);
- 328              		.loc 1 62 15 is_stmt 0
- 329 0214 03A74404 		lw	a4,68(s1)
+ 382              		.loc 1 62 15 is_stmt 0
+ 383 0288 03A78404 		lw	a4,72(s1)
   62:src/kern_threads.c ****         contextSwitch(old,running);
- 330              		.loc 1 62 11
- 331 0218 93071000 		li	a5,1
- 332 021c 6304F702 		beq	a4,a5,.L23
- 333              	.L21:
+ 384              		.loc 1 62 11
+ 385 028c 93071000 		li	a5,1
+ 386 0290 6304F702 		beq	a4,a5,.L27
+ 387              	.L25:
   63:src/kern_threads.c ****     }
- 334              		.loc 1 63 9 is_stmt 1
- 335 0220 13850400 		mv	a0,s1
- 336 0224 97000000 		call	contextSwitch
- 336      E7800000 
- 337              	.LVL17:
- 338              	.L19:
+ 388              		.loc 1 63 9 is_stmt 1
+ 389 0294 13850400 		mv	a0,s1
+ 390 0298 97000000 		call	contextSwitch
+ 390      E7800000 
+ 391              	.LVL20:
+GAS LISTING /tmp/ccAQswmS.s 			page 10
+
+
+ 392              	.L23:
   65:src/kern_threads.c **** 
- 339              		.loc 1 65 1 is_stmt 0
- 340 022c 83308101 		ld	ra,24(sp)
- 341              		.cfi_remember_state
- 342              		.cfi_restore 1
- 343 0230 03340101 		ld	s0,16(sp)
- 344              		.cfi_restore 8
- 345              		.cfi_def_cfa 2, 32
- 346 0234 83348100 		ld	s1,8(sp)
- 347              		.cfi_restore 9
- 348              	.LVL18:
- 349 0238 03390100 		ld	s2,0(sp)
- 350              		.cfi_restore 18
- 351 023c 13010102 		addi	sp,sp,32
- 352              		.cfi_def_cfa_offset 0
- 353 0240 67800000 		jr	ra
- 354              	.LVL19:
- 355              	.L23:
-GAS LISTING /tmp/ccvXE2EI.s 			page 9
-
-
- 356              		.cfi_restore_state
+ 393              		.loc 1 65 1 is_stmt 0
+ 394 02a0 83308101 		ld	ra,24(sp)
+ 395              		.cfi_remember_state
+ 396              		.cfi_restore 1
+ 397 02a4 03340101 		ld	s0,16(sp)
+ 398              		.cfi_restore 8
+ 399              		.cfi_def_cfa 2, 32
+ 400 02a8 83348100 		ld	s1,8(sp)
+ 401              		.cfi_restore 9
+ 402              	.LVL21:
+ 403 02ac 03390100 		ld	s2,0(sp)
+ 404              		.cfi_restore 18
+ 405 02b0 13010102 		addi	sp,sp,32
+ 406              		.cfi_def_cfa_offset 0
+ 407 02b4 67800000 		jr	ra
+ 408              	.LVL22:
+ 409              	.L27:
+ 410              		.cfi_restore_state
   62:src/kern_threads.c ****         contextSwitch(old,running);
- 357              		.loc 1 62 34 is_stmt 1 discriminator 1
+ 411              		.loc 1 62 34 is_stmt 1 discriminator 1
   62:src/kern_threads.c ****         contextSwitch(old,running);
- 358              		.loc 1 62 45 is_stmt 0 discriminator 1
- 359 0244 93072000 		li	a5,2
- 360 0248 23A2F404 		sw	a5,68(s1)
- 361 024c 6FF05FFD 		j	.L21
- 362              		.cfi_endproc
- 363              	.LFE4:
- 365              		.align	2
- 366              		.globl	kern_thread_create
- 368              	kern_thread_create:
- 369              	.LFB6:
-  74:src/kern_threads.c **** 
-  75:src/kern_threads.c **** int kern_thread_create(thread_t* handle, void(*start_routine)(void*), void* arg, void* stack_space)
-  76:src/kern_threads.c **** {
- 370              		.loc 1 76 1 is_stmt 1
- 371              		.cfi_startproc
- 372              	.LVL20:
- 373 0250 130101FF 		addi	sp,sp,-16
- 374              		.cfi_def_cfa_offset 16
- 375 0254 23348100 		sd	s0,8(sp)
- 376              		.cfi_offset 8, -8
- 377 0258 13040101 		addi	s0,sp,16
- 378              		.cfi_def_cfa 8, 0
-  77:src/kern_threads.c ****     *handle=0;
- 379              		.loc 1 77 5
- 380              		.loc 1 77 12 is_stmt 0
- 381 025c 23300500 		sd	zero,0(a0)
-  78:src/kern_threads.c ****     thread_t t=&threads[0]; //dodela da bismo sklonili upozorenje
- 382              		.loc 1 78 5 is_stmt 1
- 383              	.LVL21:
-  79:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
- 384              		.loc 1 79 5
- 385              	.LBB4:
- 386              		.loc 1 79 9
- 387              		.loc 1 79 13 is_stmt 0
- 388 0260 13070000 		li	a4,0
- 389              	.LVL22:
- 390              	.L25:
- 391              		.loc 1 79 17 is_stmt 1 discriminator 1
- 392              		.loc 1 79 5 is_stmt 0 discriminator 1
- 393 0264 9307F003 		li	a5,63
- 394 0268 63C4E70A 		bgt	a4,a5,.L32
-  80:src/kern_threads.c ****         if(threads[i].status==UNUSED){
- 395              		.loc 1 80 9 is_stmt 1
- 396              		.loc 1 80 22 is_stmt 0
- 397 026c 93172700 		slli	a5,a4,2
- 398 0270 B387E700 		add	a5,a5,a4
- 399 0274 93974700 		slli	a5,a5,4
- 400 0278 17080000 		lla	a6,threads
- 400      13080800 
- 401 0280 B307F800 		add	a5,a6,a5
- 402 0284 83A74704 		lw	a5,68(a5)
- 403              		.loc 1 80 11
- 404 0288 63860700 		beqz	a5,.L33
-GAS LISTING /tmp/ccvXE2EI.s 			page 10
+ 412              		.loc 1 62 45 is_stmt 0 discriminator 1
+ 413 02b8 93072000 		li	a5,2
+ 414 02bc 23A4F404 		sw	a5,72(s1)
+ 415 02c0 6FF05FFD 		j	.L25
+ 416              		.cfi_endproc
+ 417              	.LFE4:
+ 419              		.align	2
+ 420              		.globl	kern_thread_end_running
+ 422              	kern_thread_end_running:
+ 423              	.LFB5:
+  68:src/kern_threads.c ****     thread_t old = running;
+ 424              		.loc 1 68 1 is_stmt 1
+ 425              		.cfi_startproc
+ 426 02c4 130101FE 		addi	sp,sp,-32
+ 427              		.cfi_def_cfa_offset 32
+ 428 02c8 233C1100 		sd	ra,24(sp)
+ 429 02cc 23388100 		sd	s0,16(sp)
+ 430 02d0 23349100 		sd	s1,8(sp)
+ 431              		.cfi_offset 1, -8
+ 432              		.cfi_offset 8, -16
+ 433              		.cfi_offset 9, -24
+ 434 02d4 13040102 		addi	s0,sp,32
+ 435              		.cfi_def_cfa 8, 0
+  69:src/kern_threads.c ****     old->status=UNUSED;
+ 436              		.loc 1 69 5
+  69:src/kern_threads.c ****     old->status=UNUSED;
+ 437              		.loc 1 69 14 is_stmt 0
+ 438 02d8 97040000 		ld	s1,running
+ 438      83B40400 
+ 439              	.LVL23:
+  70:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
+ 440              		.loc 1 70 5 is_stmt 1
+  70:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
+ 441              		.loc 1 70 16 is_stmt 0
+GAS LISTING /tmp/ccAQswmS.s 			page 11
 
 
-  79:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
- 405              		.loc 1 79 31 is_stmt 1 discriminator 2
-  79:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
- 406              		.loc 1 79 32 is_stmt 0 discriminator 2
- 407 028c 1B071700 		addiw	a4,a4,1
- 408              	.LVL23:
- 409 0290 6FF05FFD 		j	.L25
- 410              	.LVL24:
- 411              	.L33:
-  81:src/kern_threads.c ****             *handle=&threads[i];
- 412              		.loc 1 81 13 is_stmt 1
- 413              		.loc 1 81 21 is_stmt 0
- 414 0294 93172700 		slli	a5,a4,2
- 415 0298 B387E700 		add	a5,a5,a4
- 416 029c 93974700 		slli	a5,a5,4
- 417 02a0 B3870701 		add	a5,a5,a6
- 418              		.loc 1 81 20
- 419 02a4 2330F500 		sd	a5,0(a0)
-  82:src/kern_threads.c ****             t=&threads[i];
- 420              		.loc 1 82 13 is_stmt 1
- 421              	.LVL25:
-  83:src/kern_threads.c ****             break;
- 422              		.loc 1 83 13
- 423              	.L27:
- 424              	.LBE4:
-  84:src/kern_threads.c ****         }
-  85:src/kern_threads.c ****     }
-  86:src/kern_threads.c ****     if(*handle==0) return -1;
- 425              		.loc 1 86 5
- 426              		.loc 1 86 8 is_stmt 0
- 427 02a8 03370500 		ld	a4,0(a0)
- 428              	.LVL26:
- 429              		.loc 1 86 7
- 430 02ac 63080706 		beqz	a4,.L30
-  87:src/kern_threads.c **** 
-  88:src/kern_threads.c ****     t->id=++id;
- 431              		.loc 1 88 5 is_stmt 1
- 432              		.loc 1 88 11 is_stmt 0
- 433 02b0 17050000 		lla	a0,id
- 433      13050500 
- 434              	.LVL27:
- 435 02b8 03270500 		lw	a4,0(a0)
- 436 02bc 1B071700 		addiw	a4,a4,1
- 437 02c0 1B080700 		sext.w	a6,a4
- 438              		.loc 1 88 10
- 439 02c4 2320E500 		sw	a4,0(a0)
- 440 02c8 23B80701 		sd	a6,16(a5)
-  89:src/kern_threads.c ****     t->status=READY;
- 441              		.loc 1 89 5 is_stmt 1
- 442              		.loc 1 89 14 is_stmt 0
- 443 02cc 13072000 		li	a4,2
- 444 02d0 23A2E704 		sw	a4,68(a5)
-  90:src/kern_threads.c ****     t->type=REGULAR;
- 445              		.loc 1 90 5 is_stmt 1
- 446              		.loc 1 90 12 is_stmt 0
- 447 02d4 23A00704 		sw	zero,64(a5)
-  91:src/kern_threads.c ****     t->arg=arg;
-GAS LISTING /tmp/ccvXE2EI.s 			page 11
+ 442 02e0 23A40404 		sw	zero,72(s1)
+  71:src/kern_threads.c ****         if(threads[i].status==JOINED && threads[i].joined_tid==old->id) threads[i].status=READY;
+ 443              		.loc 1 71 5 is_stmt 1
+ 444              	.LBB5:
+  71:src/kern_threads.c ****         if(threads[i].status==JOINED && threads[i].joined_tid==old->id) threads[i].status=READY;
+ 445              		.loc 1 71 9
+ 446              	.LVL24:
+  71:src/kern_threads.c ****         if(threads[i].status==JOINED && threads[i].joined_tid==old->id) threads[i].status=READY;
+ 447              		.loc 1 71 13 is_stmt 0
+ 448 02e4 93070000 		li	a5,0
+  71:src/kern_threads.c ****         if(threads[i].status==JOINED && threads[i].joined_tid==old->id) threads[i].status=READY;
+ 449              		.loc 1 71 5
+ 450 02e8 6F008000 		j	.L29
+ 451              	.LVL25:
+ 452              	.L30:
+  71:src/kern_threads.c ****         if(threads[i].status==JOINED && threads[i].joined_tid==old->id) threads[i].status=READY;
+ 453              		.loc 1 71 31 is_stmt 1 discriminator 2
+  71:src/kern_threads.c ****         if(threads[i].status==JOINED && threads[i].joined_tid==old->id) threads[i].status=READY;
+ 454              		.loc 1 71 32 is_stmt 0 discriminator 2
+ 455 02ec 9B871700 		addiw	a5,a5,1
+ 456              	.LVL26:
+ 457              	.L29:
+  71:src/kern_threads.c ****         if(threads[i].status==JOINED && threads[i].joined_tid==old->id) threads[i].status=READY;
+ 458              		.loc 1 71 17 is_stmt 1 discriminator 1
+  71:src/kern_threads.c ****         if(threads[i].status==JOINED && threads[i].joined_tid==old->id) threads[i].status=READY;
+ 459              		.loc 1 71 5 is_stmt 0 discriminator 1
+ 460 02f0 1307F003 		li	a4,63
+ 461 02f4 6342F706 		bgt	a5,a4,.L35
+  72:src/kern_threads.c ****     }
+ 462              		.loc 1 72 9 is_stmt 1
+  72:src/kern_threads.c ****     }
+ 463              		.loc 1 72 22 is_stmt 0
+ 464 02f8 13078005 		li	a4,88
+ 465 02fc B386E702 		mul	a3,a5,a4
+ 466 0300 17070000 		lla	a4,threads
+ 466      13070700 
+ 467 0308 3307D700 		add	a4,a4,a3
+ 468 030c 83268704 		lw	a3,72(a4)
+  72:src/kern_threads.c ****     }
+ 469              		.loc 1 72 11
+ 470 0310 13074000 		li	a4,4
+ 471 0314 E39CE6FC 		bne	a3,a4,.L30
+  72:src/kern_threads.c ****     }
+ 472              		.loc 1 72 51 discriminator 1
+ 473 0318 13078005 		li	a4,88
+ 474 031c B386E702 		mul	a3,a5,a4
+ 475 0320 17070000 		lla	a4,threads
+ 475      13070700 
+ 476 0328 3307D700 		add	a4,a4,a3
+ 477 032c 83368702 		ld	a3,40(a4)
+  72:src/kern_threads.c ****     }
+ 478              		.loc 1 72 67 discriminator 1
+ 479 0330 03B70401 		ld	a4,16(s1)
+  72:src/kern_threads.c ****     }
+ 480              		.loc 1 72 38 discriminator 1
+ 481 0334 E39CE6FA 		bne	a3,a4,.L30
+  72:src/kern_threads.c ****     }
+GAS LISTING /tmp/ccAQswmS.s 			page 12
 
 
- 448              		.loc 1 91 5 is_stmt 1
- 449              		.loc 1 91 11 is_stmt 0
- 450 02d8 23B0C702 		sd	a2,32(a5)
-  92:src/kern_threads.c ****     t->joined_tid=-1;
- 451              		.loc 1 92 5 is_stmt 1
- 452              		.loc 1 92 18 is_stmt 0
- 453 02dc 1307F0FF 		li	a4,-1
- 454 02e0 23B4E702 		sd	a4,40(a5)
-  93:src/kern_threads.c ****     t->timeslice=DEFAULT_TIME_SLICE;
- 455              		.loc 1 93 5 is_stmt 1
- 456              		.loc 1 93 17 is_stmt 0
- 457 02e4 13072000 		li	a4,2
- 458 02e8 23B8E702 		sd	a4,48(a5)
-  94:src/kern_threads.c ****     t->body=start_routine;
- 459              		.loc 1 94 5 is_stmt 1
- 460              		.loc 1 94 12 is_stmt 0
- 461 02ec 23BCB700 		sd	a1,24(a5)
-  95:src/kern_threads.c ****     t->sp = ((uint64)stack_space);
- 462              		.loc 1 95 5 is_stmt 1
- 463              		.loc 1 95 11 is_stmt 0
- 464 02f0 23B4D700 		sd	a3,8(a5)
-  96:src/kern_threads.c ****     t->ra=(uint64) &kern_thread_wrapper;
- 465              		.loc 1 96 5 is_stmt 1
- 466              		.loc 1 96 11 is_stmt 0
- 467 02f4 17070000 		lla	a4,kern_thread_wrapper
- 467      13070700 
- 468              		.loc 1 96 10
- 469 02fc 23B0E700 		sd	a4,0(a5)
-  97:src/kern_threads.c **** 
-  98:src/kern_threads.c ****     return 0;
- 470              		.loc 1 98 5 is_stmt 1
- 471              		.loc 1 98 12 is_stmt 0
- 472 0300 13050000 		li	a0,0
- 473              	.L29:
-  99:src/kern_threads.c **** }
- 474              		.loc 1 99 1
- 475 0304 03348100 		ld	s0,8(sp)
- 476              		.cfi_remember_state
- 477              		.cfi_restore 8
- 478              		.cfi_def_cfa 2, 16
- 479 0308 13010101 		addi	sp,sp,16
- 480              		.cfi_def_cfa_offset 0
- 481 030c 67800000 		jr	ra
- 482              	.LVL28:
- 483              	.L32:
- 484              		.cfi_restore_state
-  78:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
- 485              		.loc 1 78 14
- 486 0310 97070000 		lla	a5,threads
- 486      93870700 
- 487 0318 6FF01FF9 		j	.L27
- 488              	.LVL29:
- 489              	.L30:
-  86:src/kern_threads.c **** 
- 490              		.loc 1 86 27
- 491 031c 1305F0FF 		li	a0,-1
- 492              	.LVL30:
-GAS LISTING /tmp/ccvXE2EI.s 			page 12
+ 482              		.loc 1 72 73 is_stmt 1 discriminator 2
+  72:src/kern_threads.c ****     }
+ 483              		.loc 1 72 90 is_stmt 0 discriminator 2
+ 484 0338 13078005 		li	a4,88
+ 485 033c B386E702 		mul	a3,a5,a4
+ 486 0340 17070000 		lla	a4,threads
+ 486      13070700 
+ 487 0348 3307D700 		add	a4,a4,a3
+ 488 034c 93062000 		li	a3,2
+ 489 0350 2324D704 		sw	a3,72(a4)
+ 490 0354 6FF09FF9 		j	.L30
+ 491              	.L35:
+ 492              	.LBE5:
+  74:src/kern_threads.c ****     if(old!=running){
+ 493              		.loc 1 74 5 is_stmt 1
+  74:src/kern_threads.c ****     if(old!=running){
+ 494              		.loc 1 74 13 is_stmt 0
+ 495 0358 97000000 		call	kern_scheduler_get
+ 495      E7800000 
+ 496              	.LVL27:
+ 497 0360 93050500 		mv	a1,a0
+  74:src/kern_threads.c ****     if(old!=running){
+ 498              		.loc 1 74 12
+ 499 0364 97070000 		sd	a0,running,a5
+ 499      23B0A700 
+  75:src/kern_threads.c ****         if(old->status==RUNNING) old->status=READY;
+ 500              		.loc 1 75 5 is_stmt 1
+  75:src/kern_threads.c ****         if(old->status==RUNNING) old->status=READY;
+ 501              		.loc 1 75 7 is_stmt 0
+ 502 036c 630E9500 		beq	a0,s1,.L28
+  76:src/kern_threads.c ****         contextSwitch(old,running);
+ 503              		.loc 1 76 9 is_stmt 1
+  76:src/kern_threads.c ****         contextSwitch(old,running);
+ 504              		.loc 1 76 15 is_stmt 0
+ 505 0370 03A78404 		lw	a4,72(s1)
+  76:src/kern_threads.c ****         contextSwitch(old,running);
+ 506              		.loc 1 76 11
+ 507 0374 93071000 		li	a5,1
+ 508 0378 6302F702 		beq	a4,a5,.L36
+ 509              	.L33:
+  77:src/kern_threads.c ****     }
+ 510              		.loc 1 77 9 is_stmt 1
+ 511 037c 13850400 		mv	a0,s1
+ 512 0380 97000000 		call	contextSwitch
+ 512      E7800000 
+ 513              	.LVL28:
+ 514              	.L28:
+  79:src/kern_threads.c **** 
+ 515              		.loc 1 79 1 is_stmt 0
+ 516 0388 83308101 		ld	ra,24(sp)
+ 517              		.cfi_remember_state
+ 518              		.cfi_restore 1
+ 519 038c 03340101 		ld	s0,16(sp)
+ 520              		.cfi_restore 8
+ 521              		.cfi_def_cfa 2, 32
+ 522 0390 83348100 		ld	s1,8(sp)
+ 523              		.cfi_restore 9
+GAS LISTING /tmp/ccAQswmS.s 			page 13
 
 
- 493 0320 6FF05FFE 		j	.L29
- 494              		.cfi_endproc
- 495              	.LFE6:
- 497              		.globl	running
- 498              		.globl	threads
- 499              		.section	.srodata.cst8,"aM",@progbits,8
- 500              		.align	3
- 501              	.LC0:
- 502 0000 CDCCCCCC 		.dword	-3689348814741910323
- 502      CCCCCCCC 
- 503              		.bss
- 504              		.align	3
- 507              	threads:
- 508 0000 00000000 		.zero	5120
- 508      00000000 
- 508      00000000 
- 508      00000000 
- 508      00000000 
- 509              		.section	.sbss,"aw",@nobits
- 510              		.align	3
- 513              	running:
- 514 0000 00000000 		.zero	8
- 514      00000000 
- 517              	id:
- 518 0008 00000000 		.zero	4
- 519              		.text
- 520              	.Letext0:
- 521              		.file 2 "src/../h/../lib/hw.h"
- 522              		.file 3 "src/../h/kern_threads.h"
- 523              		.file 4 "src/../h/kern_interrupts.h"
-GAS LISTING /tmp/ccvXE2EI.s 			page 13
+ 524              	.LVL29:
+ 525 0394 13010102 		addi	sp,sp,32
+ 526              		.cfi_def_cfa_offset 0
+ 527 0398 67800000 		jr	ra
+ 528              	.LVL30:
+ 529              	.L36:
+ 530              		.cfi_restore_state
+  76:src/kern_threads.c ****         contextSwitch(old,running);
+ 531              		.loc 1 76 34 is_stmt 1 discriminator 1
+  76:src/kern_threads.c ****         contextSwitch(old,running);
+ 532              		.loc 1 76 45 is_stmt 0 discriminator 1
+ 533 039c 93072000 		li	a5,2
+ 534 03a0 23A4F404 		sw	a5,72(s1)
+ 535 03a4 6FF09FFD 		j	.L33
+ 536              		.cfi_endproc
+ 537              	.LFE5:
+ 539              		.align	2
+ 540              		.globl	kern_thread_create
+ 542              	kern_thread_create:
+ 543              	.LFB7:
+  93:src/kern_threads.c **** 
+  94:src/kern_threads.c **** int kern_thread_create(thread_t* handle, void(*start_routine)(void*), void* arg, void* stack_space)
+  95:src/kern_threads.c **** {
+ 544              		.loc 1 95 1 is_stmt 1
+ 545              		.cfi_startproc
+ 546              	.LVL31:
+ 547 03a8 130101FF 		addi	sp,sp,-16
+ 548              		.cfi_def_cfa_offset 16
+ 549 03ac 23348100 		sd	s0,8(sp)
+ 550              		.cfi_offset 8, -8
+ 551 03b0 13040101 		addi	s0,sp,16
+ 552              		.cfi_def_cfa 8, 0
+  96:src/kern_threads.c ****     *handle=0;
+ 553              		.loc 1 96 5
+ 554              		.loc 1 96 12 is_stmt 0
+ 555 03b4 23300500 		sd	zero,0(a0)
+  97:src/kern_threads.c ****     thread_t t=&threads[0]; //dodela da bismo sklonili upozorenje
+ 556              		.loc 1 97 5 is_stmt 1
+ 557              	.LVL32:
+  98:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
+ 558              		.loc 1 98 5
+ 559              	.LBB6:
+ 560              		.loc 1 98 9
+ 561              		.loc 1 98 13 is_stmt 0
+ 562 03b8 93070000 		li	a5,0
+ 563              	.LVL33:
+ 564              	.L38:
+ 565              		.loc 1 98 17 is_stmt 1 discriminator 1
+ 566              		.loc 1 98 5 is_stmt 0 discriminator 1
+ 567 03bc 1307F003 		li	a4,63
+ 568 03c0 6340F70A 		bgt	a5,a4,.L45
+  99:src/kern_threads.c ****         if(threads[i].status==UNUSED){
+ 569              		.loc 1 99 9 is_stmt 1
+ 570              		.loc 1 99 22 is_stmt 0
+ 571 03c4 13078005 		li	a4,88
+ 572 03c8 3388E702 		mul	a6,a5,a4
+ 573 03cc 17070000 		lla	a4,threads
+GAS LISTING /tmp/ccAQswmS.s 			page 14
+
+
+ 573      13070700 
+ 574 03d4 33070701 		add	a4,a4,a6
+ 575 03d8 03278704 		lw	a4,72(a4)
+ 576              		.loc 1 99 11
+ 577 03dc 63060700 		beqz	a4,.L46
+  98:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
+ 578              		.loc 1 98 31 is_stmt 1 discriminator 2
+  98:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
+ 579              		.loc 1 98 32 is_stmt 0 discriminator 2
+ 580 03e0 9B871700 		addiw	a5,a5,1
+ 581              	.LVL34:
+ 582 03e4 6FF09FFD 		j	.L38
+ 583              	.LVL35:
+ 584              	.L46:
+ 100:src/kern_threads.c ****             *handle=&threads[i];
+ 585              		.loc 1 100 13 is_stmt 1
+ 586              		.loc 1 100 21 is_stmt 0
+ 587 03e8 17070000 		lla	a4,threads
+ 587      13070700 
+ 588 03f0 B307E800 		add	a5,a6,a4
+ 589              	.LVL36:
+ 590              		.loc 1 100 20
+ 591 03f4 2330F500 		sd	a5,0(a0)
+ 101:src/kern_threads.c ****             t=&threads[i];
+ 592              		.loc 1 101 13 is_stmt 1
+ 593              	.LVL37:
+ 102:src/kern_threads.c ****             break;
+ 594              		.loc 1 102 13
+ 595              	.L40:
+ 596              	.LBE6:
+ 103:src/kern_threads.c ****         }
+ 104:src/kern_threads.c ****     }
+ 105:src/kern_threads.c ****     if(*handle==0) return -1;
+ 597              		.loc 1 105 5
+ 598              		.loc 1 105 8 is_stmt 0
+ 599 03f8 03370500 		ld	a4,0(a0)
+ 600              		.loc 1 105 7
+ 601 03fc 63080706 		beqz	a4,.L43
+ 106:src/kern_threads.c **** 
+ 107:src/kern_threads.c ****     t->id=++id;
+ 602              		.loc 1 107 5 is_stmt 1
+ 603              		.loc 1 107 11 is_stmt 0
+ 604 0400 17050000 		lla	a0,id
+ 604      13050500 
+ 605              	.LVL38:
+ 606 0408 03270500 		lw	a4,0(a0)
+ 607 040c 1B071700 		addiw	a4,a4,1
+ 608 0410 1B080700 		sext.w	a6,a4
+ 609              		.loc 1 107 10
+ 610 0414 2320E500 		sw	a4,0(a0)
+ 611 0418 23B80701 		sd	a6,16(a5)
+ 108:src/kern_threads.c ****     t->status=READY;
+ 612              		.loc 1 108 5 is_stmt 1
+ 613              		.loc 1 108 14 is_stmt 0
+ 614 041c 13072000 		li	a4,2
+ 615 0420 23A4E704 		sw	a4,72(a5)
+ 109:src/kern_threads.c ****     t->arg=arg;
+GAS LISTING /tmp/ccAQswmS.s 			page 15
+
+
+ 616              		.loc 1 109 5 is_stmt 1
+ 617              		.loc 1 109 11 is_stmt 0
+ 618 0424 23B0C702 		sd	a2,32(a5)
+ 110:src/kern_threads.c ****     t->joined_tid=-1;
+ 619              		.loc 1 110 5 is_stmt 1
+ 620              		.loc 1 110 18 is_stmt 0
+ 621 0428 1307F0FF 		li	a4,-1
+ 622 042c 23B4E702 		sd	a4,40(a5)
+ 111:src/kern_threads.c ****     t->timeslice=DEFAULT_TIME_SLICE;
+ 623              		.loc 1 111 5 is_stmt 1
+ 624              		.loc 1 111 17 is_stmt 0
+ 625 0430 13072000 		li	a4,2
+ 626 0434 23B8E702 		sd	a4,48(a5)
+ 112:src/kern_threads.c ****     t->body=start_routine;
+ 627              		.loc 1 112 5 is_stmt 1
+ 628              		.loc 1 112 12 is_stmt 0
+ 629 0438 23BCB700 		sd	a1,24(a5)
+ 113:src/kern_threads.c ****     t->sp = ((uint64)stack_space);
+ 630              		.loc 1 113 5 is_stmt 1
+ 631              		.loc 1 113 11 is_stmt 0
+ 632 043c 23B4D700 		sd	a3,8(a5)
+ 114:src/kern_threads.c ****     t->ra=(uint64) &kern_thread_wrapper;
+ 633              		.loc 1 114 5 is_stmt 1
+ 634              		.loc 1 114 11 is_stmt 0
+ 635 0440 17070000 		lla	a4,kern_thread_wrapper
+ 635      13070700 
+ 636              		.loc 1 114 10
+ 637 0448 23B0E700 		sd	a4,0(a5)
+ 115:src/kern_threads.c ****     t->sem_next=0;
+ 638              		.loc 1 115 5 is_stmt 1
+ 639              		.loc 1 115 16 is_stmt 0
+ 640 044c 23B80704 		sd	zero,80(a5)
+ 116:src/kern_threads.c **** 
+ 117:src/kern_threads.c ****     return 0;
+ 641              		.loc 1 117 5 is_stmt 1
+ 642              		.loc 1 117 12 is_stmt 0
+ 643 0450 13050000 		li	a0,0
+ 644              	.L42:
+ 118:src/kern_threads.c **** }
+ 645              		.loc 1 118 1
+ 646 0454 03348100 		ld	s0,8(sp)
+ 647              		.cfi_remember_state
+ 648              		.cfi_restore 8
+ 649              		.cfi_def_cfa 2, 16
+ 650 0458 13010101 		addi	sp,sp,16
+ 651              		.cfi_def_cfa_offset 0
+ 652 045c 67800000 		jr	ra
+ 653              	.LVL39:
+ 654              	.L45:
+ 655              		.cfi_restore_state
+  97:src/kern_threads.c ****     for(int i=0;i<MAX_THREADS;i++){
+ 656              		.loc 1 97 14
+ 657 0460 97070000 		lla	a5,threads
+ 657      93870700 
+ 658              	.LVL40:
+ 659 0468 6FF01FF9 		j	.L40
+ 660              	.LVL41:
+GAS LISTING /tmp/ccAQswmS.s 			page 16
+
+
+ 661              	.L43:
+ 105:src/kern_threads.c **** 
+ 662              		.loc 1 105 27
+ 663 046c 1305F0FF 		li	a0,-1
+ 664              	.LVL42:
+ 665 0470 6FF05FFE 		j	.L42
+ 666              		.cfi_endproc
+ 667              	.LFE7:
+ 669              		.align	2
+ 670              		.globl	kern_thread_join
+ 672              	kern_thread_join:
+ 673              	.LFB8:
+ 119:src/kern_threads.c **** 
+ 120:src/kern_threads.c **** void kern_thread_join(thread_t handle)
+ 121:src/kern_threads.c **** {
+ 674              		.loc 1 121 1 is_stmt 1
+ 675              		.cfi_startproc
+ 676              	.LVL43:
+ 677 0474 130101FF 		addi	sp,sp,-16
+ 678              		.cfi_def_cfa_offset 16
+ 679 0478 23341100 		sd	ra,8(sp)
+ 680 047c 23308100 		sd	s0,0(sp)
+ 681              		.cfi_offset 1, -8
+ 682              		.cfi_offset 8, -16
+ 683 0480 13040101 		addi	s0,sp,16
+ 684              		.cfi_def_cfa 8, 0
+ 122:src/kern_threads.c ****     running->joined_tid=handle->id;
+ 685              		.loc 1 122 5
+ 686              		.loc 1 122 12 is_stmt 0
+ 687 0484 97070000 		ld	a5,running
+ 687      83B70700 
+ 688              		.loc 1 122 31
+ 689 048c 03370501 		ld	a4,16(a0)
+ 690              		.loc 1 122 24
+ 691 0490 23B4E702 		sd	a4,40(a5)
+ 123:src/kern_threads.c ****     running->status=JOINED;
+ 692              		.loc 1 123 5 is_stmt 1
+ 693              		.loc 1 123 20 is_stmt 0
+ 694 0494 13074000 		li	a4,4
+ 695 0498 23A4E704 		sw	a4,72(a5)
+ 124:src/kern_threads.c ****     kern_thread_dispatch();
+ 696              		.loc 1 124 5 is_stmt 1
+ 697 049c 97000000 		call	kern_thread_dispatch
+ 697      E7800000 
+ 698              	.LVL44:
+ 125:src/kern_threads.c **** }
+ 699              		.loc 1 125 1 is_stmt 0
+ 700 04a4 83308100 		ld	ra,8(sp)
+ 701              		.cfi_restore 1
+ 702 04a8 03340100 		ld	s0,0(sp)
+ 703              		.cfi_restore 8
+ 704              		.cfi_def_cfa 2, 16
+ 705 04ac 13010101 		addi	sp,sp,16
+ 706              		.cfi_def_cfa_offset 0
+ 707 04b0 67800000 		jr	ra
+ 708              		.cfi_endproc
+ 709              	.LFE8:
+GAS LISTING /tmp/ccAQswmS.s 			page 17
+
+
+ 711              		.globl	running
+ 712              		.globl	threads
+ 713              		.section	.srodata.cst8,"aM",@progbits,8
+ 714              		.align	3
+ 715              	.LC0:
+ 716 0000 A38B2EBA 		.dword	3353953467947191203
+ 716      E8A28B2E 
+ 717              		.bss
+ 718              		.align	3
+ 721              	threads:
+ 722 0000 00000000 		.zero	5632
+ 722      00000000 
+ 722      00000000 
+ 722      00000000 
+ 722      00000000 
+ 723              		.section	.sbss,"aw",@nobits
+ 724              		.align	3
+ 727              	running:
+ 728 0000 00000000 		.zero	8
+ 728      00000000 
+ 731              	id:
+ 732 0008 00000000 		.zero	4
+ 733              		.text
+ 734              	.Letext0:
+ 735              		.file 2 "src/../h/../lib/hw.h"
+ 736              		.file 3 "src/../h/kern_threads.h"
+ 737              		.file 4 "src/../h/kern_interrupts.h"
+GAS LISTING /tmp/ccAQswmS.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 kern_threads.c
-     /tmp/ccvXE2EI.s:10     .text:0000000000000000 kern_thread_init
-     /tmp/ccvXE2EI.s:14     .text:0000000000000000 .L0 
-     /tmp/ccvXE2EI.s:15     .text:0000000000000000 .L0 
-     /tmp/ccvXE2EI.s:16     .text:0000000000000004 .L0 
-     /tmp/ccvXE2EI.s:18     .text:0000000000000008 .L0 
-     /tmp/ccvXE2EI.s:20     .text:000000000000000c .L0 
-     /tmp/ccvXE2EI.s:22     .text:000000000000000c .L0 
-     /tmp/ccvXE2EI.s:517    .sbss:0000000000000008 id
-     /tmp/ccvXE2EI.s:23     .text:000000000000000c .L0 
-     /tmp/ccvXE2EI.s:26     .text:0000000000000014 .L0 
-     /tmp/ccvXE2EI.s:28     .text:0000000000000014 .L0 
-     /tmp/ccvXE2EI.s:29     .text:0000000000000014 .L0 
-     /tmp/ccvXE2EI.s:31     .text:0000000000000018 .L0 
-     /tmp/ccvXE2EI.s:35     .text:000000000000001c .L0 
-     /tmp/ccvXE2EI.s:36     .text:000000000000001c .L0 
-     /tmp/ccvXE2EI.s:507    .bss:0000000000000000 threads
-     /tmp/ccvXE2EI.s:43     .text:0000000000000038 .L0 
-     /tmp/ccvXE2EI.s:44     .text:0000000000000038 .L0 
-     /tmp/ccvXE2EI.s:48     .text:000000000000003c .L0 
-     /tmp/ccvXE2EI.s:49     .text:000000000000003c .L0 
-     /tmp/ccvXE2EI.s:53     .text:0000000000000044 .L0 
-     /tmp/ccvXE2EI.s:54     .text:0000000000000044 .L0 
-     /tmp/ccvXE2EI.s:59     .text:0000000000000054 .L0 
-     /tmp/ccvXE2EI.s:60     .text:0000000000000054 .L0 
-     /tmp/ccvXE2EI.s:62     .text:0000000000000058 .L0 
-     /tmp/ccvXE2EI.s:63     .text:0000000000000058 .L0 
-     /tmp/ccvXE2EI.s:66     .text:0000000000000060 .L0 
-     /tmp/ccvXE2EI.s:67     .text:0000000000000060 .L0 
-     /tmp/ccvXE2EI.s:71     .text:000000000000006c .L0 
-     /tmp/ccvXE2EI.s:513    .sbss:0000000000000000 running
-     /tmp/ccvXE2EI.s:72     .text:000000000000006c .L0 
-     /tmp/ccvXE2EI.s:74     .text:0000000000000074 .L0 
-     /tmp/ccvXE2EI.s:75     .text:0000000000000078 .L0 
-     /tmp/ccvXE2EI.s:76     .text:0000000000000078 .L0 
-     /tmp/ccvXE2EI.s:78     .text:000000000000007c .L0 
-     /tmp/ccvXE2EI.s:80     .text:0000000000000080 .L0 
-     /tmp/ccvXE2EI.s:86     .text:0000000000000080 kern_scheduler_get
-     /tmp/ccvXE2EI.s:89     .text:0000000000000080 .L0 
-     /tmp/ccvXE2EI.s:90     .text:0000000000000080 .L0 
-     /tmp/ccvXE2EI.s:91     .text:0000000000000084 .L0 
-     /tmp/ccvXE2EI.s:93     .text:0000000000000088 .L0 
-     /tmp/ccvXE2EI.s:95     .text:000000000000008c .L0 
-     /tmp/ccvXE2EI.s:97     .text:000000000000008c .L0 
-     /tmp/ccvXE2EI.s:98     .text:000000000000008c .L0 
-     /tmp/ccvXE2EI.s:103    .text:00000000000000a4 .L0 
-     /tmp/ccvXE2EI.s:108    .text:00000000000000b0 .L0 
-     /tmp/ccvXE2EI.s:109    .text:00000000000000b0 .L0 
-     /tmp/ccvXE2EI.s:110    .text:00000000000000b0 .L0 
-     /tmp/ccvXE2EI.s:114    .text:00000000000000b4 .L0 
-     /tmp/ccvXE2EI.s:115    .text:00000000000000b4 .L0 
-     /tmp/ccvXE2EI.s:118    .text:00000000000000bc .L0 
-     /tmp/ccvXE2EI.s:119    .text:00000000000000bc .L0 
-     /tmp/ccvXE2EI.s:122    .text:00000000000000c0 .L0 
-     /tmp/ccvXE2EI.s:128    .text:00000000000000d4 .L0 
-     /tmp/ccvXE2EI.s:129    .text:00000000000000d4 .L0 
-GAS LISTING /tmp/ccvXE2EI.s 			page 14
+     /tmp/ccAQswmS.s:10     .text:0000000000000000 kern_thread_init
+     /tmp/ccAQswmS.s:14     .text:0000000000000000 .L0 
+     /tmp/ccAQswmS.s:15     .text:0000000000000000 .L0 
+     /tmp/ccAQswmS.s:16     .text:0000000000000004 .L0 
+     /tmp/ccAQswmS.s:18     .text:0000000000000008 .L0 
+     /tmp/ccAQswmS.s:20     .text:000000000000000c .L0 
+     /tmp/ccAQswmS.s:22     .text:000000000000000c .L0 
+     /tmp/ccAQswmS.s:731    .sbss:0000000000000008 id
+     /tmp/ccAQswmS.s:23     .text:000000000000000c .L0 
+     /tmp/ccAQswmS.s:26     .text:0000000000000014 .L0 
+     /tmp/ccAQswmS.s:28     .text:0000000000000014 .L0 
+     /tmp/ccAQswmS.s:29     .text:0000000000000014 .L0 
+     /tmp/ccAQswmS.s:31     .text:0000000000000018 .L0 
+     /tmp/ccAQswmS.s:35     .text:000000000000001c .L0 
+     /tmp/ccAQswmS.s:36     .text:000000000000001c .L0 
+     /tmp/ccAQswmS.s:721    .bss:0000000000000000 threads
+     /tmp/ccAQswmS.s:42     .text:0000000000000034 .L0 
+     /tmp/ccAQswmS.s:43     .text:0000000000000034 .L0 
+     /tmp/ccAQswmS.s:47     .text:0000000000000038 .L0 
+     /tmp/ccAQswmS.s:48     .text:0000000000000038 .L0 
+     /tmp/ccAQswmS.s:52     .text:0000000000000040 .L0 
+     /tmp/ccAQswmS.s:53     .text:0000000000000040 .L0 
+     /tmp/ccAQswmS.s:58     .text:0000000000000050 .L0 
+     /tmp/ccAQswmS.s:59     .text:0000000000000050 .L0 
+     /tmp/ccAQswmS.s:61     .text:0000000000000054 .L0 
+     /tmp/ccAQswmS.s:62     .text:0000000000000054 .L0 
+     /tmp/ccAQswmS.s:65     .text:000000000000005c .L0 
+     /tmp/ccAQswmS.s:66     .text:000000000000005c .L0 
+     /tmp/ccAQswmS.s:70     .text:0000000000000068 .L0 
+     /tmp/ccAQswmS.s:727    .sbss:0000000000000000 running
+     /tmp/ccAQswmS.s:71     .text:0000000000000068 .L0 
+     /tmp/ccAQswmS.s:73     .text:0000000000000070 .L0 
+     /tmp/ccAQswmS.s:74     .text:0000000000000074 .L0 
+     /tmp/ccAQswmS.s:75     .text:0000000000000074 .L0 
+     /tmp/ccAQswmS.s:77     .text:0000000000000078 .L0 
+     /tmp/ccAQswmS.s:79     .text:000000000000007c .L0 
+     /tmp/ccAQswmS.s:85     .text:000000000000007c kern_scheduler_get
+     /tmp/ccAQswmS.s:88     .text:000000000000007c .L0 
+     /tmp/ccAQswmS.s:89     .text:000000000000007c .L0 
+     /tmp/ccAQswmS.s:90     .text:0000000000000080 .L0 
+     /tmp/ccAQswmS.s:92     .text:0000000000000084 .L0 
+     /tmp/ccAQswmS.s:94     .text:0000000000000088 .L0 
+     /tmp/ccAQswmS.s:96     .text:0000000000000088 .L0 
+     /tmp/ccAQswmS.s:97     .text:0000000000000088 .L0 
+     /tmp/ccAQswmS.s:102    .text:00000000000000a0 .L0 
+     /tmp/ccAQswmS.s:107    .text:00000000000000ac .L0 
+     /tmp/ccAQswmS.s:108    .text:00000000000000ac .L0 
+     /tmp/ccAQswmS.s:109    .text:00000000000000ac .L0 
+     /tmp/ccAQswmS.s:113    .text:00000000000000b0 .L0 
+     /tmp/ccAQswmS.s:114    .text:00000000000000b0 .L0 
+     /tmp/ccAQswmS.s:117    .text:00000000000000b8 .L0 
+     /tmp/ccAQswmS.s:118    .text:00000000000000b8 .L0 
+     /tmp/ccAQswmS.s:121    .text:00000000000000bc .L0 
+     /tmp/ccAQswmS.s:127    .text:00000000000000d0 .L0 
+     /tmp/ccAQswmS.s:128    .text:00000000000000d0 .L0 
+GAS LISTING /tmp/ccAQswmS.s 			page 19
 
 
-     /tmp/ccvXE2EI.s:136    .text:00000000000000f0 .L0 
-     /tmp/ccvXE2EI.s:139    .text:00000000000000f8 .L0 
-     /tmp/ccvXE2EI.s:140    .text:00000000000000f8 .L0 
-     /tmp/ccvXE2EI.s:146    .text:0000000000000100 .L0 
-     /tmp/ccvXE2EI.s:147    .text:0000000000000100 .L0 
-     /tmp/ccvXE2EI.s:155    .text:0000000000000118 .L0 
-     /tmp/ccvXE2EI.s:156    .text:000000000000011c .L0 
-     /tmp/ccvXE2EI.s:157    .text:000000000000011c .L0 
-     /tmp/ccvXE2EI.s:158    .text:000000000000011c .L0 
-     /tmp/ccvXE2EI.s:160    .text:0000000000000120 .L0 
-     /tmp/ccvXE2EI.s:164    .text:0000000000000124 .L0 
-     /tmp/ccvXE2EI.s:166    .text:0000000000000124 .L0 
-     /tmp/ccvXE2EI.s:167    .text:0000000000000124 .L0 
-     /tmp/ccvXE2EI.s:169    .text:0000000000000128 .L0 
-     /tmp/ccvXE2EI.s:173    .text:0000000000000130 .L0 
-     /tmp/ccvXE2EI.s:175    .text:0000000000000138 .L0 
-     /tmp/ccvXE2EI.s:181    .text:0000000000000138 kern_thread_yield
-     /tmp/ccvXE2EI.s:184    .text:0000000000000138 .L0 
-     /tmp/ccvXE2EI.s:185    .text:0000000000000138 .L0 
-     /tmp/ccvXE2EI.s:186    .text:000000000000013c .L0 
-     /tmp/ccvXE2EI.s:189    .text:0000000000000144 .L0 
-     /tmp/ccvXE2EI.s:190    .text:0000000000000144 .L0 
-     /tmp/ccvXE2EI.s:192    .text:0000000000000148 .L0 
-     /tmp/ccvXE2EI.s:194    .text:0000000000000148 .L0 
-     /tmp/ccvXE2EI.s:198    .text:0000000000000154 .L0 
-     /tmp/ccvXE2EI.s:199    .text:0000000000000158 .L0 
-     /tmp/ccvXE2EI.s:201    .text:000000000000015c .L0 
-     /tmp/ccvXE2EI.s:202    .text:000000000000015c .L0 
-     /tmp/ccvXE2EI.s:204    .text:0000000000000160 .L0 
-     /tmp/ccvXE2EI.s:206    .text:0000000000000164 .L0 
-     /tmp/ccvXE2EI.s:212    .text:0000000000000164 popSppSpie
-     /tmp/ccvXE2EI.s:215    .text:0000000000000164 .L0 
-     /tmp/ccvXE2EI.s:216    .text:0000000000000164 .L0 
-     /tmp/ccvXE2EI.s:217    .text:0000000000000168 .L0 
-     /tmp/ccvXE2EI.s:219    .text:000000000000016c .L0 
-     /tmp/ccvXE2EI.s:221    .text:0000000000000170 .L0 
-  src/kern_threads.c:51     .text:0000000000000170 .L0 
-  src/kern_threads.c:52     .text:0000000000000174 .L0 
-     /tmp/ccvXE2EI.s:233    .text:0000000000000178 .L0 
-     /tmp/ccvXE2EI.s:234    .text:000000000000017c .L0 
-     /tmp/ccvXE2EI.s:235    .text:000000000000017c .L0 
-     /tmp/ccvXE2EI.s:237    .text:0000000000000180 .L0 
-     /tmp/ccvXE2EI.s:239    .text:0000000000000184 .L0 
-     /tmp/ccvXE2EI.s:245    .text:0000000000000184 kern_thread_wrapper
-     /tmp/ccvXE2EI.s:248    .text:0000000000000184 .L0 
-     /tmp/ccvXE2EI.s:249    .text:0000000000000184 .L0 
-     /tmp/ccvXE2EI.s:250    .text:0000000000000188 .L0 
-     /tmp/ccvXE2EI.s:254    .text:0000000000000194 .L0 
-     /tmp/ccvXE2EI.s:255    .text:0000000000000194 .L0 
-     /tmp/ccvXE2EI.s:256    .text:0000000000000194 .L0 
-     /tmp/ccvXE2EI.s:258    .text:0000000000000198 .L0 
-     /tmp/ccvXE2EI.s:260    .text:0000000000000198 .L0 
-     /tmp/ccvXE2EI.s:263    .text:00000000000001a0 .L0 
-     /tmp/ccvXE2EI.s:264    .text:00000000000001a0 .L0 
-     /tmp/ccvXE2EI.s:268    .text:00000000000001b0 .L0 
-     /tmp/ccvXE2EI.s:272    .text:00000000000001b8 .L0 
-     /tmp/ccvXE2EI.s:273    .text:00000000000001b8 .L0 
-GAS LISTING /tmp/ccvXE2EI.s 			page 15
+     /tmp/ccAQswmS.s:134    .text:00000000000000e8 .L0 
+     /tmp/ccAQswmS.s:137    .text:00000000000000f0 .L0 
+     /tmp/ccAQswmS.s:138    .text:00000000000000f0 .L0 
+     /tmp/ccAQswmS.s:144    .text:00000000000000f8 .L0 
+     /tmp/ccAQswmS.s:145    .text:00000000000000f8 .L0 
+     /tmp/ccAQswmS.s:152    .text:000000000000010c .L0 
+     /tmp/ccAQswmS.s:153    .text:0000000000000110 .L0 
+     /tmp/ccAQswmS.s:154    .text:0000000000000110 .L0 
+     /tmp/ccAQswmS.s:155    .text:0000000000000110 .L0 
+     /tmp/ccAQswmS.s:157    .text:0000000000000114 .L0 
+     /tmp/ccAQswmS.s:161    .text:0000000000000118 .L0 
+     /tmp/ccAQswmS.s:163    .text:0000000000000118 .L0 
+     /tmp/ccAQswmS.s:164    .text:0000000000000118 .L0 
+     /tmp/ccAQswmS.s:166    .text:000000000000011c .L0 
+     /tmp/ccAQswmS.s:170    .text:0000000000000124 .L0 
+     /tmp/ccAQswmS.s:172    .text:000000000000012c .L0 
+     /tmp/ccAQswmS.s:178    .text:000000000000012c kern_thread_yield
+     /tmp/ccAQswmS.s:181    .text:000000000000012c .L0 
+     /tmp/ccAQswmS.s:182    .text:000000000000012c .L0 
+     /tmp/ccAQswmS.s:183    .text:0000000000000130 .L0 
+     /tmp/ccAQswmS.s:186    .text:0000000000000138 .L0 
+     /tmp/ccAQswmS.s:187    .text:0000000000000138 .L0 
+     /tmp/ccAQswmS.s:189    .text:000000000000013c .L0 
+     /tmp/ccAQswmS.s:191    .text:000000000000013c .L0 
+     /tmp/ccAQswmS.s:195    .text:0000000000000148 .L0 
+     /tmp/ccAQswmS.s:196    .text:000000000000014c .L0 
+     /tmp/ccAQswmS.s:198    .text:0000000000000150 .L0 
+     /tmp/ccAQswmS.s:199    .text:0000000000000150 .L0 
+     /tmp/ccAQswmS.s:201    .text:0000000000000154 .L0 
+     /tmp/ccAQswmS.s:203    .text:0000000000000158 .L0 
+     /tmp/ccAQswmS.s:209    .text:0000000000000158 popSppSpie
+     /tmp/ccAQswmS.s:212    .text:0000000000000158 .L0 
+     /tmp/ccAQswmS.s:213    .text:0000000000000158 .L0 
+     /tmp/ccAQswmS.s:214    .text:000000000000015c .L0 
+     /tmp/ccAQswmS.s:216    .text:0000000000000160 .L0 
+     /tmp/ccAQswmS.s:218    .text:0000000000000164 .L0 
+  src/kern_threads.c:51     .text:0000000000000164 .L0 
+  src/kern_threads.c:52     .text:0000000000000168 .L0 
+     /tmp/ccAQswmS.s:230    .text:000000000000016c .L0 
+     /tmp/ccAQswmS.s:231    .text:0000000000000170 .L0 
+     /tmp/ccAQswmS.s:232    .text:0000000000000170 .L0 
+     /tmp/ccAQswmS.s:234    .text:0000000000000174 .L0 
+     /tmp/ccAQswmS.s:236    .text:0000000000000178 .L0 
+     /tmp/ccAQswmS.s:242    .text:0000000000000178 kern_thread_wrapper
+     /tmp/ccAQswmS.s:245    .text:0000000000000178 .L0 
+     /tmp/ccAQswmS.s:246    .text:0000000000000178 .L0 
+     /tmp/ccAQswmS.s:247    .text:000000000000017c .L0 
+     /tmp/ccAQswmS.s:251    .text:0000000000000188 .L0 
+     /tmp/ccAQswmS.s:252    .text:0000000000000188 .L0 
+     /tmp/ccAQswmS.s:253    .text:0000000000000188 .L0 
+     /tmp/ccAQswmS.s:255    .text:000000000000018c .L0 
+     /tmp/ccAQswmS.s:257    .text:000000000000018c .L0 
+     /tmp/ccAQswmS.s:260    .text:0000000000000194 .L0 
+     /tmp/ccAQswmS.s:261    .text:0000000000000194 .L0 
+     /tmp/ccAQswmS.s:265    .text:00000000000001a4 .L0 
+     /tmp/ccAQswmS.s:269    .text:00000000000001ac .L0 
+     /tmp/ccAQswmS.s:270    .text:00000000000001ac .L0 
+GAS LISTING /tmp/ccAQswmS.s 			page 20
 
 
-     /tmp/ccvXE2EI.s:275    .text:00000000000001bc .L0 
-     /tmp/ccvXE2EI.s:277    .text:00000000000001c0 .L0 
-     /tmp/ccvXE2EI.s:280    .text:00000000000001c8 .L0 
-     /tmp/ccvXE2EI.s:281    .text:00000000000001cc .L0 
-     /tmp/ccvXE2EI.s:283    .text:00000000000001d0 .L0 
-     /tmp/ccvXE2EI.s:284    .text:00000000000001d0 .L0 
-     /tmp/ccvXE2EI.s:286    .text:00000000000001d4 .L0 
-     /tmp/ccvXE2EI.s:288    .text:00000000000001d8 .L0 
-     /tmp/ccvXE2EI.s:290    .text:00000000000001dc .L0 
-     /tmp/ccvXE2EI.s:296    .text:00000000000001dc kern_thread_dispatch
-     /tmp/ccvXE2EI.s:299    .text:00000000000001dc .L0 
-     /tmp/ccvXE2EI.s:300    .text:00000000000001dc .L0 
-     /tmp/ccvXE2EI.s:301    .text:00000000000001e0 .L0 
-     /tmp/ccvXE2EI.s:306    .text:00000000000001f0 .L0 
-     /tmp/ccvXE2EI.s:307    .text:00000000000001f0 .L0 
-     /tmp/ccvXE2EI.s:308    .text:00000000000001f0 .L0 
-     /tmp/ccvXE2EI.s:309    .text:00000000000001f0 .L0 
-     /tmp/ccvXE2EI.s:311    .text:00000000000001f4 .L0 
-     /tmp/ccvXE2EI.s:313    .text:00000000000001f4 .L0 
-     /tmp/ccvXE2EI.s:314    .text:00000000000001f4 .L0 
-     /tmp/ccvXE2EI.s:318    .text:0000000000000200 .L0 
-     /tmp/ccvXE2EI.s:319    .text:0000000000000200 .L0 
-     /tmp/ccvXE2EI.s:322    .text:0000000000000208 .L0 
-     /tmp/ccvXE2EI.s:324    .text:000000000000020c .L0 
-     /tmp/ccvXE2EI.s:325    .text:000000000000020c .L0 
-     /tmp/ccvXE2EI.s:328    .text:0000000000000214 .L0 
-     /tmp/ccvXE2EI.s:329    .text:0000000000000214 .L0 
-     /tmp/ccvXE2EI.s:331    .text:0000000000000218 .L0 
-     /tmp/ccvXE2EI.s:335    .text:0000000000000220 .L0 
-     /tmp/ccvXE2EI.s:340    .text:000000000000022c .L0 
-     /tmp/ccvXE2EI.s:341    .text:0000000000000230 .L0 
-     /tmp/ccvXE2EI.s:342    .text:0000000000000230 .L0 
-     /tmp/ccvXE2EI.s:344    .text:0000000000000234 .L0 
-     /tmp/ccvXE2EI.s:345    .text:0000000000000234 .L0 
-     /tmp/ccvXE2EI.s:347    .text:0000000000000238 .L0 
-     /tmp/ccvXE2EI.s:350    .text:000000000000023c .L0 
-     /tmp/ccvXE2EI.s:352    .text:0000000000000240 .L0 
-     /tmp/ccvXE2EI.s:356    .text:0000000000000244 .L0 
-     /tmp/ccvXE2EI.s:358    .text:0000000000000244 .L0 
-     /tmp/ccvXE2EI.s:359    .text:0000000000000244 .L0 
-     /tmp/ccvXE2EI.s:362    .text:0000000000000250 .L0 
-     /tmp/ccvXE2EI.s:368    .text:0000000000000250 kern_thread_create
-     /tmp/ccvXE2EI.s:371    .text:0000000000000250 .L0 
-     /tmp/ccvXE2EI.s:373    .text:0000000000000250 .L0 
-     /tmp/ccvXE2EI.s:374    .text:0000000000000254 .L0 
-     /tmp/ccvXE2EI.s:376    .text:0000000000000258 .L0 
-     /tmp/ccvXE2EI.s:378    .text:000000000000025c .L0 
-     /tmp/ccvXE2EI.s:380    .text:000000000000025c .L0 
-     /tmp/ccvXE2EI.s:381    .text:000000000000025c .L0 
-     /tmp/ccvXE2EI.s:384    .text:0000000000000260 .L0 
-     /tmp/ccvXE2EI.s:386    .text:0000000000000260 .L0 
-     /tmp/ccvXE2EI.s:387    .text:0000000000000260 .L0 
-     /tmp/ccvXE2EI.s:388    .text:0000000000000260 .L0 
-     /tmp/ccvXE2EI.s:392    .text:0000000000000264 .L0 
-     /tmp/ccvXE2EI.s:393    .text:0000000000000264 .L0 
-     /tmp/ccvXE2EI.s:396    .text:000000000000026c .L0 
-     /tmp/ccvXE2EI.s:397    .text:000000000000026c .L0 
-GAS LISTING /tmp/ccvXE2EI.s 			page 16
+     /tmp/ccAQswmS.s:272    .text:00000000000001b0 .L0 
+     /tmp/ccAQswmS.s:274    .text:00000000000001b4 .L0 
+     /tmp/ccAQswmS.s:275    .text:00000000000001b4 .L0 
+     /tmp/ccAQswmS.s:277    .text:00000000000001b8 .L0 
+     /tmp/ccAQswmS.s:278    .text:00000000000001b8 .L0 
+     /tmp/ccAQswmS.s:282    .text:00000000000001c0 .L0 
+     /tmp/ccAQswmS.s:284    .text:00000000000001c0 .L0 
+     /tmp/ccAQswmS.s:285    .text:00000000000001c0 .L0 
+     /tmp/ccAQswmS.s:287    .text:00000000000001c4 .L0 
+     /tmp/ccAQswmS.s:291    .text:00000000000001c8 .L0 
+     /tmp/ccAQswmS.s:292    .text:00000000000001c8 .L0 
+     /tmp/ccAQswmS.s:296    .text:00000000000001cc .L0 
+     /tmp/ccAQswmS.s:297    .text:00000000000001cc .L0 
+     /tmp/ccAQswmS.s:300    .text:00000000000001d4 .L0 
+     /tmp/ccAQswmS.s:301    .text:00000000000001d4 .L0 
+     /tmp/ccAQswmS.s:307    .text:00000000000001ec .L0 
+     /tmp/ccAQswmS.s:310    .text:00000000000001f4 .L0 
+     /tmp/ccAQswmS.s:316    .text:000000000000020c .L0 
+     /tmp/ccAQswmS.s:318    .text:0000000000000210 .L0 
+     /tmp/ccAQswmS.s:320    .text:0000000000000214 .L0 
+     /tmp/ccAQswmS.s:321    .text:0000000000000214 .L0 
+     /tmp/ccAQswmS.s:331    .text:0000000000000234 .L0 
+     /tmp/ccAQswmS.s:334    .text:000000000000023c .L0 
+     /tmp/ccAQswmS.s:335    .text:0000000000000240 .L0 
+     /tmp/ccAQswmS.s:337    .text:0000000000000244 .L0 
+     /tmp/ccAQswmS.s:338    .text:0000000000000244 .L0 
+     /tmp/ccAQswmS.s:340    .text:0000000000000248 .L0 
+     /tmp/ccAQswmS.s:342    .text:000000000000024c .L0 
+     /tmp/ccAQswmS.s:344    .text:0000000000000250 .L0 
+     /tmp/ccAQswmS.s:350    .text:0000000000000250 kern_thread_dispatch
+     /tmp/ccAQswmS.s:353    .text:0000000000000250 .L0 
+     /tmp/ccAQswmS.s:354    .text:0000000000000250 .L0 
+     /tmp/ccAQswmS.s:355    .text:0000000000000254 .L0 
+     /tmp/ccAQswmS.s:360    .text:0000000000000264 .L0 
+     /tmp/ccAQswmS.s:361    .text:0000000000000264 .L0 
+     /tmp/ccAQswmS.s:362    .text:0000000000000264 .L0 
+     /tmp/ccAQswmS.s:363    .text:0000000000000264 .L0 
+     /tmp/ccAQswmS.s:365    .text:0000000000000268 .L0 
+     /tmp/ccAQswmS.s:367    .text:0000000000000268 .L0 
+     /tmp/ccAQswmS.s:368    .text:0000000000000268 .L0 
+     /tmp/ccAQswmS.s:372    .text:0000000000000274 .L0 
+     /tmp/ccAQswmS.s:373    .text:0000000000000274 .L0 
+     /tmp/ccAQswmS.s:376    .text:000000000000027c .L0 
+     /tmp/ccAQswmS.s:378    .text:0000000000000280 .L0 
+     /tmp/ccAQswmS.s:379    .text:0000000000000280 .L0 
+     /tmp/ccAQswmS.s:382    .text:0000000000000288 .L0 
+     /tmp/ccAQswmS.s:383    .text:0000000000000288 .L0 
+     /tmp/ccAQswmS.s:385    .text:000000000000028c .L0 
+     /tmp/ccAQswmS.s:389    .text:0000000000000294 .L0 
+     /tmp/ccAQswmS.s:394    .text:00000000000002a0 .L0 
+     /tmp/ccAQswmS.s:395    .text:00000000000002a4 .L0 
+     /tmp/ccAQswmS.s:396    .text:00000000000002a4 .L0 
+     /tmp/ccAQswmS.s:398    .text:00000000000002a8 .L0 
+     /tmp/ccAQswmS.s:399    .text:00000000000002a8 .L0 
+     /tmp/ccAQswmS.s:401    .text:00000000000002ac .L0 
+     /tmp/ccAQswmS.s:404    .text:00000000000002b0 .L0 
+     /tmp/ccAQswmS.s:406    .text:00000000000002b4 .L0 
+GAS LISTING /tmp/ccAQswmS.s 			page 21
 
 
-     /tmp/ccvXE2EI.s:404    .text:0000000000000288 .L0 
-     /tmp/ccvXE2EI.s:406    .text:000000000000028c .L0 
-     /tmp/ccvXE2EI.s:407    .text:000000000000028c .L0 
-     /tmp/ccvXE2EI.s:413    .text:0000000000000294 .L0 
-     /tmp/ccvXE2EI.s:414    .text:0000000000000294 .L0 
-     /tmp/ccvXE2EI.s:419    .text:00000000000002a4 .L0 
-     /tmp/ccvXE2EI.s:422    .text:00000000000002a8 .L0 
-     /tmp/ccvXE2EI.s:425    .text:00000000000002a8 .L0 
-     /tmp/ccvXE2EI.s:426    .text:00000000000002a8 .L0 
-     /tmp/ccvXE2EI.s:427    .text:00000000000002a8 .L0 
-     /tmp/ccvXE2EI.s:430    .text:00000000000002ac .L0 
-     /tmp/ccvXE2EI.s:432    .text:00000000000002b0 .L0 
-     /tmp/ccvXE2EI.s:433    .text:00000000000002b0 .L0 
-     /tmp/ccvXE2EI.s:439    .text:00000000000002c4 .L0 
-     /tmp/ccvXE2EI.s:442    .text:00000000000002cc .L0 
-     /tmp/ccvXE2EI.s:443    .text:00000000000002cc .L0 
-     /tmp/ccvXE2EI.s:446    .text:00000000000002d4 .L0 
-     /tmp/ccvXE2EI.s:447    .text:00000000000002d4 .L0 
-     /tmp/ccvXE2EI.s:449    .text:00000000000002d8 .L0 
-     /tmp/ccvXE2EI.s:450    .text:00000000000002d8 .L0 
-     /tmp/ccvXE2EI.s:452    .text:00000000000002dc .L0 
-     /tmp/ccvXE2EI.s:453    .text:00000000000002dc .L0 
-     /tmp/ccvXE2EI.s:456    .text:00000000000002e4 .L0 
-     /tmp/ccvXE2EI.s:457    .text:00000000000002e4 .L0 
-     /tmp/ccvXE2EI.s:460    .text:00000000000002ec .L0 
-     /tmp/ccvXE2EI.s:461    .text:00000000000002ec .L0 
-     /tmp/ccvXE2EI.s:463    .text:00000000000002f0 .L0 
-     /tmp/ccvXE2EI.s:464    .text:00000000000002f0 .L0 
-     /tmp/ccvXE2EI.s:466    .text:00000000000002f4 .L0 
-     /tmp/ccvXE2EI.s:467    .text:00000000000002f4 .L0 
-     /tmp/ccvXE2EI.s:469    .text:00000000000002fc .L0 
-     /tmp/ccvXE2EI.s:471    .text:0000000000000300 .L0 
-     /tmp/ccvXE2EI.s:472    .text:0000000000000300 .L0 
-     /tmp/ccvXE2EI.s:475    .text:0000000000000304 .L0 
-     /tmp/ccvXE2EI.s:476    .text:0000000000000308 .L0 
-     /tmp/ccvXE2EI.s:477    .text:0000000000000308 .L0 
-     /tmp/ccvXE2EI.s:478    .text:0000000000000308 .L0 
-     /tmp/ccvXE2EI.s:480    .text:000000000000030c .L0 
-     /tmp/ccvXE2EI.s:484    .text:0000000000000310 .L0 
-     /tmp/ccvXE2EI.s:486    .text:0000000000000310 .L0 
-     /tmp/ccvXE2EI.s:491    .text:000000000000031c .L0 
-     /tmp/ccvXE2EI.s:494    .text:0000000000000324 .L0 
-     /tmp/ccvXE2EI.s:524    .text:0000000000000324 .L0 
+     /tmp/ccAQswmS.s:410    .text:00000000000002b8 .L0 
+     /tmp/ccAQswmS.s:412    .text:00000000000002b8 .L0 
+     /tmp/ccAQswmS.s:413    .text:00000000000002b8 .L0 
+     /tmp/ccAQswmS.s:416    .text:00000000000002c4 .L0 
+     /tmp/ccAQswmS.s:422    .text:00000000000002c4 kern_thread_end_running
+     /tmp/ccAQswmS.s:425    .text:00000000000002c4 .L0 
+     /tmp/ccAQswmS.s:426    .text:00000000000002c4 .L0 
+     /tmp/ccAQswmS.s:427    .text:00000000000002c8 .L0 
+     /tmp/ccAQswmS.s:431    .text:00000000000002d4 .L0 
+     /tmp/ccAQswmS.s:432    .text:00000000000002d4 .L0 
+     /tmp/ccAQswmS.s:433    .text:00000000000002d4 .L0 
+     /tmp/ccAQswmS.s:435    .text:00000000000002d8 .L0 
+     /tmp/ccAQswmS.s:437    .text:00000000000002d8 .L0 
+     /tmp/ccAQswmS.s:438    .text:00000000000002d8 .L0 
+     /tmp/ccAQswmS.s:441    .text:00000000000002e0 .L0 
+     /tmp/ccAQswmS.s:442    .text:00000000000002e0 .L0 
+     /tmp/ccAQswmS.s:445    .text:00000000000002e4 .L0 
+     /tmp/ccAQswmS.s:447    .text:00000000000002e4 .L0 
+     /tmp/ccAQswmS.s:448    .text:00000000000002e4 .L0 
+     /tmp/ccAQswmS.s:450    .text:00000000000002e8 .L0 
+     /tmp/ccAQswmS.s:454    .text:00000000000002ec .L0 
+     /tmp/ccAQswmS.s:455    .text:00000000000002ec .L0 
+     /tmp/ccAQswmS.s:459    .text:00000000000002f0 .L0 
+     /tmp/ccAQswmS.s:460    .text:00000000000002f0 .L0 
+     /tmp/ccAQswmS.s:463    .text:00000000000002f8 .L0 
+     /tmp/ccAQswmS.s:464    .text:00000000000002f8 .L0 
+     /tmp/ccAQswmS.s:470    .text:0000000000000310 .L0 
+     /tmp/ccAQswmS.s:473    .text:0000000000000318 .L0 
+     /tmp/ccAQswmS.s:479    .text:0000000000000330 .L0 
+     /tmp/ccAQswmS.s:481    .text:0000000000000334 .L0 
+     /tmp/ccAQswmS.s:483    .text:0000000000000338 .L0 
+     /tmp/ccAQswmS.s:484    .text:0000000000000338 .L0 
+     /tmp/ccAQswmS.s:494    .text:0000000000000358 .L0 
+     /tmp/ccAQswmS.s:495    .text:0000000000000358 .L0 
+     /tmp/ccAQswmS.s:499    .text:0000000000000364 .L0 
+     /tmp/ccAQswmS.s:501    .text:000000000000036c .L0 
+     /tmp/ccAQswmS.s:502    .text:000000000000036c .L0 
+     /tmp/ccAQswmS.s:504    .text:0000000000000370 .L0 
+     /tmp/ccAQswmS.s:505    .text:0000000000000370 .L0 
+     /tmp/ccAQswmS.s:507    .text:0000000000000374 .L0 
+     /tmp/ccAQswmS.s:511    .text:000000000000037c .L0 
+     /tmp/ccAQswmS.s:516    .text:0000000000000388 .L0 
+     /tmp/ccAQswmS.s:517    .text:000000000000038c .L0 
+     /tmp/ccAQswmS.s:518    .text:000000000000038c .L0 
+     /tmp/ccAQswmS.s:520    .text:0000000000000390 .L0 
+     /tmp/ccAQswmS.s:521    .text:0000000000000390 .L0 
+     /tmp/ccAQswmS.s:523    .text:0000000000000394 .L0 
+     /tmp/ccAQswmS.s:526    .text:0000000000000398 .L0 
+     /tmp/ccAQswmS.s:530    .text:000000000000039c .L0 
+     /tmp/ccAQswmS.s:532    .text:000000000000039c .L0 
+     /tmp/ccAQswmS.s:533    .text:000000000000039c .L0 
+     /tmp/ccAQswmS.s:536    .text:00000000000003a8 .L0 
+     /tmp/ccAQswmS.s:542    .text:00000000000003a8 kern_thread_create
+     /tmp/ccAQswmS.s:545    .text:00000000000003a8 .L0 
+     /tmp/ccAQswmS.s:547    .text:00000000000003a8 .L0 
+     /tmp/ccAQswmS.s:548    .text:00000000000003ac .L0 
+     /tmp/ccAQswmS.s:550    .text:00000000000003b0 .L0 
+GAS LISTING /tmp/ccAQswmS.s 			page 22
+
+
+     /tmp/ccAQswmS.s:552    .text:00000000000003b4 .L0 
+     /tmp/ccAQswmS.s:554    .text:00000000000003b4 .L0 
+     /tmp/ccAQswmS.s:555    .text:00000000000003b4 .L0 
+     /tmp/ccAQswmS.s:558    .text:00000000000003b8 .L0 
+     /tmp/ccAQswmS.s:560    .text:00000000000003b8 .L0 
+     /tmp/ccAQswmS.s:561    .text:00000000000003b8 .L0 
+     /tmp/ccAQswmS.s:562    .text:00000000000003b8 .L0 
+     /tmp/ccAQswmS.s:566    .text:00000000000003bc .L0 
+     /tmp/ccAQswmS.s:567    .text:00000000000003bc .L0 
+     /tmp/ccAQswmS.s:570    .text:00000000000003c4 .L0 
+     /tmp/ccAQswmS.s:571    .text:00000000000003c4 .L0 
+     /tmp/ccAQswmS.s:577    .text:00000000000003dc .L0 
+     /tmp/ccAQswmS.s:579    .text:00000000000003e0 .L0 
+     /tmp/ccAQswmS.s:580    .text:00000000000003e0 .L0 
+     /tmp/ccAQswmS.s:586    .text:00000000000003e8 .L0 
+     /tmp/ccAQswmS.s:587    .text:00000000000003e8 .L0 
+     /tmp/ccAQswmS.s:591    .text:00000000000003f4 .L0 
+     /tmp/ccAQswmS.s:594    .text:00000000000003f8 .L0 
+     /tmp/ccAQswmS.s:597    .text:00000000000003f8 .L0 
+     /tmp/ccAQswmS.s:598    .text:00000000000003f8 .L0 
+     /tmp/ccAQswmS.s:599    .text:00000000000003f8 .L0 
+     /tmp/ccAQswmS.s:601    .text:00000000000003fc .L0 
+     /tmp/ccAQswmS.s:603    .text:0000000000000400 .L0 
+     /tmp/ccAQswmS.s:604    .text:0000000000000400 .L0 
+     /tmp/ccAQswmS.s:610    .text:0000000000000414 .L0 
+     /tmp/ccAQswmS.s:613    .text:000000000000041c .L0 
+     /tmp/ccAQswmS.s:614    .text:000000000000041c .L0 
+     /tmp/ccAQswmS.s:617    .text:0000000000000424 .L0 
+     /tmp/ccAQswmS.s:618    .text:0000000000000424 .L0 
+     /tmp/ccAQswmS.s:620    .text:0000000000000428 .L0 
+     /tmp/ccAQswmS.s:621    .text:0000000000000428 .L0 
+     /tmp/ccAQswmS.s:624    .text:0000000000000430 .L0 
+     /tmp/ccAQswmS.s:625    .text:0000000000000430 .L0 
+     /tmp/ccAQswmS.s:628    .text:0000000000000438 .L0 
+     /tmp/ccAQswmS.s:629    .text:0000000000000438 .L0 
+     /tmp/ccAQswmS.s:631    .text:000000000000043c .L0 
+     /tmp/ccAQswmS.s:632    .text:000000000000043c .L0 
+     /tmp/ccAQswmS.s:634    .text:0000000000000440 .L0 
+     /tmp/ccAQswmS.s:635    .text:0000000000000440 .L0 
+     /tmp/ccAQswmS.s:637    .text:0000000000000448 .L0 
+     /tmp/ccAQswmS.s:639    .text:000000000000044c .L0 
+     /tmp/ccAQswmS.s:640    .text:000000000000044c .L0 
+     /tmp/ccAQswmS.s:642    .text:0000000000000450 .L0 
+     /tmp/ccAQswmS.s:643    .text:0000000000000450 .L0 
+     /tmp/ccAQswmS.s:646    .text:0000000000000454 .L0 
+     /tmp/ccAQswmS.s:647    .text:0000000000000458 .L0 
+     /tmp/ccAQswmS.s:648    .text:0000000000000458 .L0 
+     /tmp/ccAQswmS.s:649    .text:0000000000000458 .L0 
+     /tmp/ccAQswmS.s:651    .text:000000000000045c .L0 
+     /tmp/ccAQswmS.s:655    .text:0000000000000460 .L0 
+     /tmp/ccAQswmS.s:657    .text:0000000000000460 .L0 
+     /tmp/ccAQswmS.s:663    .text:000000000000046c .L0 
+     /tmp/ccAQswmS.s:666    .text:0000000000000474 .L0 
+     /tmp/ccAQswmS.s:672    .text:0000000000000474 kern_thread_join
+     /tmp/ccAQswmS.s:675    .text:0000000000000474 .L0 
+     /tmp/ccAQswmS.s:677    .text:0000000000000474 .L0 
+     /tmp/ccAQswmS.s:678    .text:0000000000000478 .L0 
+GAS LISTING /tmp/ccAQswmS.s 			page 23
+
+
+     /tmp/ccAQswmS.s:681    .text:0000000000000480 .L0 
+     /tmp/ccAQswmS.s:682    .text:0000000000000480 .L0 
+     /tmp/ccAQswmS.s:684    .text:0000000000000484 .L0 
+     /tmp/ccAQswmS.s:686    .text:0000000000000484 .L0 
+     /tmp/ccAQswmS.s:687    .text:0000000000000484 .L0 
+     /tmp/ccAQswmS.s:689    .text:000000000000048c .L0 
+     /tmp/ccAQswmS.s:691    .text:0000000000000490 .L0 
+     /tmp/ccAQswmS.s:693    .text:0000000000000494 .L0 
+     /tmp/ccAQswmS.s:694    .text:0000000000000494 .L0 
+     /tmp/ccAQswmS.s:697    .text:000000000000049c .L0 
+     /tmp/ccAQswmS.s:700    .text:00000000000004a4 .L0 
+     /tmp/ccAQswmS.s:701    .text:00000000000004a8 .L0 
+     /tmp/ccAQswmS.s:703    .text:00000000000004ac .L0 
+     /tmp/ccAQswmS.s:704    .text:00000000000004ac .L0 
+     /tmp/ccAQswmS.s:706    .text:00000000000004b0 .L0 
+     /tmp/ccAQswmS.s:708    .text:00000000000004b4 .L0 
+     /tmp/ccAQswmS.s:738    .text:00000000000004b4 .L0 
                      .debug_frame:0000000000000000 .L0 
-     /tmp/ccvXE2EI.s:23     .text:000000000000000c .L0 
-     /tmp/ccvXE2EI.s:39     .text:0000000000000028 .L0 
-     /tmp/ccvXE2EI.s:54     .text:0000000000000044 .L0 
-     /tmp/ccvXE2EI.s:72     .text:000000000000006c .L0 
-     /tmp/ccvXE2EI.s:98     .text:000000000000008c .L0 
-     /tmp/ccvXE2EI.s:99     .text:0000000000000094 .L0 
-     /tmp/ccvXE2EI.s:501    .srodata.cst8:0000000000000000 .LC0
-     /tmp/ccvXE2EI.s:103    .text:00000000000000a4 .L0 
-     /tmp/ccvXE2EI.s:132    .text:00000000000000e0 .L0 
-     /tmp/ccvXE2EI.s:150    .text:000000000000010c .L0 
-     /tmp/ccvXE2EI.s:264    .text:00000000000001a0 .L0 
-     /tmp/ccvXE2EI.s:314    .text:00000000000001f4 .L0 
-     /tmp/ccvXE2EI.s:400    .text:0000000000000278 .L0 
-GAS LISTING /tmp/ccvXE2EI.s 			page 17
+     /tmp/ccAQswmS.s:23     .text:000000000000000c .L0 
+     /tmp/ccAQswmS.s:38     .text:0000000000000024 .L0 
+     /tmp/ccAQswmS.s:53     .text:0000000000000040 .L0 
+     /tmp/ccAQswmS.s:71     .text:0000000000000068 .L0 
+     /tmp/ccAQswmS.s:97     .text:0000000000000088 .L0 
+     /tmp/ccAQswmS.s:98     .text:0000000000000090 .L0 
+     /tmp/ccAQswmS.s:715    .srodata.cst8:0000000000000000 .LC0
+     /tmp/ccAQswmS.s:102    .text:00000000000000a0 .L0 
+     /tmp/ccAQswmS.s:130    .text:00000000000000d8 .L0 
+     /tmp/ccAQswmS.s:147    .text:0000000000000100 .L0 
+     /tmp/ccAQswmS.s:261    .text:0000000000000194 .L0 
+     /tmp/ccAQswmS.s:303    .text:00000000000001dc .L0 
+     /tmp/ccAQswmS.s:312    .text:00000000000001fc .L0 
+     /tmp/ccAQswmS.s:323    .text:000000000000021c .L0 
+     /tmp/ccAQswmS.s:368    .text:0000000000000268 .L0 
+     /tmp/ccAQswmS.s:438    .text:00000000000002d8 .L0 
+     /tmp/ccAQswmS.s:466    .text:0000000000000300 .L0 
+     /tmp/ccAQswmS.s:475    .text:0000000000000320 .L0 
+     /tmp/ccAQswmS.s:486    .text:0000000000000340 .L0 
+     /tmp/ccAQswmS.s:499    .text:0000000000000364 .L0 
+     /tmp/ccAQswmS.s:573    .text:00000000000003cc .L0 
+     /tmp/ccAQswmS.s:587    .text:00000000000003e8 .L0 
+     /tmp/ccAQswmS.s:604    .text:0000000000000400 .L0 
+     /tmp/ccAQswmS.s:635    .text:0000000000000440 .L0 
+     /tmp/ccAQswmS.s:657    .text:0000000000000460 .L0 
+     /tmp/ccAQswmS.s:687    .text:0000000000000484 .L0 
+     /tmp/ccAQswmS.s:45     .text:0000000000000038 .L2
+     /tmp/ccAQswmS.s:33     .text:000000000000001c .L3
+     /tmp/ccAQswmS.s:160    .text:0000000000000118 .L11
+     /tmp/ccAQswmS.s:142    .text:00000000000000f8 .L12
+     /tmp/ccAQswmS.s:111    .text:00000000000000b0 .L6
+     /tmp/ccAQswmS.s:149    .text:000000000000010c .L5
+     /tmp/ccAQswmS.s:294    .text:00000000000001cc .L18
+     /tmp/ccAQswmS.s:328    .text:0000000000000234 .L22
+     /tmp/ccAQswmS.s:289    .text:00000000000001c8 .L19
+     /tmp/ccAQswmS.s:392    .text:00000000000002a0 .L23
+     /tmp/ccAQswmS.s:409    .text:00000000000002b8 .L27
+     /tmp/ccAQswmS.s:387    .text:0000000000000294 .L25
+     /tmp/ccAQswmS.s:457    .text:00000000000002f0 .L29
+GAS LISTING /tmp/ccAQswmS.s 			page 24
 
 
-     /tmp/ccvXE2EI.s:433    .text:00000000000002b0 .L0 
-     /tmp/ccvXE2EI.s:467    .text:00000000000002f4 .L0 
-     /tmp/ccvXE2EI.s:486    .text:0000000000000310 .L0 
-     /tmp/ccvXE2EI.s:46     .text:000000000000003c .L2
-     /tmp/ccvXE2EI.s:33     .text:000000000000001c .L3
-     /tmp/ccvXE2EI.s:163    .text:0000000000000124 .L11
-     /tmp/ccvXE2EI.s:144    .text:0000000000000100 .L12
-     /tmp/ccvXE2EI.s:112    .text:00000000000000b4 .L6
-     /tmp/ccvXE2EI.s:152    .text:0000000000000118 .L5
-     /tmp/ccvXE2EI.s:338    .text:000000000000022c .L19
-     /tmp/ccvXE2EI.s:355    .text:0000000000000244 .L23
-     /tmp/ccvXE2EI.s:333    .text:0000000000000220 .L21
-     /tmp/ccvXE2EI.s:483    .text:0000000000000310 .L32
-     /tmp/ccvXE2EI.s:411    .text:0000000000000294 .L33
-     /tmp/ccvXE2EI.s:390    .text:0000000000000264 .L25
-     /tmp/ccvXE2EI.s:489    .text:000000000000031c .L30
-     /tmp/ccvXE2EI.s:423    .text:00000000000002a8 .L27
-     /tmp/ccvXE2EI.s:473    .text:0000000000000304 .L29
-     /tmp/ccvXE2EI.s:1089   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/ccvXE2EI.s:1845   .debug_str:00000000000001e6 .LASF58
-     /tmp/ccvXE2EI.s:1793   .debug_str:000000000000008f .LASF59
-     /tmp/ccvXE2EI.s:1883   .debug_str:000000000000034d .LASF60
-     /tmp/ccvXE2EI.s:5      .text:0000000000000000 .Ltext0
-     /tmp/ccvXE2EI.s:520    .text:0000000000000324 .Letext0
-     /tmp/ccvXE2EI.s:1769   .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/ccvXE2EI.s:1847   .debug_str:0000000000000284 .LASF0
-     /tmp/ccvXE2EI.s:1819   .debug_str:0000000000000146 .LASF1
-     /tmp/ccvXE2EI.s:1809   .debug_str:00000000000000fc .LASF2
-     /tmp/ccvXE2EI.s:1789   .debug_str:000000000000007f .LASF4
-     /tmp/ccvXE2EI.s:1815   .debug_str:0000000000000124 .LASF3
-     /tmp/ccvXE2EI.s:1775   .debug_str:000000000000001c .LASF5
-     /tmp/ccvXE2EI.s:1773   .debug_str:0000000000000009 .LASF6
-     /tmp/ccvXE2EI.s:1803   .debug_str:00000000000000d5 .LASF7
-     /tmp/ccvXE2EI.s:1855   .debug_str:00000000000002b2 .LASF8
-     /tmp/ccvXE2EI.s:1787   .debug_str:0000000000000071 .LASF9
-     /tmp/ccvXE2EI.s:1899   .debug_str:00000000000003b4 .LASF10
-     /tmp/ccvXE2EI.s:1805   .debug_str:00000000000000e8 .LASF11
-     /tmp/ccvXE2EI.s:1891   .debug_str:000000000000038a .LASF12
-     /tmp/ccvXE2EI.s:1863   .debug_str:00000000000002ec .LASF13
-     /tmp/ccvXE2EI.s:1823   .debug_str:000000000000016c .LASF14
-     /tmp/ccvXE2EI.s:1795   .debug_str:00000000000000a2 .LASF15
-     /tmp/ccvXE2EI.s:1857   .debug_str:00000000000002c2 .LASF16
-     /tmp/ccvXE2EI.s:1833   .debug_str:0000000000000198 .LASF21
-     /tmp/ccvXE2EI.s:1875   .debug_str:000000000000032d .LASF17
-     /tmp/ccvXE2EI.s:1893   .debug_str:000000000000039a .LASF18
-     /tmp/ccvXE2EI.s:1811   .debug_str:000000000000010a .LASF19
-     /tmp/ccvXE2EI.s:1829   .debug_str:0000000000000189 .LASF20
-     /tmp/ccvXE2EI.s:1797   .debug_str:00000000000000b8 .LASF22
-     /tmp/ccvXE2EI.s:1895   .debug_str:00000000000003a2 .LASF23
-     /tmp/ccvXE2EI.s:1873   .debug_str:0000000000000324 .LASF24
-     /tmp/ccvXE2EI.s:1791   .debug_str:0000000000000086 .LASF61
-     /tmp/ccvXE2EI.s:1831   .debug_str:0000000000000193 .LASF25
-     /tmp/ccvXE2EI.s:1837   .debug_str:00000000000001b3 .LASF26
-     /tmp/ccvXE2EI.s:1865   .debug_str:00000000000002fc .LASF27
-     /tmp/ccvXE2EI.s:1871   .debug_str:000000000000031c .LASF28
-     /tmp/ccvXE2EI.s:1881   .debug_str:0000000000000348 .LASF29
-     /tmp/ccvXE2EI.s:1869   .debug_str:0000000000000315 .LASF30
-GAS LISTING /tmp/ccvXE2EI.s 			page 18
+     /tmp/ccAQswmS.s:491    .text:0000000000000358 .L35
+     /tmp/ccAQswmS.s:452    .text:00000000000002ec .L30
+     /tmp/ccAQswmS.s:514    .text:0000000000000388 .L28
+     /tmp/ccAQswmS.s:529    .text:000000000000039c .L36
+     /tmp/ccAQswmS.s:509    .text:000000000000037c .L33
+     /tmp/ccAQswmS.s:654    .text:0000000000000460 .L45
+     /tmp/ccAQswmS.s:584    .text:00000000000003e8 .L46
+     /tmp/ccAQswmS.s:564    .text:00000000000003bc .L38
+     /tmp/ccAQswmS.s:661    .text:000000000000046c .L43
+     /tmp/ccAQswmS.s:595    .text:00000000000003f8 .L40
+     /tmp/ccAQswmS.s:644    .text:0000000000000454 .L42
+     /tmp/ccAQswmS.s:1366   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccAQswmS.s:2209   .debug_str:00000000000001d9 .LASF59
+     /tmp/ccAQswmS.s:2155   .debug_str:0000000000000086 .LASF60
+     /tmp/ccAQswmS.s:2245   .debug_str:0000000000000353 .LASF61
+     /tmp/ccAQswmS.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccAQswmS.s:734    .text:00000000000004b4 .Letext0
+     /tmp/ccAQswmS.s:2133   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccAQswmS.s:2211   .debug_str:0000000000000277 .LASF0
+     /tmp/ccAQswmS.s:2183   .debug_str:0000000000000139 .LASF1
+     /tmp/ccAQswmS.s:2171   .debug_str:00000000000000ef .LASF2
+     /tmp/ccAQswmS.s:2151   .debug_str:0000000000000076 .LASF4
+     /tmp/ccAQswmS.s:2179   .debug_str:000000000000011e .LASF3
+     /tmp/ccAQswmS.s:2139   .debug_str:000000000000001c .LASF5
+     /tmp/ccAQswmS.s:2137   .debug_str:0000000000000009 .LASF6
+     /tmp/ccAQswmS.s:2165   .debug_str:00000000000000c8 .LASF7
+     /tmp/ccAQswmS.s:2219   .debug_str:00000000000002af .LASF8
+     /tmp/ccAQswmS.s:2149   .debug_str:0000000000000068 .LASF9
+     /tmp/ccAQswmS.s:2263   .debug_str:00000000000003cc .LASF10
+     /tmp/ccAQswmS.s:2167   .debug_str:00000000000000db .LASF11
+     /tmp/ccAQswmS.s:2253   .debug_str:0000000000000390 .LASF12
+     /tmp/ccAQswmS.s:2227   .debug_str:00000000000002e9 .LASF13
+     /tmp/ccAQswmS.s:2187   .debug_str:000000000000015f .LASF14
+     /tmp/ccAQswmS.s:2157   .debug_str:0000000000000099 .LASF15
+     /tmp/ccAQswmS.s:2221   .debug_str:00000000000002bf .LASF16
+     /tmp/ccAQswmS.s:2197   .debug_str:000000000000018b .LASF32
+     /tmp/ccAQswmS.s:2239   .debug_str:0000000000000338 .LASF17
+     /tmp/ccAQswmS.s:2255   .debug_str:00000000000003a0 .LASF18
+     /tmp/ccAQswmS.s:2175   .debug_str:0000000000000104 .LASF19
+     /tmp/ccAQswmS.s:2193   .debug_str:000000000000017c .LASF20
+     /tmp/ccAQswmS.s:2173   .debug_str:00000000000000fd .LASF21
+     /tmp/ccAQswmS.s:2153   .debug_str:000000000000007d .LASF62
+     /tmp/ccAQswmS.s:2195   .debug_str:0000000000000186 .LASF22
+     /tmp/ccAQswmS.s:2201   .debug_str:00000000000001a6 .LASF23
+     /tmp/ccAQswmS.s:2231   .debug_str:0000000000000307 .LASF24
+     /tmp/ccAQswmS.s:2235   .debug_str:0000000000000320 .LASF25
+     /tmp/ccAQswmS.s:2233   .debug_str:0000000000000311 .LASF26
+     /tmp/ccAQswmS.s:2159   .debug_str:00000000000000af .LASF27
+     /tmp/ccAQswmS.s:2251   .debug_str:0000000000000387 .LASF28
+     /tmp/ccAQswmS.s:2223   .debug_str:00000000000002d5 .LASF29
+     /tmp/ccAQswmS.s:2213   .debug_str:0000000000000284 .LASF30
+     /tmp/ccAQswmS.s:2243   .debug_str:000000000000034b .LASF31
+     /tmp/ccAQswmS.s:2205   .debug_str:00000000000001bd .LASF33
+     /tmp/ccAQswmS.s:2191   .debug_str:0000000000000172 .LASF34
+     /tmp/ccAQswmS.s:2257   .debug_str:00000000000003a8 .LASF35
+     /tmp/ccAQswmS.s:2207   .debug_str:00000000000001cb .LASF36
+     /tmp/ccAQswmS.s:2247   .debug_str:000000000000036a .LASF37
+GAS LISTING /tmp/ccAQswmS.s 			page 25
 
 
-     /tmp/ccvXE2EI.s:1867   .debug_str:0000000000000306 .LASF31
-     /tmp/ccvXE2EI.s:1859   .debug_str:00000000000002d8 .LASF32
-     /tmp/ccvXE2EI.s:1849   .debug_str:0000000000000291 .LASF33
-     /tmp/ccvXE2EI.s:1879   .debug_str:0000000000000340 .LASF34
-     /tmp/ccvXE2EI.s:1841   .debug_str:00000000000001ca .LASF35
-     /tmp/ccvXE2EI.s:1827   .debug_str:000000000000017f .LASF36
-     /tmp/ccvXE2EI.s:1889   .debug_str:0000000000000381 .LASF37
-     /tmp/ccvXE2EI.s:1843   .debug_str:00000000000001d8 .LASF38
-     /tmp/ccvXE2EI.s:1885   .debug_str:0000000000000364 .LASF39
-     /tmp/ccvXE2EI.s:1817   .debug_str:0000000000000136 .LASF40
-     /tmp/ccvXE2EI.s:1877   .debug_str:0000000000000334 .LASF41
-     /tmp/ccvXE2EI.s:1771   .debug_str:0000000000000000 .LASF42
-     /tmp/ccvXE2EI.s:1897   .debug_str:00000000000003aa .LASF43
-     /tmp/ccvXE2EI.s:1777   .debug_str:0000000000000023 .LASF44
-     /tmp/ccvXE2EI.s:1851   .debug_str:0000000000000299 .LASF45
-     /tmp/ccvXE2EI.s:1781   .debug_str:000000000000003f .LASF46
-     /tmp/ccvXE2EI.s:1807   .debug_str:00000000000000f7 .LASF47
-     /tmp/ccvXE2EI.s:1801   .debug_str:00000000000000d0 .LASF48
-     /tmp/ccvXE2EI.s:1779   .debug_str:000000000000002c .LASF62
-     /tmp/ccvXE2EI.s:369    .text:0000000000000250 .LFB6
-     /tmp/ccvXE2EI.s:495    .text:0000000000000324 .LFE6
-     /tmp/ccvXE2EI.s:1825   .debug_str:0000000000000178 .LASF49
-     /tmp/ccvXE2EI.s:1638   .debug_loc:0000000000000000 .LLST4
-     /tmp/ccvXE2EI.s:1835   .debug_str:00000000000001a5 .LASF50
-     /tmp/ccvXE2EI.s:1839   .debug_str:00000000000001be .LASF51
-     /tmp/ccvXE2EI.s:1663   .debug_loc:0000000000000062 .LLST5
-     /tmp/ccvXE2EI.s:385    .text:0000000000000260 .LBB4
-     /tmp/ccvXE2EI.s:424    .text:00000000000002a8 .LBE4
-     /tmp/ccvXE2EI.s:1686   .debug_loc:00000000000000d0 .LLST6
-     /tmp/ccvXE2EI.s:1813   .debug_str:0000000000000110 .LASF52
-     /tmp/ccvXE2EI.s:246    .text:0000000000000184 .LFB5
-     /tmp/ccvXE2EI.s:291    .text:00000000000001dc .LFE5
-     /tmp/ccvXE2EI.s:261    .text:00000000000001a0 .LVL12
-     /tmp/ccvXE2EI.s:278    .text:00000000000001c8 .LVL14
-     /tmp/ccvXE2EI.s:1785   .debug_str:000000000000005c .LASF53
-     /tmp/ccvXE2EI.s:297    .text:00000000000001dc .LFB4
-     /tmp/ccvXE2EI.s:363    .text:0000000000000250 .LFE4
-     /tmp/ccvXE2EI.s:1706   .debug_loc:000000000000012d .LLST3
-     /tmp/ccvXE2EI.s:320    .text:0000000000000208 .LVL16
-     /tmp/ccvXE2EI.s:337    .text:000000000000022c .LVL17
-     /tmp/ccvXE2EI.s:1861   .debug_str:00000000000002e1 .LASF63
-     /tmp/ccvXE2EI.s:213    .text:0000000000000164 .LFB3
-     /tmp/ccvXE2EI.s:240    .text:0000000000000184 .LFE3
-     /tmp/ccvXE2EI.s:1783   .debug_str:000000000000004a .LASF54
-     /tmp/ccvXE2EI.s:182    .text:0000000000000138 .LFB2
-     /tmp/ccvXE2EI.s:207    .text:0000000000000164 .LFE2
-     /tmp/ccvXE2EI.s:196    .text:0000000000000154 .LVL11
-     /tmp/ccvXE2EI.s:1821   .debug_str:0000000000000159 .LASF64
-     /tmp/ccvXE2EI.s:87     .text:0000000000000080 .LFB1
-     /tmp/ccvXE2EI.s:176    .text:0000000000000138 .LFE1
-     /tmp/ccvXE2EI.s:1717   .debug_loc:0000000000000163 .LLST1
-     /tmp/ccvXE2EI.s:107    .text:00000000000000b0 .LBB3
-     /tmp/ccvXE2EI.s:153    .text:0000000000000118 .LBE3
-     /tmp/ccvXE2EI.s:1728   .debug_loc:0000000000000199 .LLST2
-     /tmp/ccvXE2EI.s:1887   .debug_str:0000000000000370 .LASF55
-     /tmp/ccvXE2EI.s:11     .text:0000000000000000 .LFB0
-     /tmp/ccvXE2EI.s:81     .text:0000000000000080 .LFE0
-GAS LISTING /tmp/ccvXE2EI.s 			page 19
+     /tmp/ccAQswmS.s:2237   .debug_str:0000000000000328 .LASF38
+     /tmp/ccAQswmS.s:2241   .debug_str:000000000000033f .LASF39
+     /tmp/ccAQswmS.s:2135   .debug_str:0000000000000000 .LASF40
+     /tmp/ccAQswmS.s:2261   .debug_str:00000000000003c2 .LASF41
+     /tmp/ccAQswmS.s:2181   .debug_str:0000000000000130 .LASF42
+     /tmp/ccAQswmS.s:2215   .debug_str:000000000000028c .LASF43
+     /tmp/ccAQswmS.s:2143   .debug_str:0000000000000036 .LASF44
+     /tmp/ccAQswmS.s:2169   .debug_str:00000000000000ea .LASF45
+     /tmp/ccAQswmS.s:2163   .debug_str:00000000000000c3 .LASF46
+     /tmp/ccAQswmS.s:2249   .debug_str:0000000000000376 .LASF54
+     /tmp/ccAQswmS.s:673    .text:0000000000000474 .LFB8
+     /tmp/ccAQswmS.s:709    .text:00000000000004b4 .LFE8
+     /tmp/ccAQswmS.s:2189   .debug_str:000000000000016b .LASF47
+     /tmp/ccAQswmS.s:1953   .debug_loc:0000000000000000 .LLST10
+     /tmp/ccAQswmS.s:698    .text:00000000000004a4 .LVL44
+     /tmp/ccAQswmS.s:2141   .debug_str:0000000000000023 .LASF63
+     /tmp/ccAQswmS.s:543    .text:00000000000003a8 .LFB7
+     /tmp/ccAQswmS.s:667    .text:0000000000000474 .LFE7
+     /tmp/ccAQswmS.s:1967   .debug_loc:0000000000000039 .LLST7
+     /tmp/ccAQswmS.s:2199   .debug_str:0000000000000198 .LASF48
+     /tmp/ccAQswmS.s:2203   .debug_str:00000000000001b1 .LASF49
+     /tmp/ccAQswmS.s:1992   .debug_loc:000000000000009b .LLST8
+     /tmp/ccAQswmS.s:559    .text:00000000000003b8 .LBB6
+     /tmp/ccAQswmS.s:596    .text:00000000000003f8 .LBE6
+     /tmp/ccAQswmS.s:2015   .debug_loc:0000000000000109 .LLST9
+     /tmp/ccAQswmS.s:2177   .debug_str:000000000000010a .LASF50
+     /tmp/ccAQswmS.s:243    .text:0000000000000178 .LFB6
+     /tmp/ccAQswmS.s:345    .text:0000000000000250 .LFE6
+     /tmp/ccAQswmS.s:281    .text:00000000000001c0 .LBB4
+     /tmp/ccAQswmS.s:329    .text:0000000000000234 .LBE4
+     /tmp/ccAQswmS.s:2035   .debug_loc:0000000000000166 .LLST3
+     /tmp/ccAQswmS.s:258    .text:0000000000000194 .LVL12
+     /tmp/ccAQswmS.s:332    .text:000000000000023c .LVL17
+     /tmp/ccAQswmS.s:2217   .debug_str:0000000000000297 .LASF51
+     /tmp/ccAQswmS.s:423    .text:00000000000002c4 .LFB5
+     /tmp/ccAQswmS.s:537    .text:00000000000003a8 .LFE5
+     /tmp/ccAQswmS.s:2047   .debug_loc:000000000000019d .LLST5
+     /tmp/ccAQswmS.s:444    .text:00000000000002e4 .LBB5
+     /tmp/ccAQswmS.s:492    .text:0000000000000358 .LBE5
+     /tmp/ccAQswmS.s:2058   .debug_loc:00000000000001d3 .LLST6
+     /tmp/ccAQswmS.s:496    .text:0000000000000360 .LVL27
+     /tmp/ccAQswmS.s:513    .text:0000000000000388 .LVL28
+     /tmp/ccAQswmS.s:2147   .debug_str:0000000000000053 .LASF52
+     /tmp/ccAQswmS.s:351    .text:0000000000000250 .LFB4
+     /tmp/ccAQswmS.s:417    .text:00000000000002c4 .LFE4
+     /tmp/ccAQswmS.s:2070   .debug_loc:000000000000020a .LLST4
+     /tmp/ccAQswmS.s:374    .text:000000000000027c .LVL19
+     /tmp/ccAQswmS.s:391    .text:00000000000002a0 .LVL20
+     /tmp/ccAQswmS.s:2225   .debug_str:00000000000002de .LASF64
+     /tmp/ccAQswmS.s:210    .text:0000000000000158 .LFB3
+     /tmp/ccAQswmS.s:237    .text:0000000000000178 .LFE3
+     /tmp/ccAQswmS.s:2145   .debug_str:0000000000000041 .LASF53
+     /tmp/ccAQswmS.s:179    .text:000000000000012c .LFB2
+     /tmp/ccAQswmS.s:204    .text:0000000000000158 .LFE2
+     /tmp/ccAQswmS.s:193    .text:0000000000000148 .LVL11
+     /tmp/ccAQswmS.s:2185   .debug_str:000000000000014c .LASF55
+     /tmp/ccAQswmS.s:86     .text:000000000000007c .LFB1
+GAS LISTING /tmp/ccAQswmS.s 			page 26
 
 
-     /tmp/ccvXE2EI.s:25     .text:0000000000000014 .LBB2
-     /tmp/ccvXE2EI.s:51     .text:0000000000000044 .LBE2
-     /tmp/ccvXE2EI.s:1744   .debug_loc:00000000000001e3 .LLST0
-     /tmp/ccvXE2EI.s:1853   .debug_str:00000000000002a4 .LASF56
-     /tmp/ccvXE2EI.s:1799   .debug_str:00000000000000c3 .LASF57
-     /tmp/ccvXE2EI.s:372    .text:0000000000000250 .LVL20
-     /tmp/ccvXE2EI.s:434    .text:00000000000002b8 .LVL27
-     /tmp/ccvXE2EI.s:482    .text:0000000000000310 .LVL28
-     /tmp/ccvXE2EI.s:492    .text:0000000000000320 .LVL30
-     /tmp/ccvXE2EI.s:383    .text:0000000000000260 .LVL21
-     /tmp/ccvXE2EI.s:421    .text:00000000000002a8 .LVL25
-     /tmp/ccvXE2EI.s:488    .text:000000000000031c .LVL29
-     /tmp/ccvXE2EI.s:389    .text:0000000000000264 .LVL22
-     /tmp/ccvXE2EI.s:408    .text:0000000000000290 .LVL23
-     /tmp/ccvXE2EI.s:410    .text:0000000000000294 .LVL24
-     /tmp/ccvXE2EI.s:428    .text:00000000000002ac .LVL26
-     /tmp/ccvXE2EI.s:316    .text:0000000000000200 .LVL15
-     /tmp/ccvXE2EI.s:348    .text:0000000000000238 .LVL18
-     /tmp/ccvXE2EI.s:354    .text:0000000000000244 .LVL19
-     /tmp/ccvXE2EI.s:105    .text:00000000000000b0 .LVL4
-     /tmp/ccvXE2EI.s:120    .text:00000000000000c0 .LVL6
-     /tmp/ccvXE2EI.s:162    .text:0000000000000124 .LVL9
-     /tmp/ccvXE2EI.s:170    .text:000000000000012c .LVL10
-     /tmp/ccvXE2EI.s:111    .text:00000000000000b4 .LVL5
-     /tmp/ccvXE2EI.s:141    .text:00000000000000fc .LVL7
-     /tmp/ccvXE2EI.s:143    .text:0000000000000100 .LVL8
-     /tmp/ccvXE2EI.s:27     .text:0000000000000014 .LVL0
-     /tmp/ccvXE2EI.s:32     .text:000000000000001c .LVL1
-     /tmp/ccvXE2EI.s:55     .text:000000000000004c .LVL3
-     /tmp/ccvXE2EI.s:525    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccAQswmS.s:173    .text:000000000000012c .LFE1
+     /tmp/ccAQswmS.s:2081   .debug_loc:0000000000000240 .LLST1
+     /tmp/ccAQswmS.s:106    .text:00000000000000ac .LBB3
+     /tmp/ccAQswmS.s:150    .text:000000000000010c .LBE3
+     /tmp/ccAQswmS.s:2092   .debug_loc:0000000000000276 .LLST2
+     /tmp/ccAQswmS.s:2259   .debug_str:00000000000003b1 .LASF56
+     /tmp/ccAQswmS.s:11     .text:0000000000000000 .LFB0
+     /tmp/ccAQswmS.s:80     .text:000000000000007c .LFE0
+     /tmp/ccAQswmS.s:25     .text:0000000000000014 .LBB2
+     /tmp/ccAQswmS.s:50     .text:0000000000000040 .LBE2
+     /tmp/ccAQswmS.s:2108   .debug_loc:00000000000002c0 .LLST0
+     /tmp/ccAQswmS.s:2229   .debug_str:00000000000002f9 .LASF57
+     /tmp/ccAQswmS.s:2161   .debug_str:00000000000000b6 .LASF58
+     /tmp/ccAQswmS.s:676    .text:0000000000000474 .LVL43
+     /tmp/ccAQswmS.s:546    .text:00000000000003a8 .LVL31
+     /tmp/ccAQswmS.s:605    .text:0000000000000408 .LVL38
+     /tmp/ccAQswmS.s:653    .text:0000000000000460 .LVL39
+     /tmp/ccAQswmS.s:664    .text:0000000000000470 .LVL42
+     /tmp/ccAQswmS.s:557    .text:00000000000003b8 .LVL32
+     /tmp/ccAQswmS.s:593    .text:00000000000003f8 .LVL37
+     /tmp/ccAQswmS.s:660    .text:000000000000046c .LVL41
+     /tmp/ccAQswmS.s:563    .text:00000000000003bc .LVL33
+     /tmp/ccAQswmS.s:581    .text:00000000000003e4 .LVL34
+     /tmp/ccAQswmS.s:583    .text:00000000000003e8 .LVL35
+     /tmp/ccAQswmS.s:589    .text:00000000000003f4 .LVL36
+     /tmp/ccAQswmS.s:658    .text:0000000000000468 .LVL40
+     /tmp/ccAQswmS.s:283    .text:00000000000001c0 .LVL14
+     /tmp/ccAQswmS.s:288    .text:00000000000001c8 .LVL15
+     /tmp/ccAQswmS.s:439    .text:00000000000002e0 .LVL23
+     /tmp/ccAQswmS.s:524    .text:0000000000000394 .LVL29
+     /tmp/ccAQswmS.s:528    .text:000000000000039c .LVL30
+     /tmp/ccAQswmS.s:446    .text:00000000000002e4 .LVL24
+     /tmp/ccAQswmS.s:451    .text:00000000000002ec .LVL25
+     /tmp/ccAQswmS.s:370    .text:0000000000000274 .LVL18
+     /tmp/ccAQswmS.s:402    .text:00000000000002ac .LVL21
+     /tmp/ccAQswmS.s:408    .text:00000000000002b8 .LVL22
+     /tmp/ccAQswmS.s:104    .text:00000000000000ac .LVL4
+     /tmp/ccAQswmS.s:119    .text:00000000000000bc .LVL6
+     /tmp/ccAQswmS.s:159    .text:0000000000000118 .LVL9
+     /tmp/ccAQswmS.s:167    .text:0000000000000120 .LVL10
+     /tmp/ccAQswmS.s:110    .text:00000000000000b0 .LVL5
+     /tmp/ccAQswmS.s:139    .text:00000000000000f4 .LVL7
+     /tmp/ccAQswmS.s:141    .text:00000000000000f8 .LVL8
+     /tmp/ccAQswmS.s:27     .text:0000000000000014 .LVL0
+     /tmp/ccAQswmS.s:32     .text:000000000000001c .LVL1
+     /tmp/ccAQswmS.s:54     .text:0000000000000048 .LVL3
+     /tmp/ccAQswmS.s:739    .debug_info:0000000000000000 .Ldebug_info0
 
 UNDEFINED SYMBOLS
 kern_syscall

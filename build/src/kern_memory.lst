@@ -1,4 +1,4 @@
-GAS LISTING /tmp/cciikDjw.s 			page 1
+GAS LISTING /tmp/ccsjMfoc.s 			page 1
 
 
    1              		.file	"kern_memory.c"
@@ -58,7 +58,7 @@ GAS LISTING /tmp/cciikDjw.s 			page 1
   31              	.LVL2:
   21:src/kern_memory.c ****     mem_block_s *prev = 0;
   32              		.loc 1 21 18
-GAS LISTING /tmp/cciikDjw.s 			page 2
+GAS LISTING /tmp/ccsjMfoc.s 			page 2
 
 
   33 001c 13060000 		li	a2,0
@@ -118,7 +118,7 @@ GAS LISTING /tmp/cciikDjw.s 			page 1
   65              		.cfi_restore_state
   25:src/kern_memory.c ****             else prev->next = curr->next;
   66              		.loc 1 25 32 is_stmt 1 discriminator 1
-GAS LISTING /tmp/cciikDjw.s 			page 3
+GAS LISTING /tmp/ccsjMfoc.s 			page 3
 
 
   25:src/kern_memory.c ****             else prev->next = curr->next;
@@ -178,7 +178,7 @@ GAS LISTING /tmp/cciikDjw.s 			page 1
  103              		.loc 1 31 13 is_stmt 1
   31:src/kern_memory.c ****             newFreeBlock->sizeInBlocks = curr->sizeInBlocks-sizeInBlocks-1;
  104              		.loc 1 31 45 is_stmt 0
-GAS LISTING /tmp/cciikDjw.s 			page 4
+GAS LISTING /tmp/ccsjMfoc.s 			page 4
 
 
  105 007c 9315A700 		slli	a1,a4,10
@@ -238,7 +238,7 @@ GAS LISTING /tmp/cciikDjw.s 			page 1
  139              		.loc 1 37 13 is_stmt 1
   37:src/kern_memory.c ****             return (curr+MEM_BLOCK_SIZE);
  140              		.loc 1 37 31 is_stmt 0
-GAS LISTING /tmp/cciikDjw.s 			page 5
+GAS LISTING /tmp/ccsjMfoc.s 			page 5
 
 
  141 00b8 2320E500 		sw	a4,0(a0)
@@ -298,7 +298,7 @@ GAS LISTING /tmp/cciikDjw.s 			page 1
  184              	.LVL15:
   55:src/kern_memory.c ****         curr=curr->next;
  185              		.loc 1 55 9
-GAS LISTING /tmp/cciikDjw.s 			page 6
+GAS LISTING /tmp/ccsjMfoc.s 			page 6
 
 
   54:src/kern_memory.c ****         prev=curr;
@@ -358,7 +358,7 @@ GAS LISTING /tmp/cciikDjw.s 			page 1
  218              		.loc 1 76 48
  219 0118 03260700 		lw	a2,0(a4)
  220              		.loc 1 76 37
-GAS LISTING /tmp/cciikDjw.s 			page 7
+GAS LISTING /tmp/ccsjMfoc.s 			page 7
 
 
  221 011c BB86C600 		addw	a3,a3,a2
@@ -418,7 +418,7 @@ GAS LISTING /tmp/cciikDjw.s 			page 1
  259              		.loc 1 73 10 is_stmt 1
   73:src/kern_memory.c **** 
  260              		.loc 1 73 18 is_stmt 0
-GAS LISTING /tmp/cciikDjw.s 			page 8
+GAS LISTING /tmp/ccsjMfoc.s 			page 8
 
 
  261 0150 97060000 		sd	a4,freeHead,a3
@@ -478,7 +478,7 @@ GAS LISTING /tmp/cciikDjw.s 			page 1
  303 0184 1377F503 		andi	a4,a0,63
  304              		.loc 1 93 7
  305 0188 63080700 		beqz	a4,.L28
-GAS LISTING /tmp/cciikDjw.s 			page 9
+GAS LISTING /tmp/ccsjMfoc.s 			page 9
 
 
  306              		.loc 1 93 33 is_stmt 1 discriminator 1
@@ -538,7 +538,7 @@ GAS LISTING /tmp/cciikDjw.s 			page 1
  352              		.cfi_def_cfa_offset 0
  353 01d0 67800000 		jr	ra
  354              		.cfi_endproc
-GAS LISTING /tmp/cciikDjw.s 			page 10
+GAS LISTING /tmp/ccsjMfoc.s 			page 10
 
 
  355              	.LFE2:
@@ -551,317 +551,317 @@ GAS LISTING /tmp/cciikDjw.s 			page 1
  364              		.text
  365              	.Letext0:
  366              		.file 2 "src/../lib/hw.h"
-GAS LISTING /tmp/cciikDjw.s 			page 11
+GAS LISTING /tmp/ccsjMfoc.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 kern_memory.c
-     /tmp/cciikDjw.s:10     .text:0000000000000000 kern_mem_alloc
-     /tmp/cciikDjw.s:14     .text:0000000000000000 .L0 
-     /tmp/cciikDjw.s:16     .text:0000000000000000 .L0 
-     /tmp/cciikDjw.s:17     .text:0000000000000004 .L0 
-     /tmp/cciikDjw.s:19     .text:0000000000000008 .L0 
-     /tmp/cciikDjw.s:21     .text:000000000000000c .L0 
-     /tmp/cciikDjw.s:24     .text:0000000000000010 .L0 
-     /tmp/cciikDjw.s:362    .sbss:0000000000000000 freeHead
-     /tmp/cciikDjw.s:25     .text:0000000000000010 .L0 
-     /tmp/cciikDjw.s:28     .text:0000000000000018 .L0 
-     /tmp/cciikDjw.s:29     .text:0000000000000018 .L0 
-     /tmp/cciikDjw.s:30     .text:0000000000000018 .L0 
-     /tmp/cciikDjw.s:33     .text:000000000000001c .L0 
-     /tmp/cciikDjw.s:35     .text:0000000000000020 .L0 
-     /tmp/cciikDjw.s:39     .text:0000000000000024 .L0 
-     /tmp/cciikDjw.s:40     .text:0000000000000024 .L0 
-     /tmp/cciikDjw.s:42     .text:0000000000000028 .L0 
-     /tmp/cciikDjw.s:43     .text:0000000000000028 .L0 
-     /tmp/cciikDjw.s:45     .text:000000000000002c .L0 
-     /tmp/cciikDjw.s:48     .text:0000000000000030 .L0 
-     /tmp/cciikDjw.s:49     .text:0000000000000030 .L0 
-     /tmp/cciikDjw.s:51     .text:0000000000000034 .L0 
-     /tmp/cciikDjw.s:52     .text:0000000000000034 .L0 
-     /tmp/cciikDjw.s:56     .text:0000000000000038 .L0 
-     /tmp/cciikDjw.s:57     .text:000000000000003c .L0 
-     /tmp/cciikDjw.s:58     .text:000000000000003c .L0 
-     /tmp/cciikDjw.s:59     .text:000000000000003c .L0 
-     /tmp/cciikDjw.s:61     .text:0000000000000040 .L0 
-     /tmp/cciikDjw.s:65     .text:0000000000000044 .L0 
-     /tmp/cciikDjw.s:67     .text:0000000000000044 .L0 
-     /tmp/cciikDjw.s:68     .text:0000000000000044 .L0 
-     /tmp/cciikDjw.s:70     .text:0000000000000048 .L0 
-     /tmp/cciikDjw.s:76     .text:0000000000000054 .L0 
-     /tmp/cciikDjw.s:77     .text:0000000000000054 .L0 
-     /tmp/cciikDjw.s:83     .text:0000000000000060 .L0 
-     /tmp/cciikDjw.s:84     .text:0000000000000060 .L0 
-     /tmp/cciikDjw.s:85     .text:0000000000000060 .L0 
-     /tmp/cciikDjw.s:87     .text:0000000000000064 .L0 
-     /tmp/cciikDjw.s:91     .text:0000000000000068 .L0 
-     /tmp/cciikDjw.s:93     .text:000000000000006c .L0 
-     /tmp/cciikDjw.s:94     .text:000000000000006c .L0 
-     /tmp/cciikDjw.s:96     .text:0000000000000070 .L0 
-     /tmp/cciikDjw.s:98     .text:0000000000000074 .L0 
-     /tmp/cciikDjw.s:100    .text:0000000000000078 .L0 
-     /tmp/cciikDjw.s:101    .text:0000000000000078 .L0 
-     /tmp/cciikDjw.s:104    .text:000000000000007c .L0 
-     /tmp/cciikDjw.s:105    .text:000000000000007c .L0 
-     /tmp/cciikDjw.s:107    .text:0000000000000080 .L0 
-     /tmp/cciikDjw.s:110    .text:0000000000000084 .L0 
-     /tmp/cciikDjw.s:111    .text:0000000000000084 .L0 
-     /tmp/cciikDjw.s:113    .text:0000000000000088 .L0 
-     /tmp/cciikDjw.s:115    .text:000000000000008c .L0 
-     /tmp/cciikDjw.s:117    .text:0000000000000090 .L0 
-     /tmp/cciikDjw.s:118    .text:0000000000000090 .L0 
-     /tmp/cciikDjw.s:120    .text:0000000000000094 .L0 
-GAS LISTING /tmp/cciikDjw.s 			page 12
+     /tmp/ccsjMfoc.s:10     .text:0000000000000000 kern_mem_alloc
+     /tmp/ccsjMfoc.s:14     .text:0000000000000000 .L0 
+     /tmp/ccsjMfoc.s:16     .text:0000000000000000 .L0 
+     /tmp/ccsjMfoc.s:17     .text:0000000000000004 .L0 
+     /tmp/ccsjMfoc.s:19     .text:0000000000000008 .L0 
+     /tmp/ccsjMfoc.s:21     .text:000000000000000c .L0 
+     /tmp/ccsjMfoc.s:24     .text:0000000000000010 .L0 
+     /tmp/ccsjMfoc.s:362    .sbss:0000000000000000 freeHead
+     /tmp/ccsjMfoc.s:25     .text:0000000000000010 .L0 
+     /tmp/ccsjMfoc.s:28     .text:0000000000000018 .L0 
+     /tmp/ccsjMfoc.s:29     .text:0000000000000018 .L0 
+     /tmp/ccsjMfoc.s:30     .text:0000000000000018 .L0 
+     /tmp/ccsjMfoc.s:33     .text:000000000000001c .L0 
+     /tmp/ccsjMfoc.s:35     .text:0000000000000020 .L0 
+     /tmp/ccsjMfoc.s:39     .text:0000000000000024 .L0 
+     /tmp/ccsjMfoc.s:40     .text:0000000000000024 .L0 
+     /tmp/ccsjMfoc.s:42     .text:0000000000000028 .L0 
+     /tmp/ccsjMfoc.s:43     .text:0000000000000028 .L0 
+     /tmp/ccsjMfoc.s:45     .text:000000000000002c .L0 
+     /tmp/ccsjMfoc.s:48     .text:0000000000000030 .L0 
+     /tmp/ccsjMfoc.s:49     .text:0000000000000030 .L0 
+     /tmp/ccsjMfoc.s:51     .text:0000000000000034 .L0 
+     /tmp/ccsjMfoc.s:52     .text:0000000000000034 .L0 
+     /tmp/ccsjMfoc.s:56     .text:0000000000000038 .L0 
+     /tmp/ccsjMfoc.s:57     .text:000000000000003c .L0 
+     /tmp/ccsjMfoc.s:58     .text:000000000000003c .L0 
+     /tmp/ccsjMfoc.s:59     .text:000000000000003c .L0 
+     /tmp/ccsjMfoc.s:61     .text:0000000000000040 .L0 
+     /tmp/ccsjMfoc.s:65     .text:0000000000000044 .L0 
+     /tmp/ccsjMfoc.s:67     .text:0000000000000044 .L0 
+     /tmp/ccsjMfoc.s:68     .text:0000000000000044 .L0 
+     /tmp/ccsjMfoc.s:70     .text:0000000000000048 .L0 
+     /tmp/ccsjMfoc.s:76     .text:0000000000000054 .L0 
+     /tmp/ccsjMfoc.s:77     .text:0000000000000054 .L0 
+     /tmp/ccsjMfoc.s:83     .text:0000000000000060 .L0 
+     /tmp/ccsjMfoc.s:84     .text:0000000000000060 .L0 
+     /tmp/ccsjMfoc.s:85     .text:0000000000000060 .L0 
+     /tmp/ccsjMfoc.s:87     .text:0000000000000064 .L0 
+     /tmp/ccsjMfoc.s:91     .text:0000000000000068 .L0 
+     /tmp/ccsjMfoc.s:93     .text:000000000000006c .L0 
+     /tmp/ccsjMfoc.s:94     .text:000000000000006c .L0 
+     /tmp/ccsjMfoc.s:96     .text:0000000000000070 .L0 
+     /tmp/ccsjMfoc.s:98     .text:0000000000000074 .L0 
+     /tmp/ccsjMfoc.s:100    .text:0000000000000078 .L0 
+     /tmp/ccsjMfoc.s:101    .text:0000000000000078 .L0 
+     /tmp/ccsjMfoc.s:104    .text:000000000000007c .L0 
+     /tmp/ccsjMfoc.s:105    .text:000000000000007c .L0 
+     /tmp/ccsjMfoc.s:107    .text:0000000000000080 .L0 
+     /tmp/ccsjMfoc.s:110    .text:0000000000000084 .L0 
+     /tmp/ccsjMfoc.s:111    .text:0000000000000084 .L0 
+     /tmp/ccsjMfoc.s:113    .text:0000000000000088 .L0 
+     /tmp/ccsjMfoc.s:115    .text:000000000000008c .L0 
+     /tmp/ccsjMfoc.s:117    .text:0000000000000090 .L0 
+     /tmp/ccsjMfoc.s:118    .text:0000000000000090 .L0 
+     /tmp/ccsjMfoc.s:120    .text:0000000000000094 .L0 
+GAS LISTING /tmp/ccsjMfoc.s 			page 12
 
 
-     /tmp/cciikDjw.s:122    .text:0000000000000098 .L0 
-     /tmp/cciikDjw.s:124    .text:000000000000009c .L0 
-     /tmp/cciikDjw.s:126    .text:00000000000000a0 .L0 
-     /tmp/cciikDjw.s:127    .text:00000000000000a0 .L0 
-     /tmp/cciikDjw.s:129    .text:00000000000000a4 .L0 
-     /tmp/cciikDjw.s:131    .text:00000000000000a8 .L0 
-     /tmp/cciikDjw.s:132    .text:00000000000000a8 .L0 
-     /tmp/cciikDjw.s:134    .text:00000000000000b0 .L0 
-     /tmp/cciikDjw.s:136    .text:00000000000000b4 .L0 
-     /tmp/cciikDjw.s:137    .text:00000000000000b4 .L0 
-     /tmp/cciikDjw.s:140    .text:00000000000000b8 .L0 
-     /tmp/cciikDjw.s:141    .text:00000000000000b8 .L0 
-     /tmp/cciikDjw.s:143    .text:00000000000000bc .L0 
-     /tmp/cciikDjw.s:144    .text:00000000000000bc .L0 
-     /tmp/cciikDjw.s:148    .text:00000000000000c4 .L0 
-     /tmp/cciikDjw.s:154    .text:00000000000000c4 kern_mem_free
-     /tmp/cciikDjw.s:157    .text:00000000000000c4 .L0 
-     /tmp/cciikDjw.s:159    .text:00000000000000c4 .L0 
-     /tmp/cciikDjw.s:160    .text:00000000000000c8 .L0 
-     /tmp/cciikDjw.s:162    .text:00000000000000cc .L0 
-     /tmp/cciikDjw.s:164    .text:00000000000000d0 .L0 
-     /tmp/cciikDjw.s:166    .text:00000000000000d0 .L0 
-     /tmp/cciikDjw.s:167    .text:00000000000000d0 .L0 
-     /tmp/cciikDjw.s:170    .text:00000000000000d4 .L0 
-     /tmp/cciikDjw.s:171    .text:00000000000000d4 .L0 
-     /tmp/cciikDjw.s:174    .text:00000000000000dc .L0 
-     /tmp/cciikDjw.s:175    .text:00000000000000dc .L0 
-     /tmp/cciikDjw.s:176    .text:00000000000000dc .L0 
-     /tmp/cciikDjw.s:180    .text:00000000000000e0 .L0 
-     /tmp/cciikDjw.s:182    .text:00000000000000e4 .L0 
-     /tmp/cciikDjw.s:185    .text:00000000000000e8 .L0 
-     /tmp/cciikDjw.s:186    .text:00000000000000e8 .L0 
-     /tmp/cciikDjw.s:187    .text:00000000000000e8 .L0 
-     /tmp/cciikDjw.s:189    .text:00000000000000ec .L0 
-     /tmp/cciikDjw.s:194    .text:00000000000000f4 .L0 
-     /tmp/cciikDjw.s:195    .text:00000000000000f4 .L0 
-     /tmp/cciikDjw.s:197    .text:00000000000000f8 .L0 
-     /tmp/cciikDjw.s:198    .text:00000000000000f8 .L0 
-     /tmp/cciikDjw.s:200    .text:00000000000000fc .L0 
-     /tmp/cciikDjw.s:202    .text:0000000000000100 .L0 
-     /tmp/cciikDjw.s:204    .text:0000000000000104 .L0 
-     /tmp/cciikDjw.s:206    .text:0000000000000108 .L0 
-     /tmp/cciikDjw.s:208    .text:000000000000010c .L0 
-     /tmp/cciikDjw.s:209    .text:000000000000010c .L0 
-     /tmp/cciikDjw.s:213    .text:0000000000000110 .L0 
-     /tmp/cciikDjw.s:214    .text:0000000000000110 .L0 
-     /tmp/cciikDjw.s:216    .text:0000000000000114 .L0 
-     /tmp/cciikDjw.s:217    .text:0000000000000114 .L0 
-     /tmp/cciikDjw.s:219    .text:0000000000000118 .L0 
-     /tmp/cciikDjw.s:221    .text:000000000000011c .L0 
-     /tmp/cciikDjw.s:223    .text:0000000000000120 .L0 
-     /tmp/cciikDjw.s:225    .text:0000000000000124 .L0 
-     /tmp/cciikDjw.s:227    .text:0000000000000128 .L0 
-     /tmp/cciikDjw.s:228    .text:0000000000000128 .L0 
-     /tmp/cciikDjw.s:232    .text:000000000000012c .L0 
-     /tmp/cciikDjw.s:233    .text:000000000000012c .L0 
-     /tmp/cciikDjw.s:236    .text:0000000000000134 .L0 
-GAS LISTING /tmp/cciikDjw.s 			page 13
+     /tmp/ccsjMfoc.s:122    .text:0000000000000098 .L0 
+     /tmp/ccsjMfoc.s:124    .text:000000000000009c .L0 
+     /tmp/ccsjMfoc.s:126    .text:00000000000000a0 .L0 
+     /tmp/ccsjMfoc.s:127    .text:00000000000000a0 .L0 
+     /tmp/ccsjMfoc.s:129    .text:00000000000000a4 .L0 
+     /tmp/ccsjMfoc.s:131    .text:00000000000000a8 .L0 
+     /tmp/ccsjMfoc.s:132    .text:00000000000000a8 .L0 
+     /tmp/ccsjMfoc.s:134    .text:00000000000000b0 .L0 
+     /tmp/ccsjMfoc.s:136    .text:00000000000000b4 .L0 
+     /tmp/ccsjMfoc.s:137    .text:00000000000000b4 .L0 
+     /tmp/ccsjMfoc.s:140    .text:00000000000000b8 .L0 
+     /tmp/ccsjMfoc.s:141    .text:00000000000000b8 .L0 
+     /tmp/ccsjMfoc.s:143    .text:00000000000000bc .L0 
+     /tmp/ccsjMfoc.s:144    .text:00000000000000bc .L0 
+     /tmp/ccsjMfoc.s:148    .text:00000000000000c4 .L0 
+     /tmp/ccsjMfoc.s:154    .text:00000000000000c4 kern_mem_free
+     /tmp/ccsjMfoc.s:157    .text:00000000000000c4 .L0 
+     /tmp/ccsjMfoc.s:159    .text:00000000000000c4 .L0 
+     /tmp/ccsjMfoc.s:160    .text:00000000000000c8 .L0 
+     /tmp/ccsjMfoc.s:162    .text:00000000000000cc .L0 
+     /tmp/ccsjMfoc.s:164    .text:00000000000000d0 .L0 
+     /tmp/ccsjMfoc.s:166    .text:00000000000000d0 .L0 
+     /tmp/ccsjMfoc.s:167    .text:00000000000000d0 .L0 
+     /tmp/ccsjMfoc.s:170    .text:00000000000000d4 .L0 
+     /tmp/ccsjMfoc.s:171    .text:00000000000000d4 .L0 
+     /tmp/ccsjMfoc.s:174    .text:00000000000000dc .L0 
+     /tmp/ccsjMfoc.s:175    .text:00000000000000dc .L0 
+     /tmp/ccsjMfoc.s:176    .text:00000000000000dc .L0 
+     /tmp/ccsjMfoc.s:180    .text:00000000000000e0 .L0 
+     /tmp/ccsjMfoc.s:182    .text:00000000000000e4 .L0 
+     /tmp/ccsjMfoc.s:185    .text:00000000000000e8 .L0 
+     /tmp/ccsjMfoc.s:186    .text:00000000000000e8 .L0 
+     /tmp/ccsjMfoc.s:187    .text:00000000000000e8 .L0 
+     /tmp/ccsjMfoc.s:189    .text:00000000000000ec .L0 
+     /tmp/ccsjMfoc.s:194    .text:00000000000000f4 .L0 
+     /tmp/ccsjMfoc.s:195    .text:00000000000000f4 .L0 
+     /tmp/ccsjMfoc.s:197    .text:00000000000000f8 .L0 
+     /tmp/ccsjMfoc.s:198    .text:00000000000000f8 .L0 
+     /tmp/ccsjMfoc.s:200    .text:00000000000000fc .L0 
+     /tmp/ccsjMfoc.s:202    .text:0000000000000100 .L0 
+     /tmp/ccsjMfoc.s:204    .text:0000000000000104 .L0 
+     /tmp/ccsjMfoc.s:206    .text:0000000000000108 .L0 
+     /tmp/ccsjMfoc.s:208    .text:000000000000010c .L0 
+     /tmp/ccsjMfoc.s:209    .text:000000000000010c .L0 
+     /tmp/ccsjMfoc.s:213    .text:0000000000000110 .L0 
+     /tmp/ccsjMfoc.s:214    .text:0000000000000110 .L0 
+     /tmp/ccsjMfoc.s:216    .text:0000000000000114 .L0 
+     /tmp/ccsjMfoc.s:217    .text:0000000000000114 .L0 
+     /tmp/ccsjMfoc.s:219    .text:0000000000000118 .L0 
+     /tmp/ccsjMfoc.s:221    .text:000000000000011c .L0 
+     /tmp/ccsjMfoc.s:223    .text:0000000000000120 .L0 
+     /tmp/ccsjMfoc.s:225    .text:0000000000000124 .L0 
+     /tmp/ccsjMfoc.s:227    .text:0000000000000128 .L0 
+     /tmp/ccsjMfoc.s:228    .text:0000000000000128 .L0 
+     /tmp/ccsjMfoc.s:232    .text:000000000000012c .L0 
+     /tmp/ccsjMfoc.s:233    .text:000000000000012c .L0 
+     /tmp/ccsjMfoc.s:236    .text:0000000000000134 .L0 
+GAS LISTING /tmp/ccsjMfoc.s 			page 13
 
 
-     /tmp/cciikDjw.s:237    .text:0000000000000134 .L0 
-     /tmp/cciikDjw.s:238    .text:0000000000000134 .L0 
-     /tmp/cciikDjw.s:240    .text:0000000000000138 .L0 
-     /tmp/cciikDjw.s:244    .text:000000000000013c .L0 
-     /tmp/cciikDjw.s:246    .text:000000000000013c .L0 
-     /tmp/cciikDjw.s:247    .text:000000000000013c .L0 
-     /tmp/cciikDjw.s:250    .text:0000000000000140 .L0 
-     /tmp/cciikDjw.s:254    .text:0000000000000148 .L0 
-     /tmp/cciikDjw.s:255    .text:0000000000000148 .L0 
-     /tmp/cciikDjw.s:260    .text:0000000000000150 .L0 
-     /tmp/cciikDjw.s:261    .text:0000000000000150 .L0 
-     /tmp/cciikDjw.s:266    .text:000000000000015c .L0 
-     /tmp/cciikDjw.s:267    .text:000000000000015c .L0 
-     /tmp/cciikDjw.s:269    .text:0000000000000160 .L0 
-     /tmp/cciikDjw.s:272    .text:0000000000000168 .L0 
-     /tmp/cciikDjw.s:273    .text:0000000000000168 .L0 
-     /tmp/cciikDjw.s:276    .text:000000000000016c .L0 
-     /tmp/cciikDjw.s:278    .text:0000000000000174 .L0 
-     /tmp/cciikDjw.s:284    .text:0000000000000174 kern_mem_init
-     /tmp/cciikDjw.s:287    .text:0000000000000174 .L0 
-     /tmp/cciikDjw.s:289    .text:0000000000000174 .L0 
-     /tmp/cciikDjw.s:290    .text:0000000000000178 .L0 
-     /tmp/cciikDjw.s:292    .text:000000000000017c .L0 
-     /tmp/cciikDjw.s:294    .text:0000000000000180 .L0 
-     /tmp/cciikDjw.s:297    .text:0000000000000180 .L0 
-     /tmp/cciikDjw.s:298    .text:0000000000000180 .L0 
-     /tmp/cciikDjw.s:299    .text:0000000000000180 .L0 
-     /tmp/cciikDjw.s:302    .text:0000000000000184 .L0 
-     /tmp/cciikDjw.s:303    .text:0000000000000184 .L0 
-     /tmp/cciikDjw.s:305    .text:0000000000000188 .L0 
-     /tmp/cciikDjw.s:307    .text:000000000000018c .L0 
-     /tmp/cciikDjw.s:308    .text:000000000000018c .L0 
-     /tmp/cciikDjw.s:311    .text:0000000000000190 .L0 
-     /tmp/cciikDjw.s:313    .text:0000000000000194 .L0 
-     /tmp/cciikDjw.s:317    .text:0000000000000198 .L0 
-     /tmp/cciikDjw.s:318    .text:0000000000000198 .L0 
-     /tmp/cciikDjw.s:320    .text:000000000000019c .L0 
-     /tmp/cciikDjw.s:322    .text:00000000000001a0 .L0 
-     /tmp/cciikDjw.s:323    .text:00000000000001a0 .L0 
-     /tmp/cciikDjw.s:327    .text:00000000000001a4 .L0 
-     /tmp/cciikDjw.s:328    .text:00000000000001a4 .L0 
-     /tmp/cciikDjw.s:332    .text:00000000000001b0 .L0 
-     /tmp/cciikDjw.s:333    .text:00000000000001b0 .L0 
-     /tmp/cciikDjw.s:335    .text:00000000000001b4 .L0 
-     /tmp/cciikDjw.s:336    .text:00000000000001b4 .L0 
-     /tmp/cciikDjw.s:338    .text:00000000000001b8 .L0 
-     /tmp/cciikDjw.s:339    .text:00000000000001b8 .L0 
-     /tmp/cciikDjw.s:342    .text:00000000000001bc .L0 
-     /tmp/cciikDjw.s:344    .text:00000000000001c0 .L0 
-     /tmp/cciikDjw.s:346    .text:00000000000001c4 .L0 
-     /tmp/cciikDjw.s:348    .text:00000000000001c8 .L0 
-     /tmp/cciikDjw.s:349    .text:00000000000001cc .L0 
-     /tmp/cciikDjw.s:350    .text:00000000000001cc .L0 
-     /tmp/cciikDjw.s:352    .text:00000000000001d0 .L0 
-     /tmp/cciikDjw.s:354    .text:00000000000001d4 .L0 
-     /tmp/cciikDjw.s:367    .text:00000000000001d4 .L0 
+     /tmp/ccsjMfoc.s:237    .text:0000000000000134 .L0 
+     /tmp/ccsjMfoc.s:238    .text:0000000000000134 .L0 
+     /tmp/ccsjMfoc.s:240    .text:0000000000000138 .L0 
+     /tmp/ccsjMfoc.s:244    .text:000000000000013c .L0 
+     /tmp/ccsjMfoc.s:246    .text:000000000000013c .L0 
+     /tmp/ccsjMfoc.s:247    .text:000000000000013c .L0 
+     /tmp/ccsjMfoc.s:250    .text:0000000000000140 .L0 
+     /tmp/ccsjMfoc.s:254    .text:0000000000000148 .L0 
+     /tmp/ccsjMfoc.s:255    .text:0000000000000148 .L0 
+     /tmp/ccsjMfoc.s:260    .text:0000000000000150 .L0 
+     /tmp/ccsjMfoc.s:261    .text:0000000000000150 .L0 
+     /tmp/ccsjMfoc.s:266    .text:000000000000015c .L0 
+     /tmp/ccsjMfoc.s:267    .text:000000000000015c .L0 
+     /tmp/ccsjMfoc.s:269    .text:0000000000000160 .L0 
+     /tmp/ccsjMfoc.s:272    .text:0000000000000168 .L0 
+     /tmp/ccsjMfoc.s:273    .text:0000000000000168 .L0 
+     /tmp/ccsjMfoc.s:276    .text:000000000000016c .L0 
+     /tmp/ccsjMfoc.s:278    .text:0000000000000174 .L0 
+     /tmp/ccsjMfoc.s:284    .text:0000000000000174 kern_mem_init
+     /tmp/ccsjMfoc.s:287    .text:0000000000000174 .L0 
+     /tmp/ccsjMfoc.s:289    .text:0000000000000174 .L0 
+     /tmp/ccsjMfoc.s:290    .text:0000000000000178 .L0 
+     /tmp/ccsjMfoc.s:292    .text:000000000000017c .L0 
+     /tmp/ccsjMfoc.s:294    .text:0000000000000180 .L0 
+     /tmp/ccsjMfoc.s:297    .text:0000000000000180 .L0 
+     /tmp/ccsjMfoc.s:298    .text:0000000000000180 .L0 
+     /tmp/ccsjMfoc.s:299    .text:0000000000000180 .L0 
+     /tmp/ccsjMfoc.s:302    .text:0000000000000184 .L0 
+     /tmp/ccsjMfoc.s:303    .text:0000000000000184 .L0 
+     /tmp/ccsjMfoc.s:305    .text:0000000000000188 .L0 
+     /tmp/ccsjMfoc.s:307    .text:000000000000018c .L0 
+     /tmp/ccsjMfoc.s:308    .text:000000000000018c .L0 
+     /tmp/ccsjMfoc.s:311    .text:0000000000000190 .L0 
+     /tmp/ccsjMfoc.s:313    .text:0000000000000194 .L0 
+     /tmp/ccsjMfoc.s:317    .text:0000000000000198 .L0 
+     /tmp/ccsjMfoc.s:318    .text:0000000000000198 .L0 
+     /tmp/ccsjMfoc.s:320    .text:000000000000019c .L0 
+     /tmp/ccsjMfoc.s:322    .text:00000000000001a0 .L0 
+     /tmp/ccsjMfoc.s:323    .text:00000000000001a0 .L0 
+     /tmp/ccsjMfoc.s:327    .text:00000000000001a4 .L0 
+     /tmp/ccsjMfoc.s:328    .text:00000000000001a4 .L0 
+     /tmp/ccsjMfoc.s:332    .text:00000000000001b0 .L0 
+     /tmp/ccsjMfoc.s:333    .text:00000000000001b0 .L0 
+     /tmp/ccsjMfoc.s:335    .text:00000000000001b4 .L0 
+     /tmp/ccsjMfoc.s:336    .text:00000000000001b4 .L0 
+     /tmp/ccsjMfoc.s:338    .text:00000000000001b8 .L0 
+     /tmp/ccsjMfoc.s:339    .text:00000000000001b8 .L0 
+     /tmp/ccsjMfoc.s:342    .text:00000000000001bc .L0 
+     /tmp/ccsjMfoc.s:344    .text:00000000000001c0 .L0 
+     /tmp/ccsjMfoc.s:346    .text:00000000000001c4 .L0 
+     /tmp/ccsjMfoc.s:348    .text:00000000000001c8 .L0 
+     /tmp/ccsjMfoc.s:349    .text:00000000000001cc .L0 
+     /tmp/ccsjMfoc.s:350    .text:00000000000001cc .L0 
+     /tmp/ccsjMfoc.s:352    .text:00000000000001d0 .L0 
+     /tmp/ccsjMfoc.s:354    .text:00000000000001d4 .L0 
+     /tmp/ccsjMfoc.s:367    .text:00000000000001d4 .L0 
                      .debug_frame:0000000000000000 .L0 
-GAS LISTING /tmp/cciikDjw.s 			page 14
+GAS LISTING /tmp/ccsjMfoc.s 			page 14
 
 
-     /tmp/cciikDjw.s:25     .text:0000000000000010 .L0 
-     /tmp/cciikDjw.s:70     .text:0000000000000048 .L0 
-     /tmp/cciikDjw.s:77     .text:0000000000000054 .L0 
-     /tmp/cciikDjw.s:132    .text:00000000000000a8 .L0 
-     /tmp/cciikDjw.s:171    .text:00000000000000d4 .L0 
-     /tmp/cciikDjw.s:261    .text:0000000000000150 .L0 
-     /tmp/cciikDjw.s:328    .text:00000000000001a4 .L0 
-     /tmp/cciikDjw.s:89     .text:0000000000000068 .L2
-     /tmp/cciikDjw.s:64     .text:0000000000000044 .L12
-     /tmp/cciikDjw.s:46     .text:0000000000000030 .L5
-     /tmp/cciikDjw.s:138    .text:00000000000000b8 .L9
-     /tmp/cciikDjw.s:54     .text:0000000000000038 .L1
-     /tmp/cciikDjw.s:37     .text:0000000000000024 .L13
-     /tmp/cciikDjw.s:80     .text:0000000000000060 .L7
-     /tmp/cciikDjw.s:73     .text:0000000000000054 .L14
-     /tmp/cciikDjw.s:192    .text:00000000000000f4 .L17
-     /tmp/cciikDjw.s:178    .text:00000000000000e0 .L16
-     /tmp/cciikDjw.s:258    .text:0000000000000150 .L19
-     /tmp/cciikDjw.s:243    .text:000000000000013c .L25
-     /tmp/cciikDjw.s:230    .text:000000000000012c .L22
-     /tmp/cciikDjw.s:264    .text:000000000000015c .L26
-     /tmp/cciikDjw.s:211    .text:0000000000000110 .L21
-     /tmp/cciikDjw.s:315    .text:0000000000000198 .L28
-     /tmp/cciikDjw.s:325    .text:00000000000001a4 .L29
-     /tmp/cciikDjw.s:668    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
-     /tmp/cciikDjw.s:1287   .debug_str:000000000000010d .LASF32
-     /tmp/cciikDjw.s:1281   .debug_str:00000000000000de .LASF33
-     /tmp/cciikDjw.s:1303   .debug_str:0000000000000206 .LASF34
-     /tmp/cciikDjw.s:5      .text:0000000000000000 .Ltext0
-     /tmp/cciikDjw.s:365    .text:00000000000001d4 .Letext0
-     /tmp/cciikDjw.s:1243   .debug_line:0000000000000000 .Ldebug_line0
-     /tmp/cciikDjw.s:1289   .debug_str:00000000000001ab .LASF0
-     /tmp/cciikDjw.s:1275   .debug_str:00000000000000b2 .LASF1
-     /tmp/cciikDjw.s:1271   .debug_str:0000000000000092 .LASF2
-     /tmp/cciikDjw.s:1255   .debug_str:0000000000000032 .LASF4
-     /tmp/cciikDjw.s:1273   .debug_str:00000000000000a0 .LASF3
-     /tmp/cciikDjw.s:1247   .debug_str:0000000000000013 .LASF5
-     /tmp/cciikDjw.s:1245   .debug_str:0000000000000000 .LASF6
-     /tmp/cciikDjw.s:1267   .debug_str:0000000000000070 .LASF7
-     /tmp/cciikDjw.s:1297   .debug_str:00000000000001d0 .LASF8
-     /tmp/cciikDjw.s:1253   .debug_str:0000000000000024 .LASF9
-     /tmp/cciikDjw.s:1317   .debug_str:0000000000000263 .LASF10
-     /tmp/cciikDjw.s:1269   .debug_str:0000000000000083 .LASF11
-     /tmp/cciikDjw.s:1309   .debug_str:0000000000000236 .LASF12
-     /tmp/cciikDjw.s:1301   .debug_str:00000000000001f6 .LASF13
-     /tmp/cciikDjw.s:1279   .debug_str:00000000000000d2 .LASF14
-     /tmp/cciikDjw.s:1261   .debug_str:0000000000000050 .LASF15
-     /tmp/cciikDjw.s:1299   .debug_str:00000000000001e0 .LASF16
-     /tmp/cciikDjw.s:1311   .debug_str:0000000000000246 .LASF35
-     /tmp/cciikDjw.s:1305   .debug_str:000000000000021d .LASF17
-     /tmp/cciikDjw.s:1257   .debug_str:0000000000000039 .LASF18
-     /tmp/cciikDjw.s:1249   .debug_str:000000000000001a .LASF19
-     /tmp/cciikDjw.s:1307   .debug_str:000000000000022a .LASF20
-     /tmp/cciikDjw.s:1259   .debug_str:0000000000000047 .LASF21
-     /tmp/cciikDjw.s:1313   .debug_str:0000000000000250 .LASF29
-     /tmp/cciikDjw.s:285    .text:0000000000000174 .LFB2
-     /tmp/cciikDjw.s:355    .text:00000000000001d4 .LFE2
-GAS LISTING /tmp/cciikDjw.s 			page 15
+     /tmp/ccsjMfoc.s:25     .text:0000000000000010 .L0 
+     /tmp/ccsjMfoc.s:70     .text:0000000000000048 .L0 
+     /tmp/ccsjMfoc.s:77     .text:0000000000000054 .L0 
+     /tmp/ccsjMfoc.s:132    .text:00000000000000a8 .L0 
+     /tmp/ccsjMfoc.s:171    .text:00000000000000d4 .L0 
+     /tmp/ccsjMfoc.s:261    .text:0000000000000150 .L0 
+     /tmp/ccsjMfoc.s:328    .text:00000000000001a4 .L0 
+     /tmp/ccsjMfoc.s:89     .text:0000000000000068 .L2
+     /tmp/ccsjMfoc.s:64     .text:0000000000000044 .L12
+     /tmp/ccsjMfoc.s:46     .text:0000000000000030 .L5
+     /tmp/ccsjMfoc.s:138    .text:00000000000000b8 .L9
+     /tmp/ccsjMfoc.s:54     .text:0000000000000038 .L1
+     /tmp/ccsjMfoc.s:37     .text:0000000000000024 .L13
+     /tmp/ccsjMfoc.s:80     .text:0000000000000060 .L7
+     /tmp/ccsjMfoc.s:73     .text:0000000000000054 .L14
+     /tmp/ccsjMfoc.s:192    .text:00000000000000f4 .L17
+     /tmp/ccsjMfoc.s:178    .text:00000000000000e0 .L16
+     /tmp/ccsjMfoc.s:258    .text:0000000000000150 .L19
+     /tmp/ccsjMfoc.s:243    .text:000000000000013c .L25
+     /tmp/ccsjMfoc.s:230    .text:000000000000012c .L22
+     /tmp/ccsjMfoc.s:264    .text:000000000000015c .L26
+     /tmp/ccsjMfoc.s:211    .text:0000000000000110 .L21
+     /tmp/ccsjMfoc.s:315    .text:0000000000000198 .L28
+     /tmp/ccsjMfoc.s:325    .text:00000000000001a4 .L29
+     /tmp/ccsjMfoc.s:668    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccsjMfoc.s:1287   .debug_str:000000000000010d .LASF32
+     /tmp/ccsjMfoc.s:1281   .debug_str:00000000000000de .LASF33
+     /tmp/ccsjMfoc.s:1303   .debug_str:0000000000000206 .LASF34
+     /tmp/ccsjMfoc.s:5      .text:0000000000000000 .Ltext0
+     /tmp/ccsjMfoc.s:365    .text:00000000000001d4 .Letext0
+     /tmp/ccsjMfoc.s:1243   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccsjMfoc.s:1289   .debug_str:00000000000001ab .LASF0
+     /tmp/ccsjMfoc.s:1275   .debug_str:00000000000000b2 .LASF1
+     /tmp/ccsjMfoc.s:1271   .debug_str:0000000000000092 .LASF2
+     /tmp/ccsjMfoc.s:1255   .debug_str:0000000000000032 .LASF4
+     /tmp/ccsjMfoc.s:1273   .debug_str:00000000000000a0 .LASF3
+     /tmp/ccsjMfoc.s:1247   .debug_str:0000000000000013 .LASF5
+     /tmp/ccsjMfoc.s:1245   .debug_str:0000000000000000 .LASF6
+     /tmp/ccsjMfoc.s:1267   .debug_str:0000000000000070 .LASF7
+     /tmp/ccsjMfoc.s:1297   .debug_str:00000000000001d0 .LASF8
+     /tmp/ccsjMfoc.s:1253   .debug_str:0000000000000024 .LASF9
+     /tmp/ccsjMfoc.s:1317   .debug_str:0000000000000263 .LASF10
+     /tmp/ccsjMfoc.s:1269   .debug_str:0000000000000083 .LASF11
+     /tmp/ccsjMfoc.s:1309   .debug_str:0000000000000236 .LASF12
+     /tmp/ccsjMfoc.s:1301   .debug_str:00000000000001f6 .LASF13
+     /tmp/ccsjMfoc.s:1279   .debug_str:00000000000000d2 .LASF14
+     /tmp/ccsjMfoc.s:1261   .debug_str:0000000000000050 .LASF15
+     /tmp/ccsjMfoc.s:1299   .debug_str:00000000000001e0 .LASF16
+     /tmp/ccsjMfoc.s:1311   .debug_str:0000000000000246 .LASF35
+     /tmp/ccsjMfoc.s:1305   .debug_str:000000000000021d .LASF17
+     /tmp/ccsjMfoc.s:1257   .debug_str:0000000000000039 .LASF18
+     /tmp/ccsjMfoc.s:1249   .debug_str:000000000000001a .LASF19
+     /tmp/ccsjMfoc.s:1307   .debug_str:000000000000022a .LASF20
+     /tmp/ccsjMfoc.s:1259   .debug_str:0000000000000047 .LASF21
+     /tmp/ccsjMfoc.s:1313   .debug_str:0000000000000250 .LASF29
+     /tmp/ccsjMfoc.s:285    .text:0000000000000174 .LFB2
+     /tmp/ccsjMfoc.s:355    .text:00000000000001d4 .LFE2
+GAS LISTING /tmp/ccsjMfoc.s 			page 15
 
 
-     /tmp/cciikDjw.s:1291   .debug_str:00000000000001b8 .LASF22
-     /tmp/cciikDjw.s:1003   .debug_loc:0000000000000000 .LLST8
-     /tmp/cciikDjw.s:1021   .debug_loc:000000000000004c .LLST9
-     /tmp/cciikDjw.s:1295   .debug_str:00000000000001c9 .LASF23
-     /tmp/cciikDjw.s:1032   .debug_loc:0000000000000082 .LLST10
-     /tmp/cciikDjw.s:1263   .debug_str:0000000000000066 .LASF24
-     /tmp/cciikDjw.s:1046   .debug_loc:00000000000000bb .LLST11
-     /tmp/cciikDjw.s:1285   .debug_str:00000000000000ff .LASF36
-     /tmp/cciikDjw.s:155    .text:00000000000000c4 .LFB1
-     /tmp/cciikDjw.s:279    .text:0000000000000174 .LFE1
-     /tmp/cciikDjw.s:1265   .debug_str:000000000000006b .LASF25
-     /tmp/cciikDjw.s:1064   .debug_loc:0000000000000107 .LLST4
-     /tmp/cciikDjw.s:1293   .debug_str:00000000000001be .LASF26
-     /tmp/cciikDjw.s:1082   .debug_loc:0000000000000153 .LLST5
-     /tmp/cciikDjw.s:1251   .debug_str:000000000000001f .LASF27
-     /tmp/cciikDjw.s:1103   .debug_loc:00000000000001b2 .LLST6
-     /tmp/cciikDjw.s:1315   .debug_str:000000000000025e .LASF28
-     /tmp/cciikDjw.s:1123   .debug_loc:000000000000020f .LLST7
-     /tmp/cciikDjw.s:1283   .debug_str:00000000000000f0 .LASF30
-     /tmp/cciikDjw.s:11     .text:0000000000000000 .LFB0
-     /tmp/cciikDjw.s:149    .text:00000000000000c4 .LFE0
-     /tmp/cciikDjw.s:1147   .debug_loc:000000000000027f .LLST0
-     /tmp/cciikDjw.s:1161   .debug_loc:00000000000002b8 .LLST1
-     /tmp/cciikDjw.s:1191   .debug_loc:000000000000033e .LLST2
-     /tmp/cciikDjw.s:1235   .debug_ranges:0000000000000000 .Ldebug_ranges0
-     /tmp/cciikDjw.s:1277   .debug_str:00000000000000c5 .LASF31
-     /tmp/cciikDjw.s:1211   .debug_loc:000000000000039b .LLST3
-     /tmp/cciikDjw.s:288    .text:0000000000000174 .LVL26
-     /tmp/cciikDjw.s:309    .text:0000000000000190 .LVL29
-     /tmp/cciikDjw.s:314    .text:0000000000000198 .LVL30
-     /tmp/cciikDjw.s:340    .text:00000000000001bc .LVL33
-     /tmp/cciikDjw.s:324    .text:00000000000001a4 .LVL31
-     /tmp/cciikDjw.s:296    .text:0000000000000180 .LVL27
-     /tmp/cciikDjw.s:300    .text:0000000000000184 .LVL28
-     /tmp/cciikDjw.s:329    .text:00000000000001ac .LVL32
-     /tmp/cciikDjw.s:158    .text:00000000000000c4 .LVL11
-     /tmp/cciikDjw.s:234    .text:0000000000000130 .LVL19
-     /tmp/cciikDjw.s:242    .text:000000000000013c .LVL20
-     /tmp/cciikDjw.s:168    .text:00000000000000d4 .LVL12
-     /tmp/cciikDjw.s:248    .text:0000000000000140 .LVL21
-     /tmp/cciikDjw.s:253    .text:0000000000000148 .LVL22
-     /tmp/cciikDjw.s:257    .text:0000000000000150 .LVL23
-     /tmp/cciikDjw.s:172    .text:00000000000000dc .LVL13
-     /tmp/cciikDjw.s:184    .text:00000000000000e8 .LVL15
-     /tmp/cciikDjw.s:190    .text:00000000000000f0 .LVL16
-     /tmp/cciikDjw.s:229    .text:000000000000012c .LVL18
-     /tmp/cciikDjw.s:274    .text:000000000000016c .LVL25
-     /tmp/cciikDjw.s:177    .text:00000000000000e0 .LVL14
-     /tmp/cciikDjw.s:210    .text:0000000000000110 .LVL17
-     /tmp/cciikDjw.s:262    .text:0000000000000158 .LVL24
-     /tmp/cciikDjw.s:15     .text:0000000000000000 .LVL0
-     /tmp/cciikDjw.s:31     .text:000000000000001c .LVL2
-     /tmp/cciikDjw.s:26     .text:0000000000000018 .LVL1
-     /tmp/cciikDjw.s:36     .text:0000000000000024 .LVL3
-     /tmp/cciikDjw.s:53     .text:0000000000000038 .LVL4
-     /tmp/cciikDjw.s:63     .text:0000000000000044 .LVL5
-     /tmp/cciikDjw.s:79     .text:0000000000000060 .LVL7
-GAS LISTING /tmp/cciikDjw.s 			page 16
+     /tmp/ccsjMfoc.s:1291   .debug_str:00000000000001b8 .LASF22
+     /tmp/ccsjMfoc.s:1003   .debug_loc:0000000000000000 .LLST8
+     /tmp/ccsjMfoc.s:1021   .debug_loc:000000000000004c .LLST9
+     /tmp/ccsjMfoc.s:1295   .debug_str:00000000000001c9 .LASF23
+     /tmp/ccsjMfoc.s:1032   .debug_loc:0000000000000082 .LLST10
+     /tmp/ccsjMfoc.s:1263   .debug_str:0000000000000066 .LASF24
+     /tmp/ccsjMfoc.s:1046   .debug_loc:00000000000000bb .LLST11
+     /tmp/ccsjMfoc.s:1285   .debug_str:00000000000000ff .LASF36
+     /tmp/ccsjMfoc.s:155    .text:00000000000000c4 .LFB1
+     /tmp/ccsjMfoc.s:279    .text:0000000000000174 .LFE1
+     /tmp/ccsjMfoc.s:1265   .debug_str:000000000000006b .LASF25
+     /tmp/ccsjMfoc.s:1064   .debug_loc:0000000000000107 .LLST4
+     /tmp/ccsjMfoc.s:1293   .debug_str:00000000000001be .LASF26
+     /tmp/ccsjMfoc.s:1082   .debug_loc:0000000000000153 .LLST5
+     /tmp/ccsjMfoc.s:1251   .debug_str:000000000000001f .LASF27
+     /tmp/ccsjMfoc.s:1103   .debug_loc:00000000000001b2 .LLST6
+     /tmp/ccsjMfoc.s:1315   .debug_str:000000000000025e .LASF28
+     /tmp/ccsjMfoc.s:1123   .debug_loc:000000000000020f .LLST7
+     /tmp/ccsjMfoc.s:1283   .debug_str:00000000000000f0 .LASF30
+     /tmp/ccsjMfoc.s:11     .text:0000000000000000 .LFB0
+     /tmp/ccsjMfoc.s:149    .text:00000000000000c4 .LFE0
+     /tmp/ccsjMfoc.s:1147   .debug_loc:000000000000027f .LLST0
+     /tmp/ccsjMfoc.s:1161   .debug_loc:00000000000002b8 .LLST1
+     /tmp/ccsjMfoc.s:1191   .debug_loc:000000000000033e .LLST2
+     /tmp/ccsjMfoc.s:1235   .debug_ranges:0000000000000000 .Ldebug_ranges0
+     /tmp/ccsjMfoc.s:1277   .debug_str:00000000000000c5 .LASF31
+     /tmp/ccsjMfoc.s:1211   .debug_loc:000000000000039b .LLST3
+     /tmp/ccsjMfoc.s:288    .text:0000000000000174 .LVL26
+     /tmp/ccsjMfoc.s:309    .text:0000000000000190 .LVL29
+     /tmp/ccsjMfoc.s:314    .text:0000000000000198 .LVL30
+     /tmp/ccsjMfoc.s:340    .text:00000000000001bc .LVL33
+     /tmp/ccsjMfoc.s:324    .text:00000000000001a4 .LVL31
+     /tmp/ccsjMfoc.s:296    .text:0000000000000180 .LVL27
+     /tmp/ccsjMfoc.s:300    .text:0000000000000184 .LVL28
+     /tmp/ccsjMfoc.s:329    .text:00000000000001ac .LVL32
+     /tmp/ccsjMfoc.s:158    .text:00000000000000c4 .LVL11
+     /tmp/ccsjMfoc.s:234    .text:0000000000000130 .LVL19
+     /tmp/ccsjMfoc.s:242    .text:000000000000013c .LVL20
+     /tmp/ccsjMfoc.s:168    .text:00000000000000d4 .LVL12
+     /tmp/ccsjMfoc.s:248    .text:0000000000000140 .LVL21
+     /tmp/ccsjMfoc.s:253    .text:0000000000000148 .LVL22
+     /tmp/ccsjMfoc.s:257    .text:0000000000000150 .LVL23
+     /tmp/ccsjMfoc.s:172    .text:00000000000000dc .LVL13
+     /tmp/ccsjMfoc.s:184    .text:00000000000000e8 .LVL15
+     /tmp/ccsjMfoc.s:190    .text:00000000000000f0 .LVL16
+     /tmp/ccsjMfoc.s:229    .text:000000000000012c .LVL18
+     /tmp/ccsjMfoc.s:274    .text:000000000000016c .LVL25
+     /tmp/ccsjMfoc.s:177    .text:00000000000000e0 .LVL14
+     /tmp/ccsjMfoc.s:210    .text:0000000000000110 .LVL17
+     /tmp/ccsjMfoc.s:262    .text:0000000000000158 .LVL24
+     /tmp/ccsjMfoc.s:15     .text:0000000000000000 .LVL0
+     /tmp/ccsjMfoc.s:31     .text:000000000000001c .LVL2
+     /tmp/ccsjMfoc.s:26     .text:0000000000000018 .LVL1
+     /tmp/ccsjMfoc.s:36     .text:0000000000000024 .LVL3
+     /tmp/ccsjMfoc.s:53     .text:0000000000000038 .LVL4
+     /tmp/ccsjMfoc.s:63     .text:0000000000000044 .LVL5
+     /tmp/ccsjMfoc.s:79     .text:0000000000000060 .LVL7
+GAS LISTING /tmp/ccsjMfoc.s 			page 16
 
 
-     /tmp/cciikDjw.s:88     .text:0000000000000068 .LVL8
-     /tmp/cciikDjw.s:145    .text:00000000000000c0 .LVL10
-     /tmp/cciikDjw.s:72     .text:0000000000000054 .LVL6
-     /tmp/cciikDjw.s:108    .text:0000000000000084 .LVL9
-     /tmp/cciikDjw.s:368    .debug_info:0000000000000000 .Ldebug_info0
-     /tmp/cciikDjw.s:74     .text:0000000000000054 .LBB2
-     /tmp/cciikDjw.s:81     .text:0000000000000060 .LBE2
-     /tmp/cciikDjw.s:102    .text:000000000000007c .LBB3
-     /tmp/cciikDjw.s:147    .text:00000000000000c4 .LBE3
+     /tmp/ccsjMfoc.s:88     .text:0000000000000068 .LVL8
+     /tmp/ccsjMfoc.s:145    .text:00000000000000c0 .LVL10
+     /tmp/ccsjMfoc.s:72     .text:0000000000000054 .LVL6
+     /tmp/ccsjMfoc.s:108    .text:0000000000000084 .LVL9
+     /tmp/ccsjMfoc.s:368    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccsjMfoc.s:74     .text:0000000000000054 .LBB2
+     /tmp/ccsjMfoc.s:81     .text:0000000000000060 .LBE2
+     /tmp/ccsjMfoc.s:102    .text:000000000000007c .LBB3
+     /tmp/ccsjMfoc.s:147    .text:00000000000000c4 .LBE3
 
 NO UNDEFINED SYMBOLS

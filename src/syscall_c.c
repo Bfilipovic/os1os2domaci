@@ -32,5 +32,32 @@ void thread_dispatch(){
     kern_syscall(THREAD_DISPATCH);
 }
 
-int thread_exit ();
+int thread_exit ()
+{
+    kern_syscall(THREAD_EXIT);
+    return 0;
+}
 
+void thread_join(thread_t handle)
+{
+    kern_syscall(THREAD_JOIN,handle);
+}
+
+int sem_open (sem_t* handle, unsigned init)
+{
+    return kern_syscall(SEM_OPEN,handle,init);
+}
+
+int sem_close (sem_t handle)
+{
+    return kern_syscall(SEM_CLOSE,handle);
+}
+
+int sem_wait (sem_t id)
+{
+    return kern_syscall(SEM_WAIT,id);
+}
+
+int sem_signal (sem_t id){
+    return kern_syscall(SEM_SIGNAL,id);
+}

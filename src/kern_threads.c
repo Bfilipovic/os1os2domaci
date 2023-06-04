@@ -64,11 +64,30 @@ void kern_thread_dispatch()
     }
 }
 
+void kern_thread_end_running()
+{
+    thread_t old = running;
+    old->status=UNUSED;
+    for(int i=0;i<MAX_THREADS;i++){
+        if(threads[i].status==JOINED && threads[i].joined_tid==old->id) threads[i].status=READY;
+    }
+    running=kern_scheduler_get();
+    if(old!=running){
+        if(old->status==RUNNING) old->status=READY;
+        contextSwitch(old,running);
+    }
+}
+
 void kern_thread_wrapper()
 {
     popSppSpie();
     running->body(running->arg);
     running->status=UNUSED;
+    running->sem_next=0;
+    running->joined_tid=-1;
+    for(int i=0;i<MAX_THREADS;i++){
+        if(threads[i].status==JOINED && threads[i].joined_tid==running->id) threads[i].status=READY;
+    }
     kern_thread_yield();
 }
 
@@ -87,13 +106,20 @@ int kern_thread_create(thread_t* handle, void(*start_routine)(void*), void* arg,
 
     t->id=++id;
     t->status=READY;
-    t->type=REGULAR;
     t->arg=arg;
     t->joined_tid=-1;
     t->timeslice=DEFAULT_TIME_SLICE;
     t->body=start_routine;
     t->sp = ((uint64)stack_space);
     t->ra=(uint64) &kern_thread_wrapper;
+    t->sem_next=0;
 
     return 0;
+}
+
+void kern_thread_join(thread_t handle)
+{
+    running->joined_tid=handle->id;
+    running->status=JOINED;
+    kern_thread_dispatch();
 }

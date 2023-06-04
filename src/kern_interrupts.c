@@ -9,6 +9,7 @@
 #include "../h/kern_memory.h"
 #include "../h/kern_threads.h"
 #include "../h/syscall_c.h"
+#include "../h/kern_semaphore.h"
 
 #define INTR_ILLEGAL_INSTRUCTION 0x0000000000000002UL
 #define INTR_ILLEGAL_ADDR_RD 0x0000000000000005UL
@@ -77,6 +78,7 @@ void handleSupervisorTrap()
                                                           (void(*)(void*))start_routine,
                                                           (void*)arg,
                                                           (void*)stack);
+                (*(thread_t*)handle)->endTime=SYSTEM_TIME+DEFAULT_TIME_SLICE;
                 break;
             }
 
@@ -84,12 +86,63 @@ void handleSupervisorTrap()
                 uint64 volatile sstatus = r_sstatus();
                 uint64 volatile v_sepc = r_sepc();
                 kern_thread_dispatch();
-
                 w_sstatus(sstatus);
                 w_sepc(v_sepc);
                 running->endTime=time+running->timeslice;
                 break;
             }
+
+            case THREAD_JOIN:{
+                thread_t handle = (thread_t) a1;
+                uint64 volatile sstatus = r_sstatus();
+                uint64 volatile v_sepc = r_sepc();
+                kern_thread_join(handle);
+                w_sstatus(sstatus);
+                w_sepc(v_sepc);
+                running->endTime=time+running->timeslice;
+                break;
+            }
+
+            case THREAD_EXIT:{
+                kern_thread_end_running();
+            }
+
+            case SEM_OPEN: {
+                sem_t* handle =(sem_t*) a1;
+                uint64 init = a2;
+                running->syscall_retval = kern_sem_open(handle,init);
+                break;
+            }
+
+            case SEM_CLOSE: {
+                sem_t handle =(sem_t) a1;
+                running->syscall_retval = kern_sem_close(handle);
+                break;
+            }
+
+            case SEM_SIGNAL: {
+                sem_t handle =(sem_t) a1;
+                kern_sem_signal(handle);
+                running->syscall_retval=0;
+                break;
+            }
+
+            case SEM_WAIT: {
+                sem_t handle =(sem_t) a1;
+                int res = kern_sem_wait(handle);
+                if(res==1) running->syscall_retval=0;
+                else {
+                    uint64 volatile sstatus = r_sstatus();
+                    uint64 volatile v_sepc = r_sepc();
+                    kern_thread_dispatch();
+                    w_sstatus(sstatus);
+                    w_sepc(v_sepc);
+                    running->endTime=time+running->timeslice;
+                }
+                break;
+            }
+
+
         }
 
     }
@@ -99,20 +152,20 @@ void handleSupervisorTrap()
         mc_sip(SIP_SSIP);
 
 
-        if(++time>=30){
-            __putc('0'+running->id);
-        }
-        time=time%30;
 
         if(SYSTEM_TIME>=running->endTime){
-            __putc('!');
+            //__putc('(');
+            //__putc('0'+running->id);
+            //__putc('-');
+            //__putc('>');
             uint64 volatile sstatus = r_sstatus();
             uint64 volatile v_sepc = r_sepc();
             kern_thread_dispatch();
-
             w_sstatus(sstatus);
             w_sepc(v_sepc);
             running->endTime=SYSTEM_TIME+running->timeslice;
+            //__putc('0'+running->id);
+            //__putc(')');
         }
 
     }
