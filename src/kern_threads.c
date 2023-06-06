@@ -124,6 +124,7 @@ int kern_thread_create(thread_t* handle, void(*start_routine)(void*), void* arg,
     t->sp = t->stack_space+(DEFAULT_STACK_SIZE);
     t->ra=(uint64) &kern_thread_wrapper;
     t->sem_next=0;
+    t->mailbox=0;
 
     return 0;
 }

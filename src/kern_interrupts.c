@@ -26,10 +26,10 @@ extern void supervisorTrap();
 uint64 SYSTEM_TIME;
 
 
-uint64 kern_syscall(enum SyscallNumber num, ...)
+void kern_syscall(enum SyscallNumber num, ...)
 {
     __asm__ volatile ("ecall");
-    return  running->syscall_retval;
+    return;
 }
 
 void kern_interrupt_init()
@@ -53,19 +53,22 @@ void handleSupervisorTrap()
     uint64  scause = r_scause();
     if (scause == INTR_USER_ECALL || scause == INTR_KERNEL_ECALL)
     {
+        uint64   retval;
         uint64   syscall_num = a0;
         uint64   sepc = r_sepc() + 4;
         w_sepc(sepc);
         switch (syscall_num) {
             case MEM_ALLOC:{
                 uint64 size = a1;
-                running->syscall_retval=(uint64)kern_mem_alloc(size);
+                retval=(uint64)kern_mem_alloc(size);
+                w_a0(retval);
                 break;
             }
 
             case MEM_FREE:{
                 uint64 addr = a1;
-                running->syscall_retval=(uint64) kern_mem_free((void*)addr);
+                retval=(uint64) kern_mem_free((void*)addr);
+                w_a0(retval);
                 break;
             }
 
@@ -74,11 +77,12 @@ void handleSupervisorTrap()
                 uint64 start_routine = a2;
                 uint64 arg = a3;
                 uint64 stack = a4;
-                running->syscall_retval=(uint64) kern_thread_create((thread_t*)handle,
+                retval=(uint64) kern_thread_create((thread_t*)handle,
                                                           (void(*)(void*))start_routine,
                                                           (void*)arg,
                                                           (void*)stack);
                 (*(thread_t*)handle)->endTime=SYSTEM_TIME+DEFAULT_TIME_SLICE;
+                w_a0(retval);
                 break;
             }
 
@@ -110,27 +114,30 @@ void handleSupervisorTrap()
             case SEM_OPEN: {
                 sem_t* handle =(sem_t*) a1;
                 uint64 init = a2;
-                running->syscall_retval = kern_sem_open(handle,init);
+                retval = kern_sem_open(handle,init);
+                w_a0(retval);
                 break;
             }
 
             case SEM_CLOSE: {
                 sem_t handle =(sem_t) a1;
-                running->syscall_retval = kern_sem_close(handle);
+                retval = kern_sem_close(handle);
+                w_a0(retval);
                 break;
             }
 
             case SEM_SIGNAL: {
                 sem_t handle =(sem_t) a1;
                 kern_sem_signal(handle);
-                running->syscall_retval=0;
+                retval=0;
+                w_a0(retval);
                 break;
             }
 
             case SEM_WAIT: {
                 sem_t handle =(sem_t) a1;
                 int res = kern_sem_wait(handle);
-                if(res==1) running->syscall_retval=0;
+                if(res==1) retval=0;
                 else {
                     uint64 volatile sstatus = r_sstatus();
                     uint64 volatile v_sepc = r_sepc();
@@ -138,7 +145,10 @@ void handleSupervisorTrap()
                     w_sstatus(sstatus);
                     w_sepc(v_sepc);
                     running->endTime=time+running->timeslice;
+                    if(running->mailbox==0) retval = 0;
+                    else retval=-1;
                 }
+                w_a0(retval);
                 break;
             }
 
@@ -156,7 +166,6 @@ void handleSupervisorTrap()
 
 
         }
-
     }
     else if (scause == INTR_TIMER)
     {
@@ -206,4 +215,5 @@ void handleSupervisorTrap()
     else if(scause==INTR_ILLEGAL_ADDR_WR){
 
     }
+
 }

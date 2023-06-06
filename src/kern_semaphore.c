@@ -39,7 +39,7 @@ int kern_sem_close (sem_t handle)
     if(handle->waiting_thread!=0){
         thread_t curr = handle->waiting_thread;
         while(curr){
-            curr->syscall_retval=-2;
+            curr->mailbox=-2;
             curr->status=READY;
             thread_t prev=curr;
             curr=curr->sem_next;
@@ -56,7 +56,7 @@ void kern_sem_signal(sem_t id)
     else {
         thread_t woken = id->waiting_thread;
         id->waiting_thread=woken->sem_next;
-        woken->syscall_retval=0;
+        woken->mailbox=0;
         woken->status=READY;
     }
 }

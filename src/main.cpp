@@ -94,7 +94,7 @@ int main()
     mem_free(a);
     */
 
-/*
+
     semTest=new Semaphore(0);
     Thread *thrA = new Thread(&bodyA,0);
     Thread *thrB = new Thread(&bodyB,0);
@@ -116,7 +116,7 @@ int main()
     //idleAlive=0;
     thrCobj->join();
     delete thrCobj;
-    */
+
     __putc('E');
     while(1);
     return 0;

@@ -23,7 +23,7 @@ enum SyscallNumber {
     PUTC = 0x42
 };
 void kern_interrupt_init();
-uint64 kern_syscall(enum SyscallNumber num, ...);
+void kern_syscall(enum SyscallNumber num, ...);
 
 
 #endif //OS1_KERN_INTERRUPTS_H

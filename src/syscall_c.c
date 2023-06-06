@@ -12,11 +12,15 @@
 
 void* mem_alloc (size_t size){
     uint64 blocks = (size+MEM_BLOCK_SIZE-1)/MEM_BLOCK_SIZE;
-    return (void*)kern_syscall(MEM_ALLOC, blocks);
+    kern_syscall(MEM_ALLOC, blocks);
+    uint64 newBlockAddr = r_a0();
+    return (void *) newBlockAddr;
 }
 
 int mem_free (void* addr){
-    return (int) kern_syscall(MEM_FREE,addr);
+    kern_syscall(MEM_FREE,addr);
+    int res = (int) r_a0();
+    return res;
 }
 
 struct thread_s;
@@ -26,7 +30,9 @@ int thread_create (thread_t* handle, void(*start_routine)(void*), void* arg)
 {
     void * stack = mem_alloc(DEFAULT_STACK_SIZE);
     if(stack==0) return -1;
-    return (int) kern_syscall(THREAD_CREATE,handle,start_routine,arg,stack);
+    kern_syscall(THREAD_CREATE,handle,start_routine,arg,stack);
+    int res = r_a0();
+    return res;
 }
 
 void thread_dispatch(){
@@ -48,21 +54,29 @@ void thread_join(thread_t handle)
 
 int sem_open (sem_t* handle, unsigned init)
 {
-    return kern_syscall(SEM_OPEN,handle,init);
+    kern_syscall(SEM_OPEN,handle,init);
+    int res = r_a0();
+    return res;
 }
 
 int sem_close (sem_t handle)
 {
-    return kern_syscall(SEM_CLOSE,handle);
+    kern_syscall(SEM_CLOSE,handle);
+    int res = r_a0();
+    return res;
 }
 
 int sem_wait (sem_t id)
 {
-    return kern_syscall(SEM_WAIT,id);
+    kern_syscall(SEM_WAIT,id);
+    int res = r_a0();
+    return res;
 }
 
 int sem_signal (sem_t id){
-    return kern_syscall(SEM_SIGNAL,id);
+    kern_syscall(SEM_SIGNAL,id);
+    int res = r_a0();
+    return res;
 }
 
 int time_sleep(unsigned long time){

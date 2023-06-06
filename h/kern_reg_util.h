@@ -27,6 +27,10 @@ inline uint64 r_a0()
     __asm__ volatile ("mv %[a0], a0" : [a0] "=r"(a0));
     return a0;
 }
+inline void w_a0(uint64 value)
+{
+    __asm__ volatile ("mv a0, %[value]" :: [value] "r"(value));
+}
 
 inline uint64 r_a1()
 {

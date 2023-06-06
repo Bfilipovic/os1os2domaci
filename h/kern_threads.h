@@ -26,8 +26,8 @@ struct thread_s{
     uint64 joined_tid;
     uint64 timeslice;
     uint64 endTime;
-    uint64 syscall_retval;
     uint64 stack_space;
+    uint64 mailbox;
     enum ThreadStatus status;
     struct thread_s* sem_next;
 };
