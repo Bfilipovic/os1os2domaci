@@ -21,7 +21,7 @@ int thread_create (
 void thread_join(thread_t handle);
 int thread_exit ();
 void thread_dispatch();
-
+int time_sleep(unsigned long time);
 
 struct sem_s;
 typedef struct sem_s* sem_t;

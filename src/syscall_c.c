@@ -9,6 +9,7 @@
 
 #include <stdarg.h>
 
+
 void* mem_alloc (size_t size){
     uint64 blocks = (size+MEM_BLOCK_SIZE-1)/MEM_BLOCK_SIZE;
     return (void*)kern_syscall(MEM_ALLOC, blocks);
@@ -34,7 +35,9 @@ void thread_dispatch(){
 
 int thread_exit ()
 {
+    void* stack = (void*)running->stack_space;
     kern_syscall(THREAD_EXIT);
+    kern_syscall(MEM_FREE,stack);
     return 0;
 }
 
@@ -60,4 +63,9 @@ int sem_wait (sem_t id)
 
 int sem_signal (sem_t id){
     return kern_syscall(SEM_SIGNAL,id);
+}
+
+int time_sleep(unsigned long time){
+    kern_syscall(TIME_SLEEP,time);
+    return 0;
 }

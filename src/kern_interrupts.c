@@ -142,6 +142,18 @@ void handleSupervisorTrap()
                 break;
             }
 
+            case TIME_SLEEP : {
+                uint64 period = a1;
+                running->status=SLEEPING;
+                running->endTime=SYSTEM_TIME+period;
+                uint64 volatile sstatus = r_sstatus();
+                uint64 volatile v_sepc = r_sepc();
+                kern_thread_dispatch();
+                w_sstatus(sstatus);
+                w_sepc(v_sepc);
+                running->endTime=time+running->timeslice;
+            }
+
 
         }
 
@@ -152,6 +164,7 @@ void handleSupervisorTrap()
         mc_sip(SIP_SSIP);
 
 
+        kern_thread_wakeup(SYSTEM_TIME);
 
         if(SYSTEM_TIME>=running->endTime){
             //__putc('(');
@@ -172,11 +185,25 @@ void handleSupervisorTrap()
     else if (scause == INTR_CONSOLE)
     {
         // interrupt: yes; cause code: supervisor external interrupt (PLIC; could be keyboard)
-        //plic_claim();
+        int i = plic_claim();
+        if(i==10){
+            plic_complete(i);
+            i--;
+        }
+        else {
+            i++;
+        }
         console_handler();
     }
-    else
+    else if(scause == INTR_ILLEGAL_INSTRUCTION)
     {
         // unexpected trap cause
+    }
+    else if(scause == INTR_ILLEGAL_ADDR_RD)
+    {
+
+    }
+    else if(scause==INTR_ILLEGAL_ADDR_WR){
+
     }
 }

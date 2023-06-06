@@ -3,7 +3,7 @@
 //
 
 #include "../lib/hw.h"
-
+#include "../h/kern_memory.h"
 
 typedef struct mem_block {
     int sizeInBlocks;
@@ -85,6 +85,7 @@ int kern_mem_free(void* addr)
     return 0;
 }
 
+unsigned long ukupno_memorije;
 void kern_mem_init(void* start, void* end)
 {
     unsigned long lstart = (unsigned long) start;
@@ -97,4 +98,5 @@ void kern_mem_init(void* start, void* end)
     freeHead->next=0;
     freeHead->startingBlock=0;
     freeHead->sizeInBlocks = (end-start)/MEM_BLOCK_SIZE;
+    ukupno_memorije=freeHead->sizeInBlocks;
 }

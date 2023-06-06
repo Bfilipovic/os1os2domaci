@@ -3,6 +3,7 @@
 //
 #include "../lib/console.h"
 #include "../h/strings.h"
+#include "../h/syscall_cpp.hpp"
 #include "../lib/hw.h"
 
 extern "C" {
@@ -13,43 +14,54 @@ extern "C" {
 #include "../h/kern_semaphore.h"
 }
 
-sem_t semtest;
+
+Semaphore* semTest;
+
+int idleAlive=1;
+void bodyIdle(void* arg){
+    while(idleAlive){
+        thread_dispatch();
+    };
+}
 
 void bodyC(void* arg)
 {
     int counter=0;
     char*c = (char*)arg;
-    while(1){
-        if(++counter>5) sem_close(semtest);
+    while(counter<10){
+        //if(++counter>5) delete semTest;
         __putc(*c);
-        thread_dispatch();
+        time_sleep(5);
+        counter++;
     }
 }
 
 void bodyA(void* arg)
 {
     char c = 'a';
-    if(sem_wait(semtest)<0) c='A';
+    if(semTest->wait()) c='A';
     for(int i=0;i<10;i++){
         __putc(c);
-        if(i==2) thread_exit();
+        if(i==5) thread_exit();
         thread_dispatch();
     }
 }
 
 int g=0;
 
+char str[15] = "tesa legenda";
 void bodyB(void* arg)
 {
+    time_sleep(10);
     for(int i=0;i<15;i++){
-        __putc('b');
+        __putc(str[i]);
         for(int k=0;k<10000;k++){
             for(int m=0;m<1000;m++){
                 if((m*k)%1337==0) g++;
             }
         }
     }
-    sem_signal(semtest);
+    semTest->signal();
 }
 
 
@@ -61,7 +73,10 @@ int main()
     kern_mem_init((void*)HEAP_START_ADDR, (void*)HEAP_END_ADDR);
     kern_interrupt_init();
     kern_sem_init();
-    /*
+
+    Thread* thrIdle = new Thread(&bodyIdle,0);
+    thrIdle->start();
+/*
     void* a;
     void* b;
     void* c;
@@ -77,26 +92,32 @@ int main()
 
     a= mem_alloc(64);
     mem_free(a);
-*/
-    thread_t thrA, thrB, thrC;
-    thread_create(&thrA,&bodyA,0);
-    thread_create(&thrB,&bodyB,0);
+    */
 
-    sem_open(&semtest,0);
-
-    char chr = '0';
-    while (1){
-        __putc(chr++);
-        thread_dispatch();
-        if(thrB->status!=UNUSED) thread_join(thrB);
-        if(thrA->status==UNUSED && thrB->status==UNUSED) break;
-    }
-
-    __putc('E');
+/*
+    semTest=new Semaphore(0);
+    Thread *thrA = new Thread(&bodyA,0);
+    Thread *thrB = new Thread(&bodyB,0);
+    thrA->start();
+    thrB->start();
+    __putc('S');
+    thrB->join();
+    thrA->join();
+    thrB->join();
+    char o='O';
     char c='M';
-    thread_create(&thrC,&bodyC,&c);
-    thread_create(&thrA,&bodyA,0);
-
+    c++;
+    o++;
+    Thread* thrCobj = new Thread(bodyC, &o);
+    thrCobj->start();
+    thread_t thrC;
+    thread_create(&thrC,bodyC,&c);
+    thread_join(thrC);
+    //idleAlive=0;
+    thrCobj->join();
+    delete thrCobj;
+    */
+    __putc('E');
     while(1);
     return 0;
 }

@@ -11,7 +11,8 @@ enum ThreadStatus {
     RUNNING,
     READY,
     SUSPENDED,
-    JOINED
+    JOINED,
+    SLEEPING
 };
 
 
@@ -26,6 +27,7 @@ struct thread_s{
     uint64 timeslice;
     uint64 endTime;
     uint64 syscall_retval;
+    uint64 stack_space;
     enum ThreadStatus status;
     struct thread_s* sem_next;
 };
@@ -42,4 +44,5 @@ void kern_thread_dispatch();
 thread_t kern_scheduler_get();
 void kern_thread_end_running();
 void kern_thread_join(thread_t handle);
+void kern_thread_wakeup(uint64 system_time);
 #endif //OS1_KERN_THREADS_H
