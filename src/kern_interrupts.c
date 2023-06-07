@@ -42,111 +42,110 @@ void kern_interrupt_init()
 
 int time=0;
 
-void handleSupervisorTrap()
-{
-    uint64  a0,a1,a2,a3,a4;
+void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
+    /*uint64 a0, a1, a2, a3, a4;
     __asm__ volatile ("mv %[a0], a0" : [a0] "=r"(a0));
     __asm__ volatile ("mv %[a1], a1" : [a1] "=r"(a1));
     __asm__ volatile ("mv %[a2], a2" : [a2] "=r"(a2));
     __asm__ volatile ("mv %[a3], a3" : [a3] "=r"(a3));
     __asm__ volatile ("mv %[a4], a4" : [a4] "=r"(a4));
-    uint64  scause = r_scause();
-    if (scause == INTR_USER_ECALL || scause == INTR_KERNEL_ECALL)
-    {
-        uint64   retval;
-        uint64   syscall_num = a0;
-        uint64   sepc = r_sepc() + 4;
+     */
+    uint64 scause = r_scause();
+    if (scause == INTR_USER_ECALL || scause == INTR_KERNEL_ECALL) {
+        uint64 retval;
+        uint64 syscall_num = a0;
+        uint64 sepc = r_sepc() + 4;
         w_sepc(sepc);
         switch (syscall_num) {
-            case MEM_ALLOC:{
+            case MEM_ALLOC: {
                 uint64 size = a1;
-                retval=(uint64)kern_mem_alloc(size);
+                retval = (uint64) kern_mem_alloc(size);
                 w_a0(retval);
                 break;
             }
 
-            case MEM_FREE:{
+            case MEM_FREE: {
                 uint64 addr = a1;
-                retval=(uint64) kern_mem_free((void*)addr);
+                retval = (uint64) kern_mem_free((void *) addr);
                 w_a0(retval);
                 break;
             }
 
-            case THREAD_CREATE:{
+            case THREAD_CREATE: {
                 uint64 handle = a1;
                 uint64 start_routine = a2;
                 uint64 arg = a3;
                 uint64 stack = a4;
-                retval=(uint64) kern_thread_create((thread_t*)handle,
-                                                          (void(*)(void*))start_routine,
-                                                          (void*)arg,
-                                                          (void*)stack);
-                (*(thread_t*)handle)->endTime=SYSTEM_TIME+DEFAULT_TIME_SLICE;
+                retval = (uint64) kern_thread_create((thread_t *) handle,
+                                                     (void (*)(void *)) start_routine,
+                                                     (void *) arg,
+                                                     (void *) stack);
+                (*(thread_t *) handle)->endTime = SYSTEM_TIME + DEFAULT_TIME_SLICE;
                 w_a0(retval);
                 break;
             }
 
-            case THREAD_DISPATCH:{
+            case THREAD_DISPATCH: {
                 uint64 volatile sstatus = r_sstatus();
                 uint64 volatile v_sepc = r_sepc();
                 kern_thread_dispatch();
                 w_sstatus(sstatus);
                 w_sepc(v_sepc);
-                running->endTime=time+running->timeslice;
+                running->endTime = time + running->timeslice;
                 break;
             }
 
-            case THREAD_JOIN:{
+            case THREAD_JOIN: {
                 thread_t handle = (thread_t) a1;
                 uint64 volatile sstatus = r_sstatus();
                 uint64 volatile v_sepc = r_sepc();
                 kern_thread_join(handle);
                 w_sstatus(sstatus);
                 w_sepc(v_sepc);
-                running->endTime=time+running->timeslice;
+                running->endTime = time + running->timeslice;
                 break;
             }
 
-            case THREAD_EXIT:{
+            case THREAD_EXIT: {
                 kern_thread_end_running();
             }
 
             case SEM_OPEN: {
-                sem_t* handle =(sem_t*) a1;
+                sem_t *handle = (sem_t *) a1;
                 uint64 init = a2;
-                retval = kern_sem_open(handle,init);
+                retval = kern_sem_open(handle, init);
                 w_a0(retval);
                 break;
             }
 
             case SEM_CLOSE: {
-                sem_t handle =(sem_t) a1;
+                sem_t handle = (sem_t) a1;
                 retval = kern_sem_close(handle);
                 w_a0(retval);
                 break;
             }
 
             case SEM_SIGNAL: {
-                sem_t handle =(sem_t) a1;
+                sem_t handle = (sem_t) a1;
                 kern_sem_signal(handle);
-                retval=0;
+                retval = 0;
                 w_a0(retval);
                 break;
             }
 
             case SEM_WAIT: {
-                sem_t handle =(sem_t) a1;
+                sem_t handle = (sem_t) a1;
                 int res = kern_sem_wait(handle);
-                if(res==1) retval=0;
+                if (res == 1) retval = 0;
                 else {
                     uint64 volatile sstatus = r_sstatus();
                     uint64 volatile v_sepc = r_sepc();
                     kern_thread_dispatch();
                     w_sstatus(sstatus);
                     w_sepc(v_sepc);
-                    running->endTime=time+running->timeslice;
-                    if(running->mailbox==0) retval = 0;
-                    else retval=-1;
+                    running->endTime = time + running->timeslice;
+                    if (running->mailbox == 0) retval = 0;
+                    else retval = -1;
                 }
                 w_a0(retval);
                 break;
@@ -154,20 +153,25 @@ void handleSupervisorTrap()
 
             case TIME_SLEEP : {
                 uint64 period = a1;
-                running->status=SLEEPING;
-                running->endTime=SYSTEM_TIME+period;
+                running->status = SLEEPING;
+                running->endTime = SYSTEM_TIME + period;
                 uint64 volatile sstatus = r_sstatus();
                 uint64 volatile v_sepc = r_sepc();
                 kern_thread_dispatch();
                 w_sstatus(sstatus);
                 w_sepc(v_sepc);
-                running->endTime=time+running->timeslice;
+                running->endTime = time + running->timeslice;
             }
 
 
         }
     }
-    else if (scause == INTR_TIMER)
+}
+
+void handleInterrupt()
+{
+    uint64 scause = r_scause();
+    if (scause == INTR_TIMER)
     {
         SYSTEM_TIME++;
         mc_sip(SIP_SSIP);
@@ -215,5 +219,4 @@ void handleSupervisorTrap()
     else if(scause==INTR_ILLEGAL_ADDR_WR){
 
     }
-
 }
