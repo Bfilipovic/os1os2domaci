@@ -135,17 +135,12 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
 
             case SEM_WAIT: {
                 sem_t handle = (sem_t) a1;
-                int res = kern_sem_wait(handle);
-                if (res == 1) retval = 0;
+                retval = kern_sem_wait(handle);
+                if (retval == 1) { //nije promenjen kontekst
+                    retval = 0;
+                }
                 else {
-                    uint64 volatile sstatus = r_sstatus();
-                    uint64 volatile v_sepc = r_sepc();
-                    kern_thread_dispatch();
-                    w_sstatus(sstatus);
-                    w_sepc(v_sepc);
                     running->endTime = time + running->timeslice;
-                    if (running->mailbox == 0) retval = 0;
-                    else retval = -1;
                 }
                 w_a0(retval);
                 break;
@@ -161,6 +156,14 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
                 w_sstatus(sstatus);
                 w_sepc(v_sepc);
                 running->endTime = time + running->timeslice;
+            }
+
+            case GETC: {
+                break;
+            }
+
+            case PUTC: {
+                break;
             }
 
 

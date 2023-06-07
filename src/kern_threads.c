@@ -6,6 +6,7 @@
 #include "../h/kern_interrupts.h"
 #include "../lib/hw.h"
 #include "../h/kern_memory.h"
+#include "../h/syscall_c.h"
 
 #define MAX_THREADS 64
 
@@ -98,7 +99,7 @@ void kern_thread_wrapper()
         if(threads[i].status==JOINED && threads[i].joined_tid==running->id) threads[i].status=READY;
     }
 
-    kern_thread_end_running();
+    thread_exit();
 }
 
 int kern_thread_create(thread_t* handle, void(*start_routine)(void*), void* arg, void* stack_space)

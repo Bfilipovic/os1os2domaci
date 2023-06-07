@@ -3,6 +3,7 @@
 //
 
 #include "../h/kern_semaphore.h"
+#include "../h/kern_reg_util.h"
 
 #define MAX_SEMAPHORES 256
 
@@ -73,7 +74,12 @@ int kern_sem_wait(sem_t id)
             curr->sem_next=running;
         }
         running->sem_next=0;
-        return -1;
+        uint64 volatile sstatus = r_sstatus();
+        uint64 volatile v_sepc = r_sepc();
+        kern_thread_dispatch();
+        w_sstatus(sstatus);
+        w_sepc(v_sepc);
+        return running->mailbox;
     }
     else {
         return 1;

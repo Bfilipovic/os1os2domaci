@@ -4,6 +4,7 @@
 
 #include "../h/kern_console.h"
 #include "../h/kern_semaphore.h"
+#include "../h/kern_reg_util.h"
 
 
 #define CONSOLE_BUFFER_SIZE 1024

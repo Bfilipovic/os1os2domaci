@@ -31,9 +31,11 @@ void bodyC(void* arg)
     while(counter<10){
         //if(++counter>5) delete semTest;
         __putc(*c);
-        time_sleep(5);
+        time_sleep(1);
         counter++;
     }
+    counter++;
+    //thread_exit();
 }
 
 void bodyA(void* arg)
@@ -52,8 +54,9 @@ int g=0;
 char str[15] = "tesa legenda";
 void bodyB(void* arg)
 {
+
     time_sleep(10);
-    for(int i=0;i<15;i++){
+    for(int i=0;i<4;i++){
         __putc(str[i]);
         for(int k=0;k<10000;k++){
             for(int m=0;m<1000;m++){
@@ -98,8 +101,8 @@ int main()
     semTest=new Semaphore(0);
     Thread *thrA = new Thread(&bodyA,0);
     Thread *thrB = new Thread(&bodyB,0);
-    thrA->start();
     thrB->start();
+    thrA->start();
     __putc('S');
     thrB->join();
     thrA->join();
@@ -108,16 +111,17 @@ int main()
     char c='M';
     c++;
     o++;
-    Thread* thrCobj = new Thread(bodyC, &o);
-    thrCobj->start();
     thread_t thrC;
-    thread_create(&thrC,bodyC,&c);
+    thread_create(&thrC,&bodyC,&o);
     thread_join(thrC);
-    //idleAlive=0;
+    Thread *thrCobj = new Thread(&bodyC,&c);
+    thrCobj->start();
     thrCobj->join();
     delete thrCobj;
-
+    thrB->start();
+    thrB->join();
     __putc('E');
-    while(1);
+    //while(1);
+    idleAlive=0;
     return 0;
 }
