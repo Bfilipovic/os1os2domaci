@@ -1,6 +1,6 @@
-build/src/kern_memory.o: src/kern_memory.c src/../lib/hw.h \
- src/../h/kern_memory.h
+build/src/kern_memory.o: src/kern_memory.cpp src/../lib/hw.h \
+ src/../h/kern_memory.hpp
 
 src/../lib/hw.h:
 
-src/../h/kern_memory.h:
+src/../h/kern_memory.hpp:

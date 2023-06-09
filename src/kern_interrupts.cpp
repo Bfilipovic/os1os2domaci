@@ -4,12 +4,13 @@
 
 #include "../lib/hw.h"
 #include "../lib/console.h"
-#include "../h/kern_interrupts.h"
+#include "../h/kern_interrupts.hpp"
 #include "../h/kern_reg_util.h"
-#include "../h/kern_memory.h"
-#include "../h/kern_threads.h"
+#include "../h/kern_memory.hpp"
+#include "../h/kern_threads.hpp"
 #include "../h/syscall_c.h"
-#include "../h/kern_semaphore.h"
+#include "../h/kern_semaphore.hpp"
+#include "../h/kern_console.hpp"
 
 #define INTR_ILLEGAL_INSTRUCTION 0x0000000000000002UL
 #define INTR_ILLEGAL_ADDR_RD 0x0000000000000005UL
@@ -20,17 +21,17 @@
 #define INTR_CONSOLE 0x8000000000000009UL
 
 
-extern void supervisorTrap();
 
 
 uint64 SYSTEM_TIME;
 
-
-void kern_syscall(enum SyscallNumber num, ...)
-{
-    __asm__ volatile ("ecall");
-    return;
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void supervisorTrap();
+#ifdef __cplusplus
 }
+#endif
 
 void kern_interrupt_init()
 {
@@ -40,7 +41,18 @@ void kern_interrupt_init()
 }
 
 
-int time=0;
+void kern_syscall(enum SyscallNumber num, ...)
+{
+    __asm__ volatile ("ecall");
+    return;
+}
+
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 
 void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
     /*uint64 a0, a1, a2, a3, a4;
@@ -55,6 +67,9 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
         uint64 retval;
         uint64 syscall_num = a0;
         uint64 sepc = r_sepc() + 4;
+        uint64 time = SYSTEM_TIME;
+        time++;
+        time--;
         w_sepc(sepc);
         switch (syscall_num) {
             case MEM_ALLOC: {
@@ -91,7 +106,7 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
                 kern_thread_dispatch();
                 w_sstatus(sstatus);
                 w_sepc(v_sepc);
-                running->endTime = time + running->timeslice;
+                running->endTime = SYSTEM_TIME + running->timeslice;
                 break;
             }
 
@@ -102,7 +117,7 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
                 kern_thread_join(handle);
                 w_sstatus(sstatus);
                 w_sepc(v_sepc);
-                running->endTime = time + running->timeslice;
+                running->endTime = SYSTEM_TIME + running->timeslice;
                 break;
             }
 
@@ -140,7 +155,7 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
                     retval = 0;
                 }
                 else {
-                    running->endTime = time + running->timeslice;
+                    running->endTime = SYSTEM_TIME + running->timeslice;
                 }
                 w_a0(retval);
                 break;
@@ -155,14 +170,44 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
                 kern_thread_dispatch();
                 w_sstatus(sstatus);
                 w_sepc(v_sepc);
-                running->endTime = time + running->timeslice;
+                time=SYSTEM_TIME;
+                running->endTime=time+running->timeslice;
+                break;
             }
 
             case GETC: {
+                int c;
+                while (1){
+                    c = kern_console_getchar();
+                    if(c==-1){
+                        uint64 volatile sstatus = r_sstatus();
+                        uint64 volatile v_sepc = r_sepc();
+                        kern_thread_dispatch();
+                        w_sstatus(sstatus);
+                        w_sepc(v_sepc);
+                        running->endTime = SYSTEM_TIME + running->timeslice;
+                    }
+                    else break;
+                }
+                w_a0(c);
                 break;
             }
 
             case PUTC: {
+                char c = a1;
+                int res=-1;
+                while(1){
+                    res=kern_console_putchar(c);
+                    if(res==-1){
+                        uint64 volatile sstatus = r_sstatus();
+                        uint64 volatile v_sepc = r_sepc();
+                        kern_thread_dispatch();
+                        w_sstatus(sstatus);
+                        w_sepc(v_sepc);
+                        running->endTime = SYSTEM_TIME + running->timeslice;
+                    }
+                    else break;
+                }
                 break;
             }
 
@@ -170,6 +215,10 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
         }
     }
 }
+
+int counter=0;
+#define BUFFER_SIZE 1024
+char cbuf[BUFFER_SIZE];
 
 void handleInterrupt()
 {
@@ -183,37 +232,29 @@ void handleInterrupt()
         kern_thread_wakeup(SYSTEM_TIME);
 
         if(SYSTEM_TIME>=running->endTime){
-            //__putc('(');
-            //__putc('0'+running->id);
-            //__putc('-');
-            //__putc('>');
             uint64 volatile sstatus = r_sstatus();
             uint64 volatile v_sepc = r_sepc();
             kern_thread_dispatch();
             w_sstatus(sstatus);
             w_sepc(v_sepc);
             running->endTime=SYSTEM_TIME+running->timeslice;
-            //__putc('0'+running->id);
-            //__putc(')');
         }
-
     }
     else if (scause == INTR_CONSOLE)
     {
         // interrupt: yes; cause code: supervisor external interrupt (PLIC; could be keyboard)
-        int i = plic_claim();
-        if(i==10){
-            plic_complete(i);
-            i--;
+        int irq = plic_claim();
+        if(irq==CONSOLE_IRQ) {
+            kern_uart_handler();
         }
-        else {
-            i++;
-        }
-        console_handler();
+        plic_complete(irq);
+        // console_handler();
     }
     else if(scause == INTR_ILLEGAL_INSTRUCTION)
     {
         // unexpected trap cause
+        kern_mem_free((void*)running->stack_space);
+        kern_thread_end_running();
     }
     else if(scause == INTR_ILLEGAL_ADDR_RD)
     {
@@ -223,3 +264,7 @@ void handleInterrupt()
 
     }
 }
+
+#ifdef __cplusplus
+}
+#endif

@@ -7,25 +7,16 @@
 #ifndef _syscall_cpp
 #define _syscall_cpp
 
-extern "C"{
 #include "syscall_c.h"
-#include "kern_semaphore.h"
-#include "kern_threads.h"
-#include "kern_memory.h"
+#include "kern_semaphore.hpp"
+#include "kern_threads.hpp"
+#include "kern_memory.hpp"
 #include "syscall_c.h"
-};
 #include "../lib/console.h"
 
 
-void* operator new(size_t size) {
-    void* ptr = mem_alloc(size);
-    return ptr;
-}
-
-void operator delete(void* ptr) {
-    mem_free(ptr);
-}
-
+void* operator new(size_t size);
+void operator delete(void* ptr);
 
 class Thread {
         public:
@@ -39,7 +30,8 @@ class Thread {
             //thread_exit();
         }
         int start (){
-            return thread_create(&myHandle,body,arg);
+            if(body== nullptr) return thread_create(&myHandle,&threadEntry, this);
+            else return thread_create(&myHandle,body,arg);
         }
         void join(){
             thread_join(myHandle);
@@ -51,8 +43,16 @@ class Thread {
             return time_sleep(time);
         }
         protected:
-        Thread (){}
+        Thread (){
+            body= nullptr;
+            arg= nullptr;
+        }
         virtual void run () {}
+
+        static void threadEntry(void* arg){
+            Thread* self = static_cast<Thread*>(arg);
+            self->run();
+        }
         private:
         thread_t myHandle;
         void (*body)(void*); void* arg;
@@ -79,10 +79,10 @@ class Semaphore {
 class Console {
         public:
         static char getc (){
-            return __getc();
+            return ::getc();
         }
         static void putc (char c){
-            __putc(c);
+            ::putc(c);
         }
 };
 #endif

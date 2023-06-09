@@ -2,7 +2,7 @@
 // Created by os on 6/4/23.
 //
 
-#include "../h/kern_semaphore.h"
+#include "../h/kern_semaphore.hpp"
 #include "../h/kern_reg_util.h"
 
 #define MAX_SEMAPHORES 256
@@ -35,7 +35,7 @@ int kern_sem_open (sem_t* handle, unsigned init)
 
 int kern_sem_close (sem_t handle)
 {
-    handle->status=UNUSED;
+    handle->status=SEM_UNUSED;
     handle->val=0;
     if(handle->waiting_thread!=0){
         thread_t curr = handle->waiting_thread;
@@ -64,8 +64,7 @@ void kern_sem_signal(sem_t id)
 
 int kern_sem_wait(sem_t id)
 {
-    id->val--;
-    if(id->val<0){
+    if(id->val<=0){
         running->status=SUSPENDED;
         if(id->waiting_thread==0) id->waiting_thread=running;
         else {
@@ -82,6 +81,7 @@ int kern_sem_wait(sem_t id)
         return running->mailbox;
     }
     else {
+        id->val--;
         return 1;
     }
 }

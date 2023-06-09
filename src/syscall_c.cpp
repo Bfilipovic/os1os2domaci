@@ -3,12 +3,13 @@
 //
 
 #include "../h/syscall_c.h"
-#include "../h/kern_threads.h"
+#include "../h/kern_threads.hpp"
 #include "../h/kern_reg_util.h"
-#include "../h/kern_interrupts.h"
+#include "../h/kern_interrupts.hpp"
 
 #include <stdarg.h>
 
+#define CONSOLE_CAN_READ ((*(char*)CONSOLE_STATUS)&CONSOLE_RX_STATUS_BIT)
 
 void* mem_alloc (size_t size){
     uint64 blocks = (size+MEM_BLOCK_SIZE-1)/MEM_BLOCK_SIZE;
@@ -82,4 +83,17 @@ int sem_signal (sem_t id){
 int time_sleep(unsigned long time){
     kern_syscall(TIME_SLEEP,time);
     return 0;
+}
+
+#define Reg(reg) ((volatile unsigned char *)(reg))
+
+char getc(){
+    kern_syscall(GETC);
+    char c = r_a0();
+    return c;
+}
+
+
+void putc(char c){
+    kern_syscall(PUTC,c);
 }

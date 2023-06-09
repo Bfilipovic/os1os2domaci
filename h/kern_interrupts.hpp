@@ -2,8 +2,8 @@
 // Created by os on 5/25/23.
 //
 
-#ifndef OS1_KERN_INTERRUPTS_H
-#define OS1_KERN_INTERRUPTS_H
+#ifndef OS1_KERN_INTERRUPTS_HPP
+#define OS1_KERN_INTERRUPTS_HPP
 #include "../lib/hw.h"
 
 // kern_interrupts.c
@@ -26,4 +26,4 @@ void kern_interrupt_init();
 void kern_syscall(enum SyscallNumber num, ...);
 
 
-#endif //OS1_KERN_INTERRUPTS_H
+#endif //OS1_KERN_INTERRUPTS_HPP

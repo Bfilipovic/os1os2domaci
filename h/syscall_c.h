@@ -5,7 +5,7 @@
 #ifndef OS1_SYSCALL_C_H
 #define OS1_SYSCALL_C_H
 #include "../lib/hw.h"
-
+#include "../lib/console.h"
 
 
 void* mem_alloc (size_t size);
@@ -30,5 +30,8 @@ int sem_close (sem_t handle);
 int sem_wait (sem_t id);
 int sem_signal (sem_t id);
 
+char getc();
+
+void putc(char c);
 
 #endif //OS1_SYSCALL_C_H

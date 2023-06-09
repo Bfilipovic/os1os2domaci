@@ -2,17 +2,17 @@
 // Created by os on 5/22/23.
 //
 
-#include "../h/kern_threads.h"
-#include "../h/kern_interrupts.h"
+#include "../h/kern_threads.hpp"
+#include "../h/kern_interrupts.hpp"
 #include "../lib/hw.h"
-#include "../h/kern_memory.h"
+#include "../h/kern_memory.hpp"
 #include "../h/syscall_c.h"
 
 #define MAX_THREADS 64
 
 typedef struct thread_s* thread_t;
 
-struct thread_s threads[MAX_THREADS];
+struct thread_s kthreads[MAX_THREADS];
 static int id;
 struct thread_s* running;
 
@@ -20,25 +20,25 @@ void kern_thread_init()
 {
     id=0;
     for (int i=0;i<MAX_THREADS;i++){
-        threads[i].status=UNUSED;
+        kthreads[i].status=UNUSED;
     }
 
-    //set threads[0] as main thread
-    threads[0].status=RUNNING;
-    threads[0].id=0;
-    threads[0].timeslice=DEFAULT_TIME_SLICE+2;
-    threads[0].endTime=0;
-    running=&threads[0];
+    //set kthreads[0] as main thread
+    kthreads[0].status=RUNNING;
+    kthreads[0].id=0;
+    kthreads[0].timeslice=DEFAULT_TIME_SLICE+2;
+    kthreads[0].endTime=0;
+    running=&kthreads[0];
 }
 
 thread_t kern_scheduler_get()
 {
-    int num = running-threads;
+    int num = running-kthreads;
     for(int i=1;i<=MAX_THREADS;i++){
         num = (num+i)%MAX_THREADS;
-        if(threads[num].status==READY){
-            threads[num].status=RUNNING;
-            return &threads[num];
+        if(kthreads[num].status==READY){
+            kthreads[num].status=RUNNING;
+            return &kthreads[num];
         }
     }
     if(running->status==READY || running->status==RUNNING) {
@@ -50,7 +50,6 @@ thread_t kern_scheduler_get()
 
 void kern_thread_yield()
 {
-    kern_syscall(THREAD_DISPATCH);
 }
 
 //samo izlazi iz kernela i vraca se odakle je pozvana
@@ -61,7 +60,13 @@ void popSppSpie()
     __asm__ volatile("sret");
 }
 
-extern void contextSwitch(thread_t old, thread_t new);
+#ifdef __cplusplus
+extern "C" {
+#endif
+void contextSwitch(thread_t oldT, thread_t newT);
+#ifdef __cplusplus
+}
+#endif
 
 void kern_thread_dispatch()
 {
@@ -79,7 +84,7 @@ void kern_thread_end_running()
     thread_t old = running;
     old->status=UNUSED;
     for(int i=0;i<MAX_THREADS;i++){
-        if(threads[i].status==JOINED && threads[i].joined_tid==old->id) threads[i].status=READY;
+        if(kthreads[i].status==JOINED && kthreads[i].joined_tid==old->id) kthreads[i].status=READY;
     }
     running=kern_scheduler_get();
     if(old->stack_space!=0) kern_mem_free((void*)old->stack_space);
@@ -96,7 +101,7 @@ void kern_thread_wrapper()
     running->sem_next=0;
     running->joined_tid=-1;
     for(int i=0;i<MAX_THREADS;i++){
-        if(threads[i].status==JOINED && threads[i].joined_tid==running->id) threads[i].status=READY;
+        if(kthreads[i].status==JOINED && kthreads[i].joined_tid==running->id) kthreads[i].status=READY;
     }
 
     thread_exit();
@@ -105,11 +110,11 @@ void kern_thread_wrapper()
 int kern_thread_create(thread_t* handle, void(*start_routine)(void*), void* arg, void* stack_space)
 {
     *handle=0;
-    thread_t t=&threads[0]; //dodela da bismo sklonili upozorenje
+    thread_t t=&kthreads[0]; //dodela da bismo sklonili upozorenje
     for(int i=0;i<MAX_THREADS;i++){
-        if(threads[i].status==UNUSED){
-            *handle=&threads[i];
-            t=&threads[i];
+        if(kthreads[i].status==UNUSED){
+            *handle=&kthreads[i];
+            t=&kthreads[i];
             break;
         }
     }
@@ -141,8 +146,8 @@ void kern_thread_join(thread_t handle)
 void kern_thread_wakeup(uint64 system_time)
 {
     for(int i=0;i<MAX_THREADS;i++){
-        if(threads[i].status==SLEEPING && threads[i].endTime<system_time){
-            threads[i].status=READY;
+        if(kthreads[i].status==SLEEPING && kthreads[i].endTime<system_time){
+            kthreads[i].status=READY;
         }
     }
 }

@@ -2,10 +2,10 @@
 // Created by os on 6/4/23.
 //
 
-#ifndef OS1_KERN_SEMAPHORE_H
-#define OS1_KERN_SEMAPHORE_H
+#ifndef OS1_KERN_SEMAPHORE_HPP
+#define OS1_KERN_SEMAPHORE_HPP
 #include "../lib/hw.h"
-#include "./kern_threads.h"
+#include "./kern_threads.hpp"
 
 enum sem_status {
     SEM_USED,
@@ -24,4 +24,4 @@ int kern_sem_open (sem_t* handle, unsigned init);
 int kern_sem_close (sem_t handle);
 void kern_sem_signal(sem_t id);
 int kern_sem_wait(sem_t id);
-#endif //OS1_KERN_SEMAPHORE_H
+#endif //OS1_KERN_SEMAPHORE_HPP
