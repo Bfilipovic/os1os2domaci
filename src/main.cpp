@@ -11,8 +11,8 @@
 #include "../h/kern_interrupts.hpp"
 #include "../h/kern_semaphore.hpp"
 #include "../h/kern_console.hpp"
-
-
+#include "../h/printing.hpp"
+#include "../h/kern_buddyAllocator.hpp"
 
 Semaphore* semTest;
 
@@ -40,7 +40,7 @@ void bodyC(void* arg)
 void bodyA(void* arg)
 {
     char c = 'a';
-    if(semTest->wait()) c='A';
+    //if(semTest->wait()) c='A';
     for(int i=0;i<10;i++){
         putc(c);
         if(i==5) thread_exit();
@@ -54,8 +54,8 @@ char str[15] = "tesa legenda";
 void bodyB(void* arg)
 {
 
-    time_sleep(10);
-    for(int i=0;i<4;i++){
+    //time_sleep(10);
+    for(int i=0;i<10;i++){
         putc(str[i]);
         for(int k=0;k<10000;k++){
             for(int m=0;m<1000;m++){
@@ -68,10 +68,21 @@ void bodyB(void* arg)
 
 extern void userMain();
 
+class PeriodicTest : public PeriodicThread {
+public:
+    PeriodicTest(uint64 period, char c) : PeriodicThread(period){
+        this->c = c;
+    }
+protected:
+    char c;
+    void periodicActivation() override {
+        putc(c++);
+    }
+};
+
 int main()
 {
     kern_thread_init();
-    //printstring("lalala");
 
     kern_mem_init((void*)HEAP_START_ADDR, (void*)HEAP_END_ADDR);
     kern_interrupt_init();
@@ -80,13 +91,18 @@ int main()
 
     Thread* thrIdle = new Thread(&bodyIdle,0);
     thrIdle->start();
-/*
+
+    printf("Printf proba %d valjda radi %x, %p\n", &thrIdle, &thrIdle, &thrIdle);
+    bba_init((char*)HEAP_START_ADDR, (char*)HEAP_END_ADDR);
+    /*
     semTest=new Semaphore(0);
     Thread *thrA = new Thread(&bodyA,0);
     Thread *thrB = new Thread(&bodyB,0);
     thrB->start();
     thrA->start();
     putc('S');
+     */
+    /*
     char c='M';
     c++;
     Thread *thrCobj = new Thread(&bodyC,&c);
@@ -114,16 +130,22 @@ int main()
     x=getc();
     x++;
     putc(x);*/
-    userMain();
+//    userMain();
 
-/*
+
+    PeriodicTest* pt = new PeriodicTest(30, 'A');
+    PeriodicTest* pt2 = new PeriodicTest(10, 'a');
+    pt->start();
+    pt2->start();
     putc('E');
     char x = 'm';
     while (x!='x'){
         x=getc();
         putc(x);
     }
-*/
+
+    pt->terminate();
+    pt2->terminate();
     idleAlive=0;
     return 0;
 }

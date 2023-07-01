@@ -30,15 +30,16 @@ struct thread_s{
     uint64 mailbox;
     enum ThreadStatus status;
     struct thread_s* sem_next;
+    struct thread_s* next_thread;
 };
 
 typedef struct thread_s* thread_t;
 
 extern  thread_t running;
 
-extern struct thread_s kthreads[];
 
 void kern_thread_init();
+void kern_thread_yield();
 int kern_thread_create(struct thread_s** handle, void(*start_routine)(void*), void* arg, void* stack_space);
 void kern_thread_dispatch();
 thread_t kern_scheduler_get();

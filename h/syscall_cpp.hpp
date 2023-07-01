@@ -26,8 +26,6 @@ class Thread {
             this->arg=arg;
         }
         virtual ~Thread (){
-            //running=myHandle;
-            //thread_exit();
         }
         int start (){
             if(body== nullptr) return thread_create(&myHandle,&threadEntry, this);
@@ -39,7 +37,7 @@ class Thread {
         static void dispatch (){
             thread_dispatch();
         }
-        static int sleep (time_t time){
+        static int sleep (uint64 time){
             return time_sleep(time);
         }
         protected:
@@ -57,6 +55,30 @@ class Thread {
         thread_t myHandle;
         void (*body)(void*); void* arg;
 };
+
+class PeriodicThread : public Thread {
+public:
+    void terminate (){
+        isThisPeriodicThreadTereminated=1;
+    }
+
+protected:
+    PeriodicThread (uint64 period) {
+        this->period=period;
+        this->isThisPeriodicThreadTereminated=0;
+    }
+    virtual void periodicActivation () {}
+    void run() override {
+        while (isThisPeriodicThreadTereminated==0){
+            periodicActivation();
+            sleep(period);
+        }
+    }
+private:
+    int isThisPeriodicThreadTereminated;
+    uint64 period;
+};
+
 
 class Semaphore {
         public:

@@ -101,11 +101,7 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
             }
 
             case THREAD_DISPATCH: {
-                uint64 volatile sstatus = r_sstatus();
-                uint64 volatile v_sepc = r_sepc();
                 kern_thread_dispatch();
-                w_sstatus(sstatus);
-                w_sepc(v_sepc);
                 running->endTime = SYSTEM_TIME + running->timeslice;
                 break;
             }
@@ -167,7 +163,7 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
                 running->endTime = SYSTEM_TIME + period;
                 uint64 volatile sstatus = r_sstatus();
                 uint64 volatile v_sepc = r_sepc();
-                kern_thread_dispatch();
+                kern_thread_yield();
                 w_sstatus(sstatus);
                 w_sepc(v_sepc);
                 time=SYSTEM_TIME;
@@ -180,11 +176,7 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
                 while (1){
                     c = kern_console_getchar();
                     if(c==-1){
-                        uint64 volatile sstatus = r_sstatus();
-                        uint64 volatile v_sepc = r_sepc();
                         kern_thread_dispatch();
-                        w_sstatus(sstatus);
-                        w_sepc(v_sepc);
                         running->endTime = SYSTEM_TIME + running->timeslice;
                     }
                     else break;
@@ -199,11 +191,7 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
                 while(1){
                     res=kern_console_putchar(c);
                     if(res==-1){
-                        uint64 volatile sstatus = r_sstatus();
-                        uint64 volatile v_sepc = r_sepc();
                         kern_thread_dispatch();
-                        w_sstatus(sstatus);
-                        w_sepc(v_sepc);
                         running->endTime = SYSTEM_TIME + running->timeslice;
                     }
                     else break;
@@ -232,11 +220,7 @@ void handleInterrupt()
         kern_thread_wakeup(SYSTEM_TIME);
 
         if(SYSTEM_TIME>=running->endTime){
-            uint64 volatile sstatus = r_sstatus();
-            uint64 volatile v_sepc = r_sepc();
             kern_thread_dispatch();
-            w_sstatus(sstatus);
-            w_sepc(v_sepc);
             running->endTime=SYSTEM_TIME+running->timeslice;
         }
     }

@@ -7,6 +7,7 @@
 #include "../lib/hw.h"
 #include "../h/kern_memory.hpp"
 #include "../h/syscall_c.h"
+#include "../h/kern_reg_util.h"
 
 #define MAX_THREADS 64
 
@@ -16,6 +17,7 @@ struct thread_s kthreads[MAX_THREADS];
 static int id;
 struct thread_s* running;
 
+void kern_thread_yield();
 void kern_thread_init()
 {
     id=0;
@@ -48,8 +50,13 @@ thread_t kern_scheduler_get()
     return 0;
 }
 
-void kern_thread_yield()
+void kern_thread_dispatch()
 {
+    uint64 volatile sstatus = r_sstatus();
+    uint64 volatile v_sepc = r_sepc();
+    kern_thread_yield();
+    w_sstatus(sstatus);
+    w_sepc(v_sepc);
 }
 
 //samo izlazi iz kernela i vraca se odakle je pozvana
@@ -68,7 +75,7 @@ void contextSwitch(thread_t oldT, thread_t newT);
 }
 #endif
 
-void kern_thread_dispatch()
+void kern_thread_yield()
 {
     thread_t old = running;
     running=kern_scheduler_get();
@@ -140,7 +147,7 @@ void kern_thread_join(thread_t handle)
     if(handle->status==UNUSED) return;
     running->joined_tid=handle->id;
     running->status=JOINED;
-    kern_thread_dispatch();
+    kern_thread_yield();
 }
 
 void kern_thread_wakeup(uint64 system_time)
