@@ -108,11 +108,7 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
 
             case THREAD_JOIN: {
                 thread_t handle = (thread_t) a1;
-                uint64 volatile sstatus = r_sstatus();
-                uint64 volatile v_sepc = r_sepc();
                 kern_thread_join(handle);
-                w_sstatus(sstatus);
-                w_sepc(v_sepc);
                 running->endTime = SYSTEM_TIME + running->timeslice;
                 break;
             }
@@ -159,13 +155,8 @@ void handleEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4) {
 
             case TIME_SLEEP : {
                 uint64 period = a1;
-                running->status = SLEEPING;
-                running->endTime = SYSTEM_TIME + period;
-                uint64 volatile sstatus = r_sstatus();
-                uint64 volatile v_sepc = r_sepc();
-                kern_thread_yield();
-                w_sstatus(sstatus);
-                w_sepc(v_sepc);
+                uint64 wakeTime = SYSTEM_TIME + period;
+                kern_thread_sleep(wakeTime);
                 time=SYSTEM_TIME;
                 running->endTime=time+running->timeslice;
                 break;

@@ -4,6 +4,8 @@
 
 #include "../h/kern_semaphore.hpp"
 #include "../h/kern_reg_util.h"
+#include "../h/kern_threads.hpp"
+
 
 #define MAX_SEMAPHORES 256
 
@@ -45,6 +47,7 @@ int kern_sem_close (sem_t handle)
             thread_t prev=curr;
             curr=curr->sem_next;
             prev->sem_next=0;
+            kern_scheduler_put(prev);
         }
         handle->waiting_thread=0;
     }
@@ -59,6 +62,7 @@ void kern_sem_signal(sem_t id)
         id->waiting_thread=woken->sem_next;
         woken->mailbox=0;
         woken->status=READY;
+        kern_scheduler_put(woken);
     }
 }
 
@@ -75,7 +79,7 @@ int kern_sem_wait(sem_t id)
         running->sem_next=0;
         uint64 volatile sstatus = r_sstatus();
         uint64 volatile v_sepc = r_sepc();
-        kern_thread_dispatch();
+        kern_thread_yield();
         w_sstatus(sstatus);
         w_sepc(v_sepc);
         return running->mailbox;

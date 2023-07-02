@@ -16,8 +16,15 @@ typedef struct thread_s* thread_t;
 struct thread_s kthreads[MAX_THREADS];
 static int id;
 struct thread_s* running;
+struct {
+    thread_t ready_head;
+    thread_t ready_tail;
+    thread_t joined_head;
+    thread_t sleeping_head;
+} scheduler;
 
 void kern_thread_yield();
+
 void kern_thread_init()
 {
     id=0;
@@ -30,28 +37,41 @@ void kern_thread_init()
     kthreads[0].id=0;
     kthreads[0].timeslice=DEFAULT_TIME_SLICE+2;
     kthreads[0].endTime=0;
+    kthreads[0].next_thread=0;
     running=&kthreads[0];
+    scheduler.ready_head=0;
+    scheduler.ready_tail=0;
+    scheduler.joined_head=0;
+    scheduler.sleeping_head=0;
 }
+
+void kern_scheduler_put(thread_t t)
+{
+    t->status=READY;
+    if(scheduler.ready_tail==0){
+        scheduler.ready_tail=t;
+        scheduler.ready_head=t;
+    } else{
+        scheduler.ready_tail->next_thread=t;
+        scheduler.ready_tail=t;
+    }
+    t->next_thread=0;
+}
+
 
 thread_t kern_scheduler_get()
 {
-    int num = running-kthreads;
-    for(int i=1;i<=MAX_THREADS;i++){
-        num = (num+i)%MAX_THREADS;
-        if(kthreads[num].status==READY){
-            kthreads[num].status=RUNNING;
-            return &kthreads[num];
-        }
-    }
-    if(running->status==READY || running->status==RUNNING) {
-        running->status=RUNNING;
-        return running;
-    }
-    return 0;
+    if(scheduler.ready_head==0) return 0;
+    thread_t t = scheduler.ready_head;
+    scheduler.ready_head=scheduler.ready_head->next_thread;
+    if(scheduler.ready_tail==t) scheduler.ready_tail=0;
+    t->next_thread=0;
+    return t;
 }
 
 void kern_thread_dispatch()
 {
+    kern_scheduler_put(running);
     uint64 volatile sstatus = r_sstatus();
     uint64 volatile v_sepc = r_sepc();
     kern_thread_yield();
@@ -84,6 +104,9 @@ void kern_thread_yield()
         if(old->status==RUNNING) old->status=READY;
         contextSwitch(old,running);
     }
+    else {
+        old->status=RUNNING;
+    }
 }
 
 void kern_thread_end_running()
@@ -91,7 +114,10 @@ void kern_thread_end_running()
     thread_t old = running;
     old->status=UNUSED;
     for(int i=0;i<MAX_THREADS;i++){
-        if(kthreads[i].status==JOINED && kthreads[i].joined_tid==old->id) kthreads[i].status=READY;
+        if(kthreads[i].status==JOINED && kthreads[i].joined_tid==old->id) {
+            kthreads[i].status=READY;
+            kern_scheduler_put(&kthreads[i]);
+        }
     }
     running=kern_scheduler_get();
     if(old->stack_space!=0) kern_mem_free((void*)old->stack_space);
@@ -104,13 +130,14 @@ void kern_thread_wrapper()
 {
     popSppSpie();
     running->body(running->arg);
+    /*
     running->status=UNUSED;
     running->sem_next=0;
     running->joined_tid=-1;
     for(int i=0;i<MAX_THREADS;i++){
         if(kthreads[i].status==JOINED && kthreads[i].joined_tid==running->id) kthreads[i].status=READY;
     }
-
+*/
     thread_exit();
 }
 
@@ -137,7 +164,9 @@ int kern_thread_create(thread_t* handle, void(*start_routine)(void*), void* arg,
     t->sp = t->stack_space+(DEFAULT_STACK_SIZE);
     t->ra=(uint64) &kern_thread_wrapper;
     t->sem_next=0;
+    t->next_thread=0;
     t->mailbox=0;
+    kern_scheduler_put(t);
 
     return 0;
 }
@@ -147,7 +176,13 @@ void kern_thread_join(thread_t handle)
     if(handle->status==UNUSED) return;
     running->joined_tid=handle->id;
     running->status=JOINED;
+    running->next_thread=scheduler.joined_head;
+    scheduler.joined_head=running;
+    uint64 volatile sstatus = r_sstatus();
+    uint64 volatile v_sepc = r_sepc();
     kern_thread_yield();
+    w_sstatus(sstatus);
+    w_sepc(v_sepc);
 }
 
 void kern_thread_wakeup(uint64 system_time)
@@ -155,6 +190,18 @@ void kern_thread_wakeup(uint64 system_time)
     for(int i=0;i<MAX_THREADS;i++){
         if(kthreads[i].status==SLEEPING && kthreads[i].endTime<system_time){
             kthreads[i].status=READY;
+            kern_scheduler_put(&kthreads[i]);
         }
     }
+}
+
+void kern_thread_sleep(uint64 wakeTime)
+{
+    running->status=SLEEPING;
+    running->endTime=wakeTime;
+    uint64 volatile sstatus = r_sstatus();
+    uint64 volatile v_sepc = r_sepc();
+    kern_thread_yield();
+    w_sstatus(sstatus);
+    w_sepc(v_sepc);
 }
