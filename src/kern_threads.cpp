@@ -9,13 +9,12 @@
 #include "../h/syscall_c.h"
 #include "../h/kern_reg_util.h"
 #include "../h/kern_slab.hpp"
+#include "../h/printing.hpp"
 
-#define MAX_THREADS 64
 
 typedef struct thread_s* thread_t;
 
 kmem_cache_t* threads_cache;
-//struct thread_s kthreads[MAX_THREADS];
 static int id;
 struct thread_s* running;
 struct {
@@ -42,9 +41,15 @@ void kern_thread_ctor(void* addr){
     t->next_thread=0;
     t->mailbox=0;
 }
+
+void kern_thread_dtor(void* addr)
+{
+    thread_t t = (thread_t)addr;
+    printf("\n Destroying thread id=%d\n",t->id);
+}
 void kern_thread_init()
 {
-    threads_cache=kmem_cache_create("thread cache", sizeof(thread_s),kern_thread_ctor,0);
+    threads_cache=kmem_cache_create("thread cache", sizeof(thread_s),kern_thread_ctor,kern_thread_dtor);
     id=0;
     /*
     for (int i=0;i<MAX_THREADS;i++){
@@ -156,6 +161,7 @@ void kern_thread_end_running()
     kern_thread_resume_joined(old->id);
     running=kern_scheduler_get();
     if(old->stack_space!=0) kern_mem_free((void*)old->stack_space);
+    kmem_cache_free(threads_cache,old);
     if(old!=running){
         contextSwitch(old,running);
     }
@@ -248,3 +254,4 @@ void kern_thread_sleep(uint64 wakeTime)
     w_sstatus(sstatus);
     w_sepc(v_sepc);
 }
+

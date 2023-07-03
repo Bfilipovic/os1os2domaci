@@ -99,6 +99,7 @@ int main()
 
     printf("Printf proba %d valjda radi %x, %p\n", &thrIdle, &thrIdle, &thrIdle);
     //bba_init((char*)HEAP_START_ADDR, (char*)HEAP_END_ADDR);
+    /*
     semTest=new Semaphore(0);
     Thread *thrA = new Thread(&bodyA,0);
     Thread *thrB = new Thread(&bodyB,0);
@@ -106,6 +107,7 @@ int main()
     thrA->start();
     thrB->join();
     putc('S');
+     */
     /*
     char c='M';
     c++;
@@ -134,8 +136,8 @@ int main()
     x=getc();
     x++;
     putc(x);*/
-    //userMain();
-
+    userMain();
+/*
     PeriodicTest* pt = new PeriodicTest(30, 'A');
     PeriodicTest* pt2 = new PeriodicTest(10, 'a');
     pt->start();
@@ -149,6 +151,7 @@ int main()
 
     pt->terminate();
     pt2->terminate();
+    */
     idleAlive=0;
     return 0;
 }

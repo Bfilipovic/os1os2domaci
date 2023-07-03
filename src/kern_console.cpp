@@ -4,14 +4,15 @@
 
 #include "../h/kern_console.hpp"
 #include "../lib/hw.h"
+#include "../h/kern_slab.hpp"
 #define BUFFER_SIZE 1024
 
 #define Reg(reg) ((volatile unsigned char *)(reg))
 #define ReadReg(reg) (*(Reg(reg)))
 #define WriteReg(reg, v) (*(Reg(reg)) = (v))
 struct {
-    char input[BUFFER_SIZE];
-    char output[BUFFER_SIZE];
+    char* input;
+    char* output;
     int input_r;
     int input_w;
     int output_r;
@@ -19,6 +20,8 @@ struct {
 } console;
 
 void kern_console_init(){
+    console.input=(char*)kmalloc(BUFFER_SIZE*sizeof(char));
+    console.output=(char*)kmalloc(BUFFER_SIZE*sizeof(char));
     console.input_r=0;
     console.input_w=0;
     console.output_r=0;

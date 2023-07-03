@@ -5,34 +5,36 @@
 #include "../h/kern_semaphore.hpp"
 #include "../h/kern_reg_util.h"
 #include "../h/kern_threads.hpp"
+#include "../h/kern_slab.hpp"
 
 
 #define MAX_SEMAPHORES 256
 
 struct sem_s semaphores[MAX_SEMAPHORES];
+kmem_cache_t * semaphore_cache;
+
+void kern_sem_ctor(void* addr)
+{
+    sem_t sem = (sem_t) addr;
+    sem->status=SEM_UNUSED;
+    sem->waiting_thread=0;
+    sem->val=0;
+}
 
 void kern_sem_init()
 {
-    for(int i=0;i<MAX_SEMAPHORES;i++){
-        semaphores[i].waiting_thread=0;
-        semaphores[i].val=0;
-        semaphores[i].status=SEM_UNUSED;
-    }
+    semaphore_cache = (kmem_cache_t*) kmem_cache_create("sem cache", sizeof(sem_s),kern_sem_ctor,0);
+
 }
 
 int kern_sem_open (sem_t* handle, unsigned init)
 {
-    int res=-1;
-    for(int i=0;i<MAX_SEMAPHORES;i++){
-        if(semaphores[i].status==SEM_UNUSED){
-            semaphores[i].status=SEM_USED;
-            semaphores[i].val=init;
-            *handle=&semaphores[i];
-            res++;
-            break;
-        }
-    }
-    return res;
+    sem_t sem=(sem_t) kmem_cache_alloc(semaphore_cache);
+    *handle=sem;
+    if(sem==0) return -1;
+    sem->status=SEM_USED;
+    sem->val=init;
+    return 0;
 }
 
 int kern_sem_close (sem_t handle)
@@ -51,6 +53,7 @@ int kern_sem_close (sem_t handle)
         }
         handle->waiting_thread=0;
     }
+    kmem_cache_free(semaphore_cache,handle);
     return 0;
 }
 
