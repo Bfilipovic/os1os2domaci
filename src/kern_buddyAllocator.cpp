@@ -54,7 +54,7 @@ void bba_init(char* start, char *end)
     buddyMemStart=start;
     buddyMemEnd=end;
 
-    printf("\nspace size=%d", end-start);
+    //printf("\nspace size=%d", end-start);
 
     for(int i=0;i<17;i++){
         buddyBlocks[i] = 0;
@@ -80,7 +80,7 @@ void bba_init(char* start, char *end)
     }
 
 
-    printf("\nallocatedSize=%d\n",allocatedSize);
+    //printf("\nallocatedSize=%d\n",allocatedSize);
     //bba_print_free_blocks_info();
 }
 

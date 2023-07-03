@@ -12,7 +12,7 @@
 #include "../h/kern_semaphore.hpp"
 #include "../h/kern_console.hpp"
 #include "../h/printing.hpp"
-#include "../h/kern_buddyAllocator.hpp"
+#include "../h/kern_slab.hpp"
 
 Semaphore* semTest;
 
@@ -82,9 +82,14 @@ protected:
 
 int main()
 {
+    char* buddy_start = (char*)HEAP_START_ADDR;
+    uint64 memory_size = ((char *)HEAP_END_ADDR-(char *)HEAP_START_ADDR);
+    uint64 buddy_size_in_blocks = (memory_size/8)/BLOCK_SIZE+1;
+    char* buddy_end = buddy_start+buddy_size_in_blocks*BLOCK_SIZE;
+    kmem_init(buddy_start,buddy_size_in_blocks);
+    kern_mem_init((void*)buddy_end, (void*)HEAP_END_ADDR);
     kern_thread_init();
 
-    kern_mem_init((void*)HEAP_START_ADDR, (void*)HEAP_END_ADDR);
     kern_interrupt_init();
     kern_sem_init();
     kern_console_init();
@@ -94,14 +99,13 @@ int main()
 
     printf("Printf proba %d valjda radi %x, %p\n", &thrIdle, &thrIdle, &thrIdle);
     //bba_init((char*)HEAP_START_ADDR, (char*)HEAP_END_ADDR);
-    /*
     semTest=new Semaphore(0);
     Thread *thrA = new Thread(&bodyA,0);
     Thread *thrB = new Thread(&bodyB,0);
     thrB->start();
     thrA->start();
+    thrB->join();
     putc('S');
-     */
     /*
     char c='M';
     c++;
@@ -130,9 +134,8 @@ int main()
     x=getc();
     x++;
     putc(x);*/
-    userMain();
+    //userMain();
 
-/*
     PeriodicTest* pt = new PeriodicTest(30, 'A');
     PeriodicTest* pt2 = new PeriodicTest(10, 'a');
     pt->start();
@@ -146,7 +149,6 @@ int main()
 
     pt->terminate();
     pt2->terminate();
-    */
     idleAlive=0;
     return 0;
 }

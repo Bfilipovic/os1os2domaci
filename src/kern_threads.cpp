@@ -8,12 +8,14 @@
 #include "../h/kern_memory.hpp"
 #include "../h/syscall_c.h"
 #include "../h/kern_reg_util.h"
+#include "../h/kern_slab.hpp"
 
 #define MAX_THREADS 64
 
 typedef struct thread_s* thread_t;
 
-struct thread_s kthreads[MAX_THREADS];
+kmem_cache_t* threads_cache;
+//struct thread_s kthreads[MAX_THREADS];
 static int id;
 struct thread_s* running;
 struct {
@@ -25,20 +27,38 @@ struct {
 
 void kern_thread_yield();
 
+void kern_thread_ctor(void* addr){
+    thread_t t = (thread_t)addr;
+    t->status=UNUSED;
+    t->stack_space=0;
+    t->arg=0;
+    t->joined_tid=-1;
+    t->timeslice=DEFAULT_TIME_SLICE;
+    t->body=0;
+    t->stack_space = 0;
+    t->sp =0;
+    t->ra=0;
+    t->sem_next=0;
+    t->next_thread=0;
+    t->mailbox=0;
+}
 void kern_thread_init()
 {
+    threads_cache=kmem_cache_create("thread cache", sizeof(thread_s),kern_thread_ctor,0);
     id=0;
+    /*
     for (int i=0;i<MAX_THREADS;i++){
         kthreads[i].status=UNUSED;
     }
-
-    //set kthreads[0] as main thread
-    kthreads[0].status=RUNNING;
-    kthreads[0].id=0;
-    kthreads[0].timeslice=DEFAULT_TIME_SLICE+2;
-    kthreads[0].endTime=0;
-    kthreads[0].next_thread=0;
-    running=&kthreads[0];
+    */
+    //set main thread
+    thread_t main_thread = (thread_t) kmem_cache_alloc(threads_cache);
+    main_thread->status=RUNNING;
+    main_thread->id=0;
+    main_thread->timeslice=DEFAULT_TIME_SLICE+2;
+    main_thread->endTime=0;
+    main_thread->next_thread=0;
+    running=main_thread;
     scheduler.ready_head=0;
     scheduler.ready_tail=0;
     scheduler.joined_head=0;
@@ -57,7 +77,6 @@ void kern_scheduler_put(thread_t t)
     }
     t->next_thread=0;
 }
-
 
 thread_t kern_scheduler_get()
 {
@@ -109,16 +128,32 @@ void kern_thread_yield()
     }
 }
 
+void kern_thread_resume_joined(uint64 joined_tid)
+{
+    thread_t curr = scheduler.joined_head;
+    thread_t prev = 0;
+    thread_t next = 0;
+    while (curr!=0){
+        next=curr->next_thread;
+        if(curr->joined_tid<=joined_tid){
+            if(prev!=0){
+                prev->next_thread=curr->next_thread;
+            } else{
+                scheduler.joined_head=curr->next_thread;
+            }
+            kern_scheduler_put(curr);
+        } else{
+            prev=curr;
+        }
+        curr=next;
+    }
+}
+
 void kern_thread_end_running()
 {
     thread_t old = running;
     old->status=UNUSED;
-    for(int i=0;i<MAX_THREADS;i++){
-        if(kthreads[i].status==JOINED && kthreads[i].joined_tid==old->id) {
-            kthreads[i].status=READY;
-            kern_scheduler_put(&kthreads[i]);
-        }
-    }
+    kern_thread_resume_joined(old->id);
     running=kern_scheduler_get();
     if(old->stack_space!=0) kern_mem_free((void*)old->stack_space);
     if(old!=running){
@@ -144,15 +179,9 @@ void kern_thread_wrapper()
 int kern_thread_create(thread_t* handle, void(*start_routine)(void*), void* arg, void* stack_space)
 {
     *handle=0;
-    thread_t t=&kthreads[0]; //dodela da bismo sklonili upozorenje
-    for(int i=0;i<MAX_THREADS;i++){
-        if(kthreads[i].status==UNUSED){
-            *handle=&kthreads[i];
-            t=&kthreads[i];
-            break;
-        }
-    }
-    if(*handle==0) return -1;
+    thread_t t= (thread_t)kmem_cache_alloc(threads_cache);
+    if(t==0) return -1;
+    *handle=t;
 
     t->id=++id;
     t->status=READY;
@@ -187,18 +216,32 @@ void kern_thread_join(thread_t handle)
 
 void kern_thread_wakeup(uint64 system_time)
 {
-    for(int i=0;i<MAX_THREADS;i++){
-        if(kthreads[i].status==SLEEPING && kthreads[i].endTime<system_time){
-            kthreads[i].status=READY;
-            kern_scheduler_put(&kthreads[i]);
+    thread_t curr = scheduler.sleeping_head;
+    thread_t prev = 0;
+    thread_t next = 0;
+    while (curr!=0){
+        next=curr->next_thread;
+        if(curr->endTime<=system_time){
+            if(prev!=0){
+                prev->next_thread=curr->next_thread;
+            } else{
+                scheduler.sleeping_head=curr->next_thread;
+            }
+            kern_scheduler_put(curr);
+        } else{
+            prev=curr;
         }
+        curr=next;
     }
+
 }
 
 void kern_thread_sleep(uint64 wakeTime)
 {
     running->status=SLEEPING;
     running->endTime=wakeTime;
+    running->next_thread=scheduler.sleeping_head;
+    scheduler.sleeping_head=running;
     uint64 volatile sstatus = r_sstatus();
     uint64 volatile v_sepc = r_sepc();
     kern_thread_yield();

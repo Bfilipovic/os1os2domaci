@@ -196,7 +196,7 @@ void* kmem_slab_get_initialized_free_object(kmem_slab_t *slab, kmem_cache_t *cac
         if(c==0) continue; //a quick way to check 8 slots at once
         int k = 0;
         while(k<8){
-            if( (c&(1<<k)) == SLOT_INITIALIZED) break;
+            if((c>>k)&SLOT_INITIALIZED) break;
             k++;
         }
 
